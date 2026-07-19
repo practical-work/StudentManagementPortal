@@ -2,12 +2,13 @@ const BASE_PATH = window.location.pathname.includes("/pages/") ? "../" : "";
 let footerTag = document.getElementById("footer-tag");
 let headerTag = document.getElementById("header-tag");
 let mainTag = document.querySelector("main");
-
+let topbarBtn = document.querySelector("#topbar-btn");
 // footer logic
 footerTag.innerHTML = `<p id="footer-para"> &copy; ${new Date().getFullYear()} All Rights Reserved.</p>`;
-let footerPara = document.getElementById("footer-para")
-// header menu bar logic
+let footerPara = document.getElementById("footer-para");
 
+
+// header menu bar logic
 headerTag.innerHTML = `
         <div id="menu-bar">
             <a href="${BASE_PATH}index.html">
@@ -64,4 +65,19 @@ menuBar.addEventListener("click",()=>{
     
 });
 
+// topbar-btn logic
+topbarBtn.innerHTML = `<i class="fa-solid fa-circle-up"></i>`;
+window.addEventListener("scroll",()=>{
+    if(window.scrollY > 300){
+        topbarBtn.style.display = "block";
+    }else{
+        topbarBtn.style.display = "none";
+    }
+});
 
+topbarBtn.addEventListener("click",()=>{
+   window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+   });
+});

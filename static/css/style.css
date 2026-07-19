@@ -26,7 +26,10 @@ padding:15px;background-color: #fff;border-radius:10px;margin:0px;display: block
 /* main styling */
 main{padding:20px;margin-bottom:70px;}
 .temp{font-size:1.2em;color: crimson;}
-
+/* topbar style */
+#topbar-btn{position:fixed;right:20px;bottom:55px;padding:15px;font-size:1.2em;
+display:none;outline:none;background-color: azure;border:2px dotted gray;border-radius:50%;
+cursor:pointer;color: darkblue;}
 /* footer styling */
 #footer-para{text-align: center;color:darkblue;font-weight: 500;font-size: 1.4em;}
 
