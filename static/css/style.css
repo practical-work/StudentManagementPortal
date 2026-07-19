@@ -25,7 +25,7 @@ padding:15px;background-color: #fff;border-radius:10px;margin:0px;display: block
 .navbar-li a i{margin-left:10px;margin-right:10px;}
 /* main styling */
 main{padding:20px;margin-bottom:70px;}
-
+.temp{font-size:1.2em;color: crimson;}
 
 /* footer styling */
 #footer-para{text-align: center;color:darkblue;font-weight: 500;font-size: 1.4em;}
