@@ -1,11 +1,9 @@
 *{margin: 0;padding: 0;}
 
-:root{
-    --primary-color:#ffd;
-    --secondary-color:rgba(127, 255, 212,0.6);
-    --border-color:rgba(127, 255, 212);
+:root{ --primary-color:#ffd;--secondary-color:rgba(127, 255, 212,0.6);--border-color:rgba(127, 255, 212);
 }
-
+::selection{background-color: var(--secondary-color);}
+::-moz-selection{background-color: var(--secondary-color);}
 /* Menu Bar styling */
 
 #menu-bar{background-color:var(--secondary-color);cursor: pointer;display: flex;justify-items: center;

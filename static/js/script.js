@@ -11,7 +11,7 @@ let footerPara = document.getElementById("footer-para")
 headerTag.innerHTML = `
         <div id="menu-bar">
             <a href="${BASE_PATH}index.html">
-                <img id="main-logo" src="${BASE_PATH}images/logo.jpeg" alt="LOGO">
+                <img id="main-logo" src="${BASE_PATH}assets/images/logo.png" alt="LOGO">
             </a>
             <p>☰ Menu</p>
         </div>
