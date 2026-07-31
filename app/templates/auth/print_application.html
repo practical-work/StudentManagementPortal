@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Application Form - {{ student.application_no }}</title>
+    <style>
+        /* ==========================================
+           Print & Screen Global Styles
+        ========================================== */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            color: #222;
+            background: #e9ecef;
+            font-size: 12px;
+        }
+
+        .document-container {
+            max-width: 850px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 40px 50px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* ==========================================
+           Header Section
+        ========================================== */
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 3px solid #003366;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        .header-spacer {
+            width: 110px;
+        }
+
+        .header-text {
+            flex: 1;
+            text-align: center;
+        }
+
+        .header-text h1 {
+            margin: 0 0 5px 0;
+            color: #003366;
+            font-size: 24px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .header-text h3 {
+            margin: 0;
+            color: #444;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .photo-box {
+            width: 110px;
+            height: 135px;
+            border: 2px solid #ccc;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+        .photo-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* ==========================================
+           Tables & Data Grids
+        ========================================== */
+        .section-title {
+            background-color: #003366;
+            color: #ffffff;
+            padding: 6px 12px;
+            font-size: 14px;
+            font-weight: bold;
+            margin: 25px 0 10px 0;
+            text-transform: uppercase;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+            page-break-inside: avoid;
+        }
+
+        th, td {
+            border: 1px solid #cbd5e1;
+            padding: 8px 10px;
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        th {
+            background-color: #f1f5f9;
+            color: #334155;
+            width: 20%;
+            font-weight: 600;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        td {
+            width: 30%;
+            color: #0f172a;
+        }
+
+        /* Full width rows */
+        .full-row th { width: 20%; }
+        .full-row td { width: 80%; }
+
+        /* Academic Table Adjustments */
+        .academic-table th {
+            width: auto;
+            background-color: #003366;
+            color: #ffffff;
+            font-size: 11px;
+            text-align: center;
+        }
+        .academic-table td {
+            width: auto;
+            font-size: 11px;
+            text-align: center;
+        }
+
+        /* Utility Classes for Clean Syntax */
+        .text-bold {
+            font-weight: bold;
+        }
+
+        .text-success {
+            font-weight: bold;
+            color: #15803d;
+        }
+
+        .text-danger {
+            font-weight: bold;
+            color: #dc2626;
+        }
+
+        .app-no-cell {
+            font-weight: bold;
+            color: #003366;
+        }
+
+        .sub-text {
+            color: #666;
+            font-size: 10px;
+        }
+
+        .ph-label {
+            color: #999;
+            font-size: 11px;
+        }
+
+        /* ==========================================
+           Print-Specific Rules
+        ========================================== */
+        @media print {
+            body { 
+                background: none; 
+                padding: 0; 
+            }
+            .document-container { 
+                box-shadow: none; 
+                padding: 0; 
+                max-width: 100%; 
+                border-radius: 0;
+            }
+            @page { 
+                margin: 10mm;
+                size: A4 portrait;
+            }
+        }
+    </style>
+</head>
+<body onload="window.print()">
+
+    <div class="document-container">
+
+        <!-- HEADER & PHOTO -->
+        <div class="header-section">
+            <div class="header-spacer"></div>
+            
+            <div class="header-text">
+                <h1>Student Management Portal</h1>
+                <h3>Application Form - {{now().year}} Session</h3>
+            </div>
+            
+            <div class="photo-box">
+                {% if documents and documents.profile_photo %}
+                    <img src="{{ url_for('static', filename=documents.profile_photo) }}" alt="Applicant Photo">
+                {% else %}
+                    <span class="ph-label">Photograph</span>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- APPLICATION STATUS -->
+        <table>
+            <tr>
+                <th>Application No.</th>
+                <td class="app-no-cell">{{ student.application_no }}</td>
+                <th>Payment Status</th>
+                <td class="text-bold">{{ student.payment_status }}</td>
+            </tr>
+            <tr>
+                <th>Submission Date</th>
+                <td>{{ student.updated_at.strftime('%d-%m-%Y') if student.updated_at else 'N/A' }}</td>
+                <th>Profile Status</th>
+                <td>Complete</td>
+            </tr>
+        </table>
+
+        <!-- 1. PERSONAL DETAILS -->
+        <div class="section-title">1. Personal Details</div>
+        <table>
+            <tr>
+                <th>Full Name</th>
+                <td colspan="3" class="text-bold">{{ student.full_name }}</td>
+            </tr>
+            <tr>
+                <th>Email ID</th>
+                <td>{{ student.email }}</td>
+                <th>Mobile Number</th>
+                <td>{{ student.mobile }}</td>
+            </tr>
+            <tr>
+                <th>Alternate Email</th>
+                <td>{{ personal.alternate_email if personal and personal.alternate_email else '-' }}</td>
+                <th>Alternate Mobile</th>
+                <td>{{ personal.alternate_mobile if personal and personal.alternate_mobile else '-' }}</td>
+            </tr>
+            <tr>
+                <th>Date of Birth</th>
+                <td>{{ personal.date_of_birth if personal else '-' }}</td>
+                <th>Gender</th>
+                <td>{{ personal.gender.gender_name if personal and personal.gender else '-' }}</td>
+            </tr>
+            <tr>
+                <th>Blood Group</th>
+                <td>{{ personal.blood_group.blood_group_name if personal and personal.blood_group else '-' }}</td>
+                <th>Aadhaar Number</th>
+                <td>{{ personal.aadhaar_no if personal else '-' }}</td>
+            </tr>
+            <tr>
+                <th>Category</th>
+                <td>{{ personal.category.category_name if personal and personal.category else '-' }}</td>
+                <th>Religion</th>
+                <td>{{ personal.religion.religion_name if personal and personal.religion else '-' }}</td>
+            </tr>
+            <tr>
+                <th>Nationality</th>
+                <td>{{ personal.nationality.nationality_name if personal and personal.nationality else '-' }}</td>
+                <th>Marital Status</th>
+                <td>{{ family.marital_status if family else '-' }}</td>
+            </tr>
+        </table>
+
+        <!-- 2. PARENT / GUARDIAN DETAILS -->
+        <div class="section-title">2. Parent / Guardian Details</div>
+        <table>
+            <tr>
+                <th>Father's Name</th>
+                <td>{{ personal.father_name if personal else '-' }}</td>
+                <th>Father's Mobile</th>
+                <td>{{ personal.father_mobile if personal else '-' }}</td>
+            </tr>
+            <tr>
+                <th>Father's Occupation</th>
+                <td colspan="3">{{ family.father_occupation if family else '-' }}</td>
+            </tr>
+            <tr>
+                <th>Mother's Name</th>
+                <td>{{ personal.mother_name if personal else '-' }}</td>
+                <th>Mother's Mobile</th>
+                <td>{{ personal.mother_mobile if personal else '-' }}</td>
+            </tr>
+            <tr>
+                <th>Mother's Occupation</th>
+                <td colspan="3">{{ family.mother_occupation if family else '-' }}</td>
+            </tr>
+            <tr>
+                <th>Guardian's Name</th>
+                <td>{{ personal.guardian_name if personal and personal.guardian_name else '-' }}</td>
+                <th>Guardian's Mobile</th>
+                <td>{{ personal.guardian_mobile if personal and personal.guardian_mobile else '-' }}</td>
+            </tr>
+            <tr>
+                <th>Guardian's Occ.</th>
+                <td colspan="3">{{ family.guardian_occupation if family and family.guardian_occupation else '-' }}</td>
+            </tr>
+        </table>
+
+        <!-- 3. ADDRESS DETAILS -->
+        <div class="section-title">3. Address Details</div>
+        <table>
+            <tr class="full-row">
+                <th>Permanent Address</th>
+                <td>
+                    {{ address.permanent_address if address else '-' }}<br>
+                    <strong>City/Village:</strong> {{ address.permanent_city if address else '-' }}, 
+                    <strong>District:</strong> {{ address.permanent_district if address else '-' }}, 
+                    <strong>State:</strong> {{ address.permanent_state if address else '-' }} - <strong>{{ address.permanent_pincode if address else '-' }}</strong>
+                </td>
+            </tr>
+            <tr class="full-row">
+                <th>Correspondence</th>
+                <td>
+                    {{ address.correspondence_address if address else '-' }}<br>
+                    <strong>City/Village:</strong> {{ address.correspondence_city if address else '-' }}, 
+                    <strong>District:</strong> {{ address.correspondence_district if address else '-' }}, 
+                    <strong>State:</strong> {{ address.correspondence_state if address else '-' }} - <strong>{{ address.correspondence_pincode if address else '-' }}</strong>
+                </td>
+            </tr>
+        </table>
+
+        <!-- 4. OTHER DETAILS & RESERVATIONS -->
+        <div class="section-title">4. Additional Details & Reservations</div>
+        <table>
+            <tr>
+                <th>Domicile Status</th>
+                <td>{{ family.domicile_status if family else '-' }}</td>
+                <th>Domicile State</th>
+                <td>{{ family.domicile_state if family else '-' }}</td>
+            </tr>
+            
+            <!-- PwBD -->
+            <tr>
+                <th>PwBD Candidate</th>
+                <td class="{% if family and family.is_pwbd %}text-success{% else %}text-bold{% endif %}">
+                    {{ 'Yes' if family and family.is_pwbd else 'No' }}
+                </td>
+                <th>PwBD Details</th>
+                <td>
+                    {% if family and family.is_pwbd %}
+                        Cat: {{ family.pwbd_category }} | Cert: {{ family.pwbd_certificate_no }}
+                    {% else %} - {% endif %}
+                </td>
+            </tr>
+
+            <!-- Freedom Fighter -->
+            <tr>
+                <th>Freedom Fighter</th>
+                <td class="{% if family and family.is_freedom_fighter %}text-success{% else %}text-bold{% endif %}">
+                    {{ 'Yes' if family and family.is_freedom_fighter else 'No' }}
+                </td>
+                <th>FF Details</th>
+                <td>
+                    {% if family and family.is_freedom_fighter %}
+                        {{ family.freedom_fighter_name }} ({{ family.freedom_fighter_relation }})
+                    {% else %} - {% endif %}
+                </td>
+            </tr>
+
+            <!-- Ex-Servicemen -->
+            <tr>
+                <th>Ex-Servicemen</th>
+                <td class="{% if family and family.is_ex_servicemen %}text-success{% else %}text-bold{% endif %}">
+                    {{ 'Yes' if family and family.is_ex_servicemen else 'No' }}
+                </td>
+                <th>Details</th>
+                <td>{{ family.ex_servicemen_details if family and family.is_ex_servicemen else '-' }}</td>
+            </tr>
+
+            <!-- NCC & Twin -->
+            <tr>
+                <th>NCC Candidate</th>
+                <td>
+                    {% if family and family.is_ncc_candidate %}
+                        Yes (Level: {{ family.ncc_level }})
+                    {% else %} No {% endif %}
+                </td>
+                <th>Twin Candidate</th>
+                <td>
+                    {% if family and family.is_twin %}
+                        Yes ({{ family.twin_name }} - {{ family.twin_relation }})
+                    {% else %} No {% endif %}
+                </td>
+            </tr>
+
+            <!-- Criminal Case -->
+            <tr>
+                <th>Criminal Case</th>
+                <td class="{% if family and family.criminal_case %}text-danger{% else %}text-bold{% endif %}">
+                    {{ 'Yes' if family and family.criminal_case else 'No' }}
+                </td>
+                <th>Case Details</th>
+                <td>{{ family.criminal_case_details if family and family.criminal_case else '-' }}</td>
+            </tr>
+        </table>
+
+        <!-- 5. ACADEMIC QUALIFICATIONS -->
+        <div class="section-title">5. Academic Qualifications</div>
+        <table class="academic-table">
+            <thead>
+                <tr>
+                    <th>Qualification</th>
+                    <th>Board / University</th>
+                    <th>Institute</th>
+                    <th>Roll / Reg No.</th>
+                    <th>Year</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in academic_records %}
+                <tr>
+                    <td class="text-bold">{{ record.qualification }}</td>
+                    <td>{{ record.board_university }}</td>
+                    <td>{{ record.institute_name }}</td>
+                    <td>
+                        {{ record.roll_number if record.roll_number else '-' }} <br>
+                        <span class="sub-text">{{ record.registration_number if record.registration_number else '' }}</span>
+                    </td>
+                    <td>{{ record.passing_year }}</td>
+                    <td class="text-bold">
+                        {% if record.marks_type == "Percentage" %}{{ record.percentage }}%
+                        {% elif record.marks_type == "CGPA" %}{{ record.cgpa }} CGPA
+                        {% else %}-{% endif %}
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="6">No academic records found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+
+</body>
+</html>

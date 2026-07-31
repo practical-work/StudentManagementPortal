@@ -1,0 +1,2752 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+Review & Final Submission
+{% endblock %}
+
+
+
+{% block css %}
+
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/registration-step7.css') }}">
+
+{% endblock %}
+
+
+
+
+
+{% block content %}
+
+
+
+<div class="step7-container">
+<form method="POST"
+      action="{{ url_for('application.save_step7') }}">
+  <input type="hidden"
+           name="csrf_token"
+           value="{{ csrf_token() }}">
+
+<!-- ================================================= -->
+<!-- HEADER -->
+<!-- ================================================= -->
+
+
+<div class="step7-header">
+
+
+<h2>
+Step 7 : Review & Final Submission
+</h2>
+
+
+
+<p>
+
+Please review all information carefully before final submission.
+After final submission, editing will be disabled until permitted by the university.
+
+</p>
+
+
+
+</div>
+
+
+
+
+
+
+<!-- ================================================= -->
+<!-- APPLICATION SUMMARY -->
+<!-- ================================================= -->
+
+
+<div class="card">
+
+ 
+<h3>
+Application Summary
+</h3>
+
+
+
+
+<div class="summary-layout">
+
+
+
+<div class="review-grid">
+
+
+
+<div>
+
+<label>
+Application No
+</label>
+
+<p>
+{{ student.application_no or '-' }}
+</p>
+
+</div>
+
+
+
+
+<div>
+
+<label>
+Full Name
+</label>
+
+<p>
+{{ student.full_name or '-' }}
+</p>
+
+</div>
+
+
+
+
+<div>
+
+<label>
+Email
+</label>
+
+<p>
+{{ student.email or '-' }}
+</p>
+
+</div>
+
+
+
+
+<div>
+
+<label>
+Mobile
+</label>
+
+<p>
+{{ student.mobile or '-' }}
+</p>
+
+</div>
+
+
+
+
+<div>
+
+<label>
+Current Status
+</label>
+
+
+<p class="status-ready">
+
+{% if student.is_final_submitted %}
+
+Submitted
+
+{% else %}
+
+Ready for Submission
+
+{% endif %}
+
+
+</p>
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+<!-- Profile Photo -->
+
+
+<div class="profile-preview">
+
+
+{% if documents and documents.profile_photo %}
+
+
+<img src="{{ url_for('static',
+filename=documents.profile_photo) }}"
+alt="Profile Photo">
+
+
+{% elif student.profile_photo %}
+
+
+<img src="{{ url_for('static',
+filename=student.profile_photo) }}"
+alt="Profile Photo">
+
+
+{% else %}
+
+
+<img src="{{ url_for('static',
+filename='assets/images/default-user.png') }}"
+alt="Profile Photo">
+
+
+{% endif %}
+
+
+
+</div>
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- ================================================= -->
+<!-- PERSONAL DETAILS -->
+<!-- ================================================= -->
+
+
+<div class="card">
+
+
+<h3>
+Personal Details
+</h3>
+
+
+
+
+<div class="review-grid">
+
+
+
+<div>
+
+<label>
+First Name
+</label>
+
+
+<p>
+{{ personal.first_name if personal else '-' }}
+</p>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+Middle Name
+</label>
+
+
+<p>
+{{ personal.middle_name if personal and personal.middle_name else '-' }}
+</p>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+Last Name
+</label>
+
+
+<p>
+{{ personal.last_name if personal else '-' }}
+</p>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+Email
+</label>
+
+
+<p>
+{{ student.email }}
+</p>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+Mobile Number
+</label>
+
+
+<p>
+{{ student.mobile }}
+</p>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+Aadhaar Number
+</label>
+
+
+<p>
+{{ personal.aadhaar_no if personal else '-' }}
+</p>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+Date of Birth
+</label>
+
+
+<p>
+
+{{ personal.date_of_birth if personal else '-' }}
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+Gender
+</label>
+
+
+<p>
+
+{{ personal.gender.gender_name
+if personal and personal.gender else '-' }}
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+Blood Group
+</label>
+
+
+<p>
+
+{{ personal.blood_group.blood_group_name
+if personal and personal.blood_group else '-' }}
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+Category
+</label>
+
+
+<p>
+
+{{ personal.category.category_name
+if personal and personal.category else '-' }}
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+Religion
+</label>
+
+
+<p>
+
+{{ personal.religion.religion_name
+if personal and personal.religion else '-' }}
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+Nationality
+</label>
+
+
+<p>
+
+{{ personal.nationality.nationality_name
+if personal and personal.nationality else '-' }}
+
+</p>
+
+
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ================================================= -->
+<!-- PARENT / GUARDIAN DETAILS -->
+<!-- ================================================= -->
+
+
+<div class="card">
+
+
+<h3>
+Parent / Guardian Details
+</h3>
+
+
+
+
+<div class="review-grid">
+
+
+
+<div>
+
+<label>
+Father Name
+</label>
+
+
+<p>
+
+{{ personal.father_name if personal else '-' }}
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+Father Mobile
+</label>
+
+
+<p>
+
+{{ personal.father_mobile if personal else '-' }}
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+Father Occupation
+</label>
+
+
+<p>
+
+{{ family.father_occupation if family else '-' }}
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+Mother Name
+</label>
+
+
+<p>
+
+{{ personal.mother_name if personal else '-' }}
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+Mother Mobile
+</label>
+
+
+<p>
+
+{{ personal.mother_mobile if personal else '-' }}
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+Mother Occupation
+</label>
+
+
+<p>
+
+{{ family.mother_occupation if family else '-' }}
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+Guardian Name
+</label>
+
+
+<p>
+
+{{ personal.guardian_name if personal else '-' }}
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+Guardian Mobile
+</label>
+
+
+<p>
+
+{{ personal.guardian_mobile if personal else '-' }}
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+Guardian Occupation
+</label>
+
+
+<p>
+
+{{ family.guardian_occupation if family else '-' }}
+
+</p>
+
+
+</div>
+
+
+
+</div>
+
+
+</div>
+<!-- ================================================= -->
+<!-- ADDRESS DETAILS -->
+<!-- ================================================= -->
+
+
+<div class="card">
+
+
+<h3>
+Address Details
+</h3>
+
+
+
+
+<!-- ================= Permanent Address ================= -->
+
+
+<div class="address-section">
+
+
+<h4>
+Permanent Address
+</h4>
+
+
+
+<div class="review-grid">
+
+
+
+<div class="full">
+
+<label>
+Address
+</label>
+
+
+<p>
+{{ address.permanent_address if address else '-' }}
+</p>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+City
+</label>
+
+
+<p>
+{{ address.permanent_city if address else '-' }}
+</p>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+District
+</label>
+
+
+<p>
+{{ address.permanent_district if address else '-' }}
+</p>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+State
+</label>
+
+
+<p>
+{{ address.permanent_state if address else '-' }}
+</p>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+Pincode
+</label>
+
+
+<p>
+{{ address.permanent_pincode if address else '-' }}
+</p>
+
+
+</div>
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+<hr>
+
+
+
+
+
+<!-- ================= Correspondence Address ================= -->
+
+
+<div class="address-section">
+
+
+<h4>
+Correspondence Address
+</h4>
+
+
+
+<div class="review-grid">
+
+
+
+<div class="full">
+
+<label>
+Address
+</label>
+
+
+<p>
+{{ address.correspondence_address if address else '-' }}
+</p>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+City
+</label>
+
+
+<p>
+{{ address.correspondence_city if address else '-' }}
+</p>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+District
+</label>
+
+
+<p>
+{{ address.correspondence_district if address else '-' }}
+</p>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+State
+</label>
+
+
+<p>
+{{ address.correspondence_state if address else '-' }}
+</p>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+Pincode
+</label>
+
+
+<p>
+{{ address.correspondence_pincode if address else '-' }}
+</p>
+
+
+</div>
+
+
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- ================================================= -->
+<!-- ACADEMIC DETAILS -->
+<!-- ================================================= -->
+
+
+<div class="card">
+
+
+<h3>
+Academic Details
+</h3>
+
+
+
+<div class="table-responsive">
+
+
+
+<table class="academic-table">
+
+
+<thead>
+
+<tr>
+
+<th>
+Qualification
+</th>
+
+
+<th>
+Board / University
+</th>
+
+
+<th>
+Institute
+</th>
+
+
+<th>
+Roll No
+</th>
+
+
+<th>
+Registration No
+</th>
+
+
+<th>
+Stream
+</th>
+
+
+<th>
+Medium
+</th>
+
+
+<th>
+Passing Year
+</th>
+
+
+<th>
+Marks
+</th>
+
+
+<th>
+Entrance Exam
+</th>
+
+
+<th>
+Document
+</th>
+
+
+</tr>
+
+
+</thead>
+
+
+
+
+
+<tbody>
+
+
+
+{% for record in academic_records %}
+
+
+
+<tr>
+
+
+
+<td>
+
+{{ record.qualification }}
+
+</td>
+
+
+
+
+
+<td>
+
+{{ record.board_university }}
+
+</td>
+
+
+
+
+
+<td>
+
+{{ record.institute_name }}
+
+</td>
+
+
+
+
+
+<td>
+
+{{ record.roll_number or '-' }}
+
+</td>
+
+
+
+
+
+<td>
+
+{{ record.registration_number or '-' }}
+
+</td>
+
+
+
+
+
+<td>
+
+{{ record.stream or '-' }}
+
+</td>
+
+
+
+
+
+<td>
+
+{{ record.medium or '-' }}
+
+</td>
+
+
+
+
+
+<td>
+
+{{ record.passing_year }}
+
+</td>
+
+
+
+
+
+<td>
+
+
+
+{% if record.marks_type == "Percentage" %}
+
+
+{{ record.percentage }} %
+
+
+
+{% elif record.marks_type == "CGPA" %}
+
+
+{{ record.cgpa }} CGPA
+
+
+
+{% else %}
+
+
+-
+
+
+{% endif %}
+
+
+
+</td>
+
+
+
+
+
+<td>
+
+{{ record.entrance_exam or '-' }}
+
+</td>
+
+
+
+
+<td>
+
+{% set doc = academic_documents.get(record.id) %}
+
+
+{% if doc %}
+
+<a href="{{ url_for('static', filename=doc.file_path) }}"
+target="_blank">
+
+View
+
+</a>
+
+
+{% else %}
+
+-
+
+{% endif %}
+
+
+</td>
+
+
+
+
+
+</tr>
+
+
+
+{% else %}
+
+
+
+<tr>
+
+<td colspan="11">
+
+No Academic Records Found
+
+</td>
+
+</tr>
+
+
+
+{% endfor %}
+
+
+
+</tbody>
+
+
+
+</table>
+
+
+
+</div>
+
+
+</div>
+<!-- ================================================= -->
+<!-- FAMILY & OTHER DETAILS -->
+<!-- ================================================= -->
+
+
+<div class="card">
+
+
+<h3>
+Family & Other Details
+</h3>
+
+
+
+
+<div class="review-grid">
+
+
+
+
+
+<!-- Father Occupation -->
+
+
+<div>
+
+<label>
+Father Occupation
+</label>
+
+
+<p>
+
+{{ family.father_occupation if family else '-' }}
+
+</p>
+
+
+</div>
+
+
+
+
+
+<!-- Mother Occupation -->
+
+
+<div>
+
+<label>
+Mother Occupation
+</label>
+
+
+<p>
+
+{{ family.mother_occupation if family else '-' }}
+
+</p>
+
+
+</div>
+
+
+
+
+
+<!-- Guardian Occupation -->
+
+
+<div>
+
+<label>
+Guardian Occupation
+</label>
+
+
+<p>
+
+{{ family.guardian_occupation if family else '-' }}
+
+</p>
+
+
+</div>
+
+
+
+
+
+<!-- Marital Status -->
+
+
+<div>
+
+<label>
+Marital Status
+</label>
+
+
+<p>
+
+{{ family.marital_status if family else '-' }}
+
+</p>
+
+
+</div>
+
+
+
+
+
+<!-- Domicile -->
+
+
+<div>
+
+<label>
+Domicile Status
+</label>
+
+
+<p>
+
+{{ family.domicile_status if family else '-' }}
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+Domicile State
+</label>
+
+
+<p>
+
+{{ family.domicile_state if family else '-' }}
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ================= PwBD ================= -->
+
+
+<div>
+
+<label>
+PwBD Candidate
+</label>
+
+
+<p>
+
+
+{% if family and family.is_pwbd %}
+
+Yes
+
+{% else %}
+
+No
+
+{% endif %}
+
+
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+PwBD Category
+</label>
+
+
+<p>
+
+{{ family.pwbd_category 
+if family and family.pwbd_category else '-' }}
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+PwBD Certificate No
+</label>
+
+
+<p>
+
+{{ family.pwbd_certificate_no
+if family and family.pwbd_certificate_no else '-' }}
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- ================= Freedom Fighter ================= -->
+
+
+
+<div>
+
+<label>
+Freedom Fighter
+</label>
+
+
+<p>
+
+
+{% if family and family.is_freedom_fighter %}
+
+Yes
+
+{% else %}
+
+No
+
+{% endif %}
+
+
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+Freedom Fighter Name
+</label>
+
+
+<p>
+
+{{ family.freedom_fighter_name
+if family and family.freedom_fighter_name else '-' }}
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+Freedom Fighter Relation
+</label>
+
+
+<p>
+
+{{ family.freedom_fighter_relation
+if family and family.freedom_fighter_relation else '-' }}
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+Freedom Fighter Certificate No
+</label>
+
+
+<p>
+
+{{ family.freedom_fighter_certificate_no
+if family and family.freedom_fighter_certificate_no else '-' }}
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ================= Ex Servicemen ================= -->
+
+
+
+<div>
+
+<label>
+Ex-Servicemen
+</label>
+
+
+<p>
+
+
+{% if family and family.is_ex_servicemen %}
+
+Yes
+
+{% else %}
+
+No
+
+{% endif %}
+
+
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div class="full">
+
+<label>
+Ex-Servicemen Details
+</label>
+
+
+<p>
+
+{{ family.ex_servicemen_details
+if family and family.ex_servicemen_details else '-' }}
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- ================= NCC ================= -->
+
+
+
+<div>
+
+<label>
+NCC Candidate
+</label>
+
+
+<p>
+
+
+{% if family and family.is_ncc_candidate %}
+
+Yes
+
+{% else %}
+
+No
+
+{% endif %}
+
+
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+NCC Certificate No
+</label>
+
+
+<p>
+
+{{ family.ncc_certificate_no
+if family and family.ncc_certificate_no else '-' }}
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+NCC Level
+</label>
+
+
+<p>
+
+{{ family.ncc_level
+if family and family.ncc_level else '-' }}
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ================= Twin Candidate ================= -->
+
+
+
+<div>
+
+<label>
+Twin Candidate
+</label>
+
+
+<p>
+
+
+{% if family and family.is_twin %}
+
+Yes
+
+{% else %}
+
+No
+
+{% endif %}
+
+
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+Twin Name
+</label>
+
+
+<p>
+
+{{ family.twin_name
+if family and family.twin_name else '-' }}
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+Twin Relation
+</label>
+
+
+<p>
+
+{{ family.twin_relation
+if family and family.twin_relation else '-' }}
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- ================= Criminal Case ================= -->
+
+
+
+<div>
+
+<label>
+Criminal Case
+</label>
+
+
+<p>
+
+
+{% if family and family.criminal_case %}
+
+Yes
+
+{% else %}
+
+No
+
+{% endif %}
+
+
+
+</p>
+
+
+</div>
+
+
+
+
+
+<div class="full">
+
+<label>
+Criminal Case Details
+</label>
+
+
+<p>
+
+{{ family.criminal_case_details
+if family and family.criminal_case_details else '-' }}
+
+</p>
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+</div>
+<!-- ================================================= -->
+<!-- UPLOADED DOCUMENTS -->
+<!-- ================================================= -->
+
+
+<div class="card">
+
+
+<h3>
+Uploaded Documents
+</h3>
+
+
+
+
+<div class="table-responsive">
+
+
+<table class="document-table">
+
+
+
+<thead>
+
+
+<tr>
+
+<th>
+Document
+</th>
+
+
+<th>
+Status
+</th>
+
+
+<th>
+Action
+</th>
+
+
+</tr>
+
+
+</thead>
+
+
+
+
+
+<tbody>
+
+
+
+
+
+<!-- ================= Profile Photo ================= -->
+
+
+<tr>
+
+
+<td>
+Profile Photo
+</td>
+
+
+
+<td>
+
+
+{% if documents and documents.profile_photo %}
+
+
+<span class="uploaded">
+Uploaded
+</span>
+
+
+{% else %}
+
+
+<span class="missing">
+Not Uploaded
+</span>
+
+
+{% endif %}
+
+
+</td>
+
+
+
+
+<td>
+
+
+
+{% if documents and documents.profile_photo %}
+
+
+<a href="{{ url_for('static',
+filename=documents.profile_photo) }}"
+target="_blank">
+
+View
+
+</a>
+
+
+
+{% else %}
+
+-
+
+{% endif %}
+
+
+
+</td>
+
+
+</tr>
+
+
+
+
+
+
+
+
+
+<!-- ================= Signature ================= -->
+
+
+<tr>
+
+
+<td>
+Signature
+</td>
+
+
+
+<td>
+
+
+{% if documents and documents.signature %}
+
+
+<span class="uploaded">
+Uploaded
+</span>
+
+
+{% else %}
+
+
+<span class="missing">
+Not Uploaded
+</span>
+
+
+{% endif %}
+
+
+</td>
+
+
+
+
+<td>
+
+
+
+{% if documents and documents.signature %}
+
+
+<a href="{{ url_for('static',
+filename=documents.signature) }}"
+target="_blank">
+
+View
+
+</a>
+
+
+
+{% else %}
+
+-
+
+{% endif %}
+
+
+
+</td>
+
+
+</tr>
+
+
+
+
+
+
+
+
+
+<!-- ================= Aadhaar Card ================= -->
+
+
+<tr>
+
+
+<td>
+Aadhaar Card
+</td>
+
+
+
+<td>
+
+
+{% if documents and documents.aadhaar_card %}
+
+
+<span class="uploaded">
+Uploaded
+</span>
+
+
+{% else %}
+
+
+<span class="missing">
+Not Uploaded
+</span>
+
+
+{% endif %}
+
+
+</td>
+
+
+
+
+<td>
+
+
+
+{% if documents and documents.aadhaar_card %}
+
+
+<a href="{{ url_for('static',
+filename=documents.aadhaar_card) }}"
+target="_blank">
+
+View
+
+</a>
+
+
+
+{% else %}
+
+-
+
+{% endif %}
+
+
+
+</td>
+
+
+</tr>
+
+
+
+
+
+
+
+
+
+<!-- ================= Birth Certificate ================= -->
+
+
+<tr>
+
+
+<td>
+Birth Certificate
+</td>
+
+
+
+<td>
+
+
+{% if documents and documents.birth_certificate %}
+
+
+<span class="uploaded">
+Uploaded
+</span>
+
+
+{% else %}
+
+
+<span class="missing">
+Not Uploaded
+</span>
+
+
+{% endif %}
+
+
+</td>
+
+
+
+
+<td>
+
+
+
+{% if documents and documents.birth_certificate %}
+
+
+<a href="{{ url_for('static',
+filename=documents.birth_certificate) }}"
+target="_blank">
+
+View
+
+</a>
+
+
+
+{% else %}
+
+-
+
+{% endif %}
+
+
+
+</td>
+
+
+</tr>
+
+
+
+
+
+
+
+
+
+<!-- ================= Caste Certificate ================= -->
+
+
+<tr>
+
+
+<td>
+Category / Caste Certificate
+</td>
+
+
+
+<td>
+
+
+{% if documents and documents.caste_certificate %}
+
+
+<span class="uploaded">
+Uploaded
+</span>
+
+
+{% else %}
+
+
+<span class="optional">
+Not Applicable
+</span>
+
+
+{% endif %}
+
+
+</td>
+
+
+
+
+<td>
+
+
+
+{% if documents and documents.caste_certificate %}
+
+
+<a href="{{ url_for('static',
+filename=documents.caste_certificate) }}"
+target="_blank">
+
+View
+
+</a>
+
+
+
+{% else %}
+
+-
+
+{% endif %}
+
+
+
+</td>
+
+
+</tr>
+
+
+
+
+
+
+
+
+
+<!-- ================= PwBD Certificate ================= -->
+
+
+<tr>
+
+
+<td>
+PwBD Certificate
+</td>
+
+
+
+<td>
+
+
+{% if documents and documents.pwbd_certificate %}
+
+
+<span class="uploaded">
+Uploaded
+</span>
+
+
+{% else %}
+
+
+<span class="optional">
+Not Applicable
+</span>
+
+
+{% endif %}
+
+
+</td>
+
+
+
+
+<td>
+
+
+
+{% if documents and documents.pwbd_certificate %}
+
+
+<a href="{{ url_for('static',
+filename=documents.pwbd_certificate) }}"
+target="_blank">
+
+View
+
+</a>
+
+
+
+{% else %}
+
+-
+
+{% endif %}
+
+
+
+</td>
+
+
+</tr>
+
+
+
+
+
+
+
+
+
+<!-- ================= Income Certificate ================= -->
+
+
+<tr>
+
+
+<td>
+Income Certificate
+</td>
+
+
+
+<td>
+
+
+{% if documents and documents.income_certificate %}
+
+
+<span class="uploaded">
+Uploaded
+</span>
+
+
+{% else %}
+
+
+<span class="optional">
+Optional
+</span>
+
+
+{% endif %}
+
+
+</td>
+
+
+
+
+<td>
+
+
+
+{% if documents and documents.income_certificate %}
+
+
+<a href="{{ url_for('static',
+filename=documents.income_certificate) }}"
+target="_blank">
+
+View
+
+</a>
+
+
+
+{% else %}
+
+-
+
+{% endif %}
+
+
+
+</td>
+
+
+</tr>
+
+
+
+
+
+
+
+
+
+<!-- ================= Domicile Certificate ================= -->
+
+
+<tr>
+
+
+<td>
+Domicile Certificate
+</td>
+
+
+
+<td>
+
+
+{% if documents and documents.domicile_certificate %}
+
+
+<span class="uploaded">
+Uploaded
+</span>
+
+
+{% else %}
+
+
+<span class="optional">
+Optional
+</span>
+
+
+{% endif %}
+
+
+</td>
+
+
+
+
+<td>
+
+
+
+{% if documents and documents.domicile_certificate %}
+
+
+<a href="{{ url_for('static',
+filename=documents.domicile_certificate) }}"
+target="_blank">
+
+View
+
+</a>
+
+
+
+{% else %}
+
+-
+
+{% endif %}
+
+
+
+</td>
+
+
+</tr>
+
+
+
+
+
+
+
+
+
+<!-- ================= Migration Certificate ================= -->
+
+
+<tr>
+
+
+<td>
+Migration Certificate
+</td>
+
+
+
+<td>
+
+
+{% if documents and documents.migration_certificate %}
+
+
+<span class="uploaded">
+Uploaded
+</span>
+
+
+{% else %}
+
+
+<span class="optional">
+Optional
+</span>
+
+
+{% endif %}
+
+
+</td>
+
+
+
+
+<td>
+
+
+
+{% if documents and documents.migration_certificate %}
+
+
+<a href="{{ url_for('static',
+filename=documents.migration_certificate) }}"
+target="_blank">
+
+View
+
+</a>
+
+
+
+{% else %}
+
+-
+
+{% endif %}
+
+
+
+</td>
+
+
+</tr>
+
+
+
+
+
+</tbody>
+
+
+
+</table>
+
+
+</div>
+
+
+</div>
+
+<!-- ================================================= -->
+<!-- DECLARATION -->
+<!-- ================================================= -->
+
+
+<div class="card declaration-card">
+
+
+<h3>
+Declaration
+</h3>
+
+
+
+<div class="declaration-box">
+
+
+<label>
+
+
+<input
+
+type="checkbox"
+
+name="declaration"
+
+id="declaration"
+
+required>
+
+
+
+I hereby declare that all information furnished by me in this application
+form and all documents uploaded by me are true, complete and correct to
+the best of my knowledge. I understand that if any information is found
+incorrect, false or misleading, my admission/application may be cancelled
+by the university.
+
+
+
+</label>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<!-- ================================================= -->
+<!-- FINAL ACTION BUTTONS -->
+<!-- ================================================= -->
+
+
+<div class="step7-actions">
+
+
+
+
+
+<a href="{{ url_for('application.step6') }}"
+
+class="previous-btn">
+
+
+Previous
+
+
+</a>
+
+
+
+
+
+
+
+<button
+
+type="submit"
+
+class="submit-btn"
+
+id="submitBtn">
+
+
+Final Submit
+
+
+</button>
+
+
+
+
+
+</div>
+
+
+
+
+
+</form>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+<!-- ================================================= -->
+<!-- JAVASCRIPT -->
+<!-- ================================================= -->
+
+
+<script src="{{ url_for('static',
+filename='js/registration-step7.js') }}">
+</script>
+
+
+
+
+{% endblock %}

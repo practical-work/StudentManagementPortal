@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Application Retrieved</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Pacifico&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/application_retrieved.css') }}">
+
+</head>
+ 
+<body>
+
+<div class="container">
+
+    <!-- Heading -->
+
+    <div class="badge-box">
+
+        <div id="main-heading">
+
+            <i class="fa-solid fa-circle-check"></i>
+
+            Application Retrieved
+
+        </div>
+
+        <p class="sub-heading">
+
+            Your application details have been found successfully.
+
+        </p>
+
+    </div>
+
+    <!-- Success Message -->
+
+    <div class="success-box">
+
+        <strong>Congratulations!</strong><br>
+
+        Your Application Number has been retrieved successfully.
+
+    </div>
+
+    <!-- Candidate Details -->
+
+    <div class="table-box">
+
+        <table>
+
+            <tr>
+
+                <th>
+
+                    Candidate Name
+
+                </th>
+
+                <td>
+
+                    {{ full_name }}
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <th>
+
+                    Application Number
+
+                </th>
+
+                <td class="application-number">
+
+                    {{ application_no }}
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <th>
+
+                    Registered Email
+
+                </th>
+
+                <td>
+
+                    {{ email }}
+
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <th>
+
+                    Registered Mobile
+
+                </th>
+
+                <td>
+
+                    {{ mobile }}
+
+                </td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+    <!-- Instructions -->
+
+    <div class="important-box">
+
+        <h5>
+
+            <i class="fa-solid fa-circle-exclamation"></i>
+
+            Important Instructions
+
+        </h5>
+
+        <ul>
+
+            <li>Keep your Application Number safe.</li>
+
+            <li>Use your Application Number and Password to log in.</li>
+
+            <li>If you have not completed your registration, log in and continue your application.</li>
+
+            <li>Do not share your Application Number or Password with anyone.</li>
+
+        </ul>
+
+    </div>
+
+    <!-- Buttons -->
+
+    <div class="btn-group-custom">
+
+        <a href="{{ url_for('auth.login') }}"
+           class="custom-btn btn-primary-custom">
+
+            <i class="fa-solid fa-right-to-bracket"></i>
+
+            Login Now
+
+        </a>
+
+        <a href="{{ url_for('auth.home') }}"
+           class="custom-btn btn-secondary-custom">
+
+            <i class="fa-solid fa-house"></i>
+
+            Back to Home
+
+        </a>
+
+    </div>
+
+    <!-- Footer -->
+
+    <div class="footer-note">
+
+        <strong>Student Management Portal</strong><br>
+
+        Secure • Reliable • Digital Education
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

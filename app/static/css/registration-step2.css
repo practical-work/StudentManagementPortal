@@ -1,0 +1,369 @@
+
+/* ===========================
+   Registration Step 2
+=========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: "Inter",sans-serif;
+}
+
+.container{
+    margin:3%;
+    margin-top:15px;
+    padding:40px;
+    border-radius:15px;
+    border-top-right-radius:0;
+    border-bottom-left-radius:0;
+    border:1.5px dotted darkblue;
+    background:linear-gradient(110deg,#f3f4f7 70%,#ffffff 30%);
+    font-family:"Inter",sans-serif;
+}
+
+/* ===========================
+   Heading
+=========================== */
+
+.badge{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+#main-heading{
+    display:inline-block;
+    padding:15px 30px;
+    border:none;
+    outline:none;
+    border-radius:10px;
+    border:1px solid darkblue;
+    background:linear-gradient(110deg,#d2f9f9 70%,#fff 30%);
+    color:rgb(0,104,139);
+    font-size:1.45rem;
+    font-family:"Pacifico",sans-serif;
+}
+
+.sub-main-heading{
+    margin-top:15px;
+    color:darkblue;
+    font-size:1.1rem;
+}
+
+/* ===========================
+   Application Details
+=========================== */
+
+.application-info{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    margin:30px 0;
+    padding:18px 25px;
+    border-radius:10px;
+    background:#fff;
+    border:1px solid rgba(0,0,139,.15);
+}
+
+.application-info div{
+    flex:1;
+    text-align:center;
+    color:darkblue;
+    font-size:1rem;
+}
+
+.application-info strong{
+    color:#003366;
+}
+
+/* ===========================
+   Form
+=========================== */
+
+.form-style{
+    margin-top:20px;
+}
+
+.mb-3{
+    margin-bottom:22px;
+}
+
+.inner-fields{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+
+.mb-3 label{
+    width:280px;
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+    font-size:1.15rem;
+    color:darkblue;
+    font-weight:500;
+}
+
+.mb-3 label span{
+    margin-left:6px;
+    color:#f97474;
+    font-size:1.3rem;
+    font-weight:bold;
+}
+
+.input-field{
+    flex:1;
+    display:flex;
+}
+
+/* ===========================
+   Inputs
+=========================== */
+
+.form-control{
+    width:100%;
+    padding:13px 15px;
+    border-radius:10px;
+    border:1px solid rgba(0,0,139,.2);
+    outline:none;
+    font-size:1rem;
+    color:darkblue;
+    background:#fff;
+    transition:.25s ease;
+}
+
+.form-control::placeholder{
+    color:darkblue;
+    opacity:.7;
+}
+
+.form-control:hover{
+    border:1px dotted darkblue;
+    box-shadow:0 3px 10px rgba(14,165,233,.12);
+}
+
+.form-control:focus{
+    border:1px solid #0ea5e9;
+    box-shadow:0 0 0 .18rem rgba(14,165,233,.15);
+}
+
+/* ===========================
+   Select
+=========================== */
+
+select.form-control{
+    cursor:pointer;
+}
+
+/* ===========================
+   Validation
+=========================== */
+
+.err-block{
+    display:none;
+    margin-top:12px;
+    margin-left:298px;
+}
+
+.err-block.failure{
+    display:block;
+}
+
+.err{
+    display:inline-block;
+    padding:8px 18px;
+    border-radius:8px;
+    background:#FEF2F2;
+    border:1px solid #FECACA;
+    color:#991B1B;
+    font-size:.95rem;
+    line-height:1.5;
+}
+
+.form-control.error{
+    border-color:#f97474;
+    box-shadow:0 0 0 .15rem rgba(220,53,69,.15);
+}
+
+.form-control.success{
+    border-color:#2ad758;
+    box-shadow:0 0 0 .15rem rgba(25,135,84,.15);
+}
+
+.form-control.error:hover{
+    border-color:#f97474;
+}
+
+.form-control.success:hover{
+    border-color:#2ad758;
+}
+
+/* ===========================
+   Disabled Fields
+=========================== */
+
+.form-control:disabled{
+    background:#f8f9fa;
+    color:#495057;
+    cursor:not-allowed;
+    opacity:.9;
+}
+
+/* ===========================
+   Footer
+=========================== */
+
+.step2-footer{
+    margin-top:35px;
+    display:flex;
+    justify-content:center;
+}
+
+.btn.btn-primary{
+    padding:12px 38px;
+    border-radius:10px;
+    border:2px dotted darkblue;
+    background:#f3faf8;
+    color:darkblue;
+    font-size:1.1rem;
+    font-weight:600;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.btn.btn-primary:hover{
+    background:linear-gradient(
+        110deg,
+        rgba(207,217,247,.5) 70%,
+        #fff 30%
+    );
+}
+
+/* ===========================
+   Responsive
+=========================== */
+
+@media(max-width:992px){
+
+.container{
+    margin:15px;
+    padding:25px;
+}
+
+.application-info{
+    flex-direction:column;
+    text-align:center;
+}
+
+.inner-fields{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:8px;
+}
+
+.mb-3 label{
+    width:100%;
+    justify-content:flex-start;
+}
+
+.input-field{
+    width:100%;
+}
+
+.err-block{
+    margin-left:0;
+}
+
+}
+
+@media(max-width:768px){
+
+.container{
+    margin:10px;
+    padding:18px;
+}
+
+#main-heading{
+    font-size:1.25rem;
+    padding:12px 20px;
+}
+
+.sub-main-heading{
+    font-size:1rem;
+}
+
+.application-info{
+    padding:15px;
+}
+
+.application-info div{
+    font-size:.95rem;
+}
+
+.form-control{
+    font-size:.95rem;
+    padding:12px;
+}
+
+.btn.btn-primary{
+    width:100%;
+}
+
+}
+
+@media(max-width:576px){
+
+.container{
+    margin:5px;
+    padding:15px;
+}
+
+.mb-3 label{
+    font-size:1rem;
+}
+
+.form-control{
+    font-size:.9rem;
+}
+
+.err{
+    width:100%;
+    display:block;
+    font-size:.88rem;
+}
+
+#main-heading{
+    width:100%;
+    font-size:1.1rem;
+}
+
+.sub-main-heading{
+    font-size:.9rem;
+}
+
+}
+
+@media(max-width:350px){
+
+body{
+    font-size:14px;
+}
+
+.container{
+    padding:10px;
+}
+
+#main-heading{
+    font-size:1rem;
+}
+
+.form-control{
+    padding:10px;
+}
+
+.btn.btn-primary{
+    font-size:.95rem;
+}
+
+}

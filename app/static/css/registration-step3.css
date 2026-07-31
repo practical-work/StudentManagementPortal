@@ -1,0 +1,207 @@
+/* ===========================
+   Qualification Cards
+=========================== */
+
+.qualification-card {
+    background: #ffffff;
+    border: 1px solid rgba(0,0,139,.15);
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+    transition: all 0.3s ease;
+}
+
+.qualification-card:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+.card-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px dashed rgba(0,0,139,.2);
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
+
+.title-text {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: darkblue;
+}
+
+.remove-btn {
+    background: #FEF2F2;
+    color: #991B1B;
+    border: 1px solid #FECACA;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.remove-btn:hover {
+    background: #FECACA;
+}
+
+/* ===========================
+   Grid Layout & Inputs
+=========================== */
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 22px;
+}
+
+.grid > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.grid label {
+    font-size: 1.05rem;
+    color: darkblue;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.grid label span {
+    color: #f97474;
+    margin-left: 4px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.grid input, 
+.grid select, 
+.grid textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: 1px solid rgba(0,0,139,.2);
+    outline: none;
+    font-size: 1rem;
+    color: darkblue;
+    background: #fff;
+    transition: .25s ease;
+}
+
+.grid input:hover, 
+.grid select:hover, 
+.grid textarea:hover {
+    border: 1px dotted darkblue;
+    box-shadow: 0 3px 10px rgba(14,165,233,.12);
+}
+
+.grid input:focus, 
+.grid select:focus, 
+.grid textarea:focus {
+    border: 1px solid #0ea5e9;
+    box-shadow: 0 0 0 .18rem rgba(14,165,233,.15);
+}
+
+.full {
+    grid-column: 1 / -1;
+}
+
+/* ===========================
+   Buttons & Extras
+=========================== */
+
+#addQualification {
+    background: #f3faf8;
+    color: darkblue;
+    border: 2px dotted darkblue;
+    padding: 12px 25px;
+    border-radius: 10px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: .25s;
+}
+
+#addQualification:hover {
+    background: linear-gradient(110deg, rgba(207,217,247,.5) 70%, #fff 30%);
+}
+
+.step3-footer {
+    margin-top: 35px;
+    display: flex;
+    justify-content: center;
+    border-top: 1px dashed rgba(0,0,139,.2);
+    padding-top: 25px;
+}
+
+
+/* ===========================
+   Error Block Alignment Fix (Overrides Step 2)
+=========================== */
+
+.grid .err-block {
+    margin-left: 0 !important; /* Removes the 298px offset from Step 2 */
+    margin-top: 8px;
+    width: 100%;
+}
+
+.grid .err {
+    width: 100%;
+    box-sizing: border-box;
+    display: block; 
+    margin-bottom: 0;
+    text-align: left;
+}
+
+/* Ensure full width fields (like Subjects) also align correctly */
+.full .err-block {
+    margin-left: 0 !important;
+}
+
+/* ===========================
+   Mobile Overflow Fixes
+=========================== */
+
+/* 1. Prevent grid items from stretching beyond their container */
+.grid > div {
+    min-width: 0; 
+}
+
+.grid input, 
+.grid select, 
+.grid textarea {
+    max-width: 100%;
+}
+
+/* 2. Adjust layout for Tablets and Mobile */
+@media (max-width: 768px) {
+    .qualification-card {
+        padding: 18px; /* Slightly less padding to save space */
+    }
+    
+    .grid {
+        /* Overrides the 240px minimum, making everything stack neatly */
+        grid-template-columns: 1fr; 
+        gap: 15px;
+    }
+    
+    .card-title {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .remove-btn {
+        width: 100%; /* Makes the remove button full width on mobile for easier tapping */
+        text-align: center;
+    }
+}
+
+@media (max-width: 400px) {
+    .qualification-card {
+        padding: 12px; /* Even tighter padding for very small phones */
+    }
+}

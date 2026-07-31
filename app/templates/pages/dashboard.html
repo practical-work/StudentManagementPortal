@@ -1,0 +1,658 @@
+{% extends "base.html" %}
+
+{% block title %}
+Student Dashboard
+{% endblock %}
+
+{% block css %}
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/dashboard.css') }}">
+
+{% endblock %}
+
+{% block content %}
+
+<div class="dashboard-container">
+
+<div class="dashboard-header">
+
+<h2>
+
+Welcome,
+{{ student.full_name }}
+
+</h2>
+
+<p>
+
+Student Admission Portal Dashboard
+
+</p>
+
+</div>
+
+
+
+<div class="profile-card">
+{% if view_mode %} 
+<div class="profile-left">
+
+  
+{% if documents and documents.profile_photo %}
+
+<img
+class="profile-photo"
+src="{{ url_for('static', filename=documents.profile_photo) }}">
+
+{% else %}
+
+<img
+class="profile-photo"
+src="{{ url_for('static', filename='assets/images/logo.png') }}">
+
+{% endif %}
+
+</div>
+{% endif %}
+
+
+<div class="profile-right">
+
+<h3>
+
+{{ student.full_name }}
+
+</h3>
+
+<div class="info-grid">
+
+<div>
+
+<strong>
+
+Application No
+
+</strong>
+
+<br>
+
+{{ student.application_no }}
+
+</div>
+
+<div>
+
+<strong>
+
+Current Step
+
+</strong>
+
+<br>
+
+{{ student.current_step }}/7
+
+</div>
+
+<div>
+
+<strong>
+
+Email
+
+</strong>
+
+<br>
+
+{{ student.email }}
+
+</div>
+
+<div>
+
+<strong>
+
+Mobile
+
+</strong>
+
+<br>
+
+{{ student.mobile }}
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<div class="stepper">
+
+<div class="step">
+
+<div class="circle {% if student.current_step>=1 %}active{% endif %}">
+
+1
+
+</div>
+
+<span>
+
+Personal
+
+</span>
+
+</div>
+
+<div class="line {% if student.current_step>=2 %}active{% endif %}"></div>
+
+<div class="step">
+
+<div class="circle {% if student.current_step>=2 %}active{% endif %}">
+
+2
+
+</div>
+
+<span>
+
+Academic
+
+</span>
+
+</div>
+
+<div class="line {% if student.current_step>=3 %}active{% endif %}"></div>
+
+<div class="step">
+
+<div class="circle {% if student.current_step>=3 %}active{% endif %}">
+
+3
+
+</div>
+
+<span>
+
+Address
+
+</span>
+
+</div>
+
+<div class="line {% if student.current_step>=4 %}active{% endif %}"></div>
+
+<div class="step">
+
+<div class="circle {% if student.current_step>=4 %}active{% endif %}">
+
+4
+
+</div>
+
+<span>
+
+Family & Others
+
+</span>
+
+</div>
+
+<div class="line {% if student.current_step>=5 %}active{% endif %}"></div>
+
+<div class="step">
+
+<div class="circle {% if student.current_step>=5 %}active{% endif %}">
+
+5
+
+</div>
+
+<span>
+
+Documents
+
+</span>
+
+</div>
+
+<div class="line {% if student.current_step>=6 %}active{% endif %}"></div>
+
+<div class="step">
+
+<div class="circle {% if student.current_step>=6 %}active{% endif %}">
+
+6
+
+</div>
+
+<span>
+
+Review
+
+</span>
+
+</div>
+
+<div class="line {% if student.current_step>=7 %}active{% endif %}"></div>
+
+<div class="step">
+
+<div class="circle {% if student.current_step>=7 %}active{% endif %}">
+
+7
+
+</div>
+
+<span>
+
+Submit
+
+</span>
+
+</div>
+
+</div>
+
+
+
+<div class="summary-row">
+
+    <div class="summary-card">
+        <h4>Application Status</h4>
+        {% if student.is_final_submitted %}
+            <span class="success">Submitted</span>
+        {% else %}
+            <span class="warning">In Progress</span>
+        {% endif %}
+    </div>
+
+    <!-- NEW PAYMENT CARD -->
+    <div class="summary-card">
+        <h4>Payment Status</h4>
+        {% if student.payment_status == 'Pending' and student.is_final_submitted %}
+            <span class="warning" style="margin-bottom: 10px;">Pending (₹0)</span>
+            <form action="{{ url_for('application.process_payment') }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button type="submit" class="btn-submit" style="padding: 6px 15px; font-size: 0.9rem;">
+                    Process Payment
+                </button>
+            </form>
+        {% elif student.payment_status in ['Exempted', 'Completed'] %}
+            <span class="success">{{ student.payment_status }}</span>
+        {% else %}
+            <span class="warning">Pending</span>
+        {% endif %}
+    </div>
+
+    <!-- NEW DOWNLOAD CARD -->
+    <div class="summary-card">
+        <h4>Application Form</h4>
+        {% if student.is_final_submitted %}
+            <a href="{{ url_for('application.download_application') }}" target="_blank" class="btn-primary" style="padding: 8px 15px; font-size: 0.95rem;">
+                <i class="fa-solid fa-download"></i> Download PDF
+            </a>
+        {% else %}
+            <span class="warning">Submit to Download</span>
+        {% endif %}
+    </div>
+
+</div>
+
+<div class="sections-card">
+
+<h3>
+
+Application Sections
+
+</h3>
+
+<div class="section-list">
+
+<!-- STEP 2 -->
+
+<div class="section-item">
+
+<div>
+
+<h4>Step 2</h4>
+
+<p>Personal Details</p>
+
+</div>
+
+<div>
+
+{% if student.is_final_submitted %}
+
+<a href="{{ url_for('application.view_step2') }}"
+class="btn-view">
+
+View
+
+</a>
+
+{% elif student.current_step >= 1 %}
+
+<a href="{{ url_for('application.step2') }}"
+class="btn-edit">
+
+Fill/Edit
+
+</a>
+
+{% else %}
+
+<button class="btn-lock" disabled>
+
+Locked
+
+</button>
+
+{% endif %}
+
+</div>
+
+</div>
+
+
+
+<!-- STEP 3 -->
+
+<div class="section-item">
+
+<div>
+
+<h4>Step 3</h4>
+
+<p>Academic Details</p>
+
+</div>
+
+<div>
+
+{% if student.is_final_submitted %}
+
+<a href="{{ url_for('application.view_step3') }}"
+class="btn-view">
+
+View
+
+</a>
+
+{% elif student.current_step >= 2 %}
+
+<a href="{{ url_for('application.step3') }}"
+class="btn-edit">
+
+Fill/Edit
+
+</a>
+
+{% elif student.current_step == 2 %}
+
+<a href="{{ url_for('application.step3') }}"
+class="btn-primary">
+
+Continue
+
+</a>
+
+{% else %}
+
+<button class="btn-lock" disabled>
+
+Locked
+
+</button>
+
+{% endif %}
+
+</div>
+
+</div>
+
+
+
+<!-- STEP 4 -->
+
+<div class="section-item">
+
+<div>
+
+<h4>Step 4</h4>
+
+<p>Address Details</p>
+
+</div>
+
+<div>
+
+{% if student.is_final_submitted %}
+
+<a href="{{ url_for('application.view_step4') }}"
+class="btn-view">
+
+View
+
+</a>
+
+{% elif student.current_step >= 3 %}
+
+<a href="{{ url_for('application.step4') }}"
+class="btn-edit">
+
+Fill/Edit
+
+</a>
+
+{% elif student.current_step == 3 %}
+
+<a href="{{ url_for('application.step4') }}"
+class="btn-primary">
+
+Continue
+
+</a>
+
+{% else %}
+
+<button class="btn-lock" disabled>
+
+Locked
+
+</button>
+
+{% endif %}
+
+</div>
+
+</div>
+
+
+
+<!-- STEP 5 -->
+
+<div class="section-item">
+
+<div>
+
+<h4>Step 5</h4>
+
+<p>Family and Others Details</p>
+
+</div>
+
+<div>
+
+{% if student.is_final_submitted %}
+
+<a href="{{ url_for('application.view_step5') }}"
+class="btn-view">
+
+View
+
+</a>
+
+{% elif student.current_step >= 4 %}
+
+<a href="{{ url_for('application.step5') }}"
+class="btn-edit">
+
+Fill/Edit
+
+</a>
+
+{% elif student.current_step == 4 %}
+
+<a href="{{ url_for('application.step5') }}"
+class="btn-primary">
+
+Continue
+
+</a>
+
+{% else %}
+
+<button class="btn-lock" disabled>
+
+Locked
+
+</button>
+
+{% endif %}
+
+</div>
+
+</div>
+
+
+
+<!-- STEP 6 -->
+
+<div class="section-item">
+
+<div>
+
+<h4>Step 6</h4>
+
+<p>Documents Upload</p>
+
+</div>
+
+<div>
+
+{% if student.is_final_submitted %}
+
+<a href="{{ url_for('application.view_step6') }}"
+class="btn-view">
+
+View
+
+</a>
+
+{% elif student.current_step >= 5 %}
+
+<a href="{{ url_for('application.step6') }}"
+class="btn-edit">
+
+Fill/Edit
+
+</a>
+
+{% elif student.current_step == 5 %}
+
+<a href="{{ url_for('application.step6') }}"
+class="btn-primary">
+
+Continue
+
+</a>
+
+{% else %}
+
+<button class="btn-lock" disabled>
+
+Locked
+
+</button>
+
+{% endif %}
+
+</div>
+
+</div>
+
+
+
+<!-- STEP 7 -->
+
+<div class="section-item">
+
+<div>
+
+<h4>Step 7</h4>
+
+<p>Final Submission</p>
+
+</div>
+
+<div>
+
+{% if student.is_final_submitted %}
+
+<span class="submitted-badge">
+
+Submitted ✓
+
+</span>
+
+{% elif student.current_step == 6 and student.profile_completed %}
+
+<a href="{{ url_for('application.step7') }}"
+class="btn-submit">
+
+Final Submit
+
+</a>
+
+{% else %}
+
+<button class="btn-lock" disabled>
+
+Locked
+
+</button>
+
+{% endif %}
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<div class="logout-area">
+
+<a
+href="{{ url_for('auth.logout') }}"
+class="logout-btn">
+
+Logout
+
+</a>
+
+</div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,153 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Inter",sans-serif;
+}
+
+body{
+
+    background:#f4f7fb;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    min-height:100vh;
+
+    padding:20px;
+
+}
+
+.error-container{
+
+    width:100%;
+    max-width:650px;
+
+}
+
+.error-card{
+
+    background:#fff;
+
+    border-radius:18px;
+
+    padding:50px;
+
+    text-align:center;
+
+    box-shadow:0 10px 35px rgba(0,0,0,.08);
+
+}
+
+.error-number{
+
+    font-size:90px;
+
+    font-weight:700;
+
+    color:#0d6efd;
+
+    margin-bottom:10px;
+
+}
+
+.error-card h1{
+
+    font-size:34px;
+
+    color:#222;
+
+    margin-bottom:20px;
+
+}
+
+.error-card p{
+
+    color:#666;
+
+    font-size:17px;
+
+    line-height:1.8;
+
+    margin-bottom:35px;
+
+}
+
+.buttons{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:18px;
+
+    flex-wrap:wrap;
+
+}
+
+.btn{
+
+    text-decoration:none;
+
+    padding:13px 28px;
+
+    border-radius:10px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.btn-primary{
+
+    background:#0d6efd;
+
+    color:#fff;
+
+}
+
+.btn-primary:hover{
+
+    background:#0b5ed7;
+
+}
+
+.btn-secondary{
+
+    background:#6c757d;
+
+    color:#fff;
+
+}
+
+.btn-secondary:hover{
+
+    background:#565e64;
+
+}
+
+@media(max-width:600px){
+
+.error-card{
+
+padding:35px 25px;
+
+}
+
+.error-number{
+
+font-size:70px;
+
+}
+
+.error-card h1{
+
+font-size:28px;
+
+}
+
+}

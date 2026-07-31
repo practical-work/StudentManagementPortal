@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Application Retrieval OTP</title>
+</head>
+
+<body style="margin:0;padding:0;background:#f4f7fb;font-family:Arial,Helvetica,sans-serif;">
+
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f7fb;padding:30px 0;">
+<tr>
+<td align="center">
+
+<table width="600" cellpadding="0" cellspacing="0"
+style="background:#ffffff;border-radius:10px;overflow:hidden;box-shadow:0 5px 20px rgba(0,0,0,.08);">
+
+<tr>
+<td align="center"
+style="background:#0d6efd;padding:30px;color:#ffffff;">
+
+<h1 style="margin:0;font-size:28px;">
+📄 Student Management Portal
+</h1>
+
+<p style="margin-top:10px;font-size:15px;">
+Application Number Verification
+</p>
+
+</td>
+</tr>
+
+<tr>
+<td style="padding:40px;">
+
+<h2 style="margin-top:0;color:#222;">
+Hello {{ name }},
+</h2>
+
+<p style="font-size:16px;color:#555;line-height:1.8;">
+We received a request to retrieve your Application Number for the Student Management Portal.
+</p>
+
+<p style="font-size:16px;color:#555;line-height:1.8;">
+Please use the OTP below to verify your identity.
+</p>
+
+<table width="100%">
+<tr>
+<td align="center">
+
+<div style="
+display:inline-block;
+padding:18px 40px;
+background:#eef4ff;
+border:2px dashed #0d6efd;
+border-radius:8px;
+font-size:34px;
+font-weight:bold;
+letter-spacing:8px;
+color:#0d6efd;
+margin:20px 0;">
+
+{{ otp }}
+
+</div>
+
+</td>
+</tr>
+</table>
+
+<p style="font-size:15px;color:#666;">
+⏳ This OTP is valid for <strong>5 minutes</strong>.
+</p>
+
+<p style="font-size:15px;color:#666;">
+If you did not request this, please ignore this email.
+</p>
+
+<hr style="border:none;border-top:1px solid #eeeeee;margin:30px 0;">
+
+<p style="font-size:14px;color:#777;">
+Never share your OTP with anyone.
+</p>
+
+</td>
+</tr>
+
+<tr>
+<td align="center"
+style="background:#f8f9fa;padding:25px;color:#666;font-size:13px;">
+
+<strong>Student Management Portal</strong><br>
+
+Secure • Reliable • Digital Education
+
+<br><br>
+
+© {{ year }} Student Management Portal
+
+</td>
+</tr>
+
+</table>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>

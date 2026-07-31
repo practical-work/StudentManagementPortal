@@ -1,0 +1,307 @@
+{% extends "base.html" %}
+
+{% block title %}Retrieve Application Number | Student Portal{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/reg1.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <!-- Heading -->
+
+    <div class="badge">
+
+        <button id="main-heading">
+            Retrieve Application Number
+        </button>
+
+        <p class="sub-main-heading">
+            Find your registered Application Number
+        </p>
+
+    </div>
+
+    <!-- Flash Messages -->
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category,message in messages %}
+
+    <div class="alert-box">
+
+        <p class="alert alert-{{ category }}">
+            {{ message }}
+        </p>
+
+    </div>
+
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+    <!-- ================= Search Form ================= -->
+
+    {% if not otp_sent %}
+
+    <form class="form-style"
+          method="POST"
+          action="{{ url_for('retrieve.step1') }}">
+        <input type="hidden"
+           name="csrf_token"
+           value="{{ csrf_token() }}">
+        <!-- Search Type -->
+
+        <div class="mb-3">
+
+            <div class="inner-fields">
+
+                <label for="searchType">
+
+                    <p>Search By</p>
+
+                    <span>*</span>
+
+                </label>
+
+                <div class="input-field">
+
+                    <select
+                        id="searchType"
+                        name="search_type"
+                        class="form-control"
+                        onchange="changePlaceholder()">
+
+                        <option value="email">
+                            Registered Email
+                        </option>
+
+                        <option value="mobile">
+                            Registered Mobile
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Search Value -->
+
+        <div class="mb-3">
+
+            <div class="inner-fields">
+
+                <label for="searchValue">
+
+                    <p>Enter Details</p>
+
+                    <span>*</span>
+
+                </label>
+
+                <div class="input-field">
+
+                    <input
+                        type="email"
+                        id="searchValue"
+                        name="value"
+                        class="form-control"
+                        placeholder="Enter Registered Email">
+
+                </div>
+
+            </div>
+
+            <div class="err-block">
+
+                <p class="err" id="value-err"></p>
+
+            </div>
+
+        </div>
+
+        <button class="btn btn-primary">
+
+            Send OTP
+
+        </button>
+
+    </form>
+
+    {% endif %}
+
+    <!-- ================= OTP Verification ================= -->
+
+    {% if otp_sent %}
+
+    <div class="mt-4">
+
+        <h5 class="text-success">
+
+            Email Verification
+
+        </h5>
+
+        <p id="info-msg">
+
+            OTP has been sent to
+
+            <strong>{{ email }}</strong>
+
+        </p>
+
+        <form class="form-style"
+              method="POST"
+              action="{{ url_for('retrieve.verify_otp') }}">
+            <input type="hidden"
+           name="csrf_token"
+           value="{{ csrf_token() }}">
+            <div class="mb-3">
+
+                <div class="inner-fields">
+
+                    <label for="entered_otp">
+
+                        <p>Enter OTP</p>
+
+                        <span>*</span>
+
+                    </label>
+
+                    <div class="input-field">
+
+                        <input
+                            type="text"
+                            id="entered_otp"
+                            name="entered_otp"
+                            class="form-control"
+                            maxlength="6"
+                            placeholder="Enter OTP">
+
+                    </div>
+
+                </div>
+
+                <div class="err-block">
+
+                    <p class="err" id="otp-err"></p>
+
+                </div>
+
+            </div>
+
+            <button class="btn btn-success">
+
+                Verify OTP
+
+            </button>
+
+        </form>
+
+        <form method="POST"
+              action="{{ url_for('retrieve.resend_otp') }}"
+              class="mt-3">
+            <input type="hidden"
+           name="csrf_token"
+           value="{{ csrf_token() }}">
+            <button
+                id="resendBtn"
+                class="btn btn-warning"
+                disabled>
+
+                Resend OTP
+                (<span id="timer"></span>)
+
+            </button>
+
+        </form>
+
+    </div>
+
+    {% endif %}
+
+    <div class="text-end">
+
+        <a href="{{ url_for('auth.login') }}">
+
+            ← Back to Login
+
+        </a>
+
+    </div>
+
+</div>
+
+<!-- Change Placeholder -->
+
+<script>
+
+function changePlaceholder(){
+
+    const type=document.getElementById("searchType").value;
+    const input=document.getElementById("searchValue");
+
+    if(type==="email"){
+
+        input.type="email";
+        input.placeholder="Enter Registered Email";
+
+    }else{
+
+        input.type="text";
+        input.placeholder="Enter Registered Mobile Number";
+
+    }
+
+}
+
+</script>
+
+{% if otp_sent %}
+
+<script>
+
+let remaining = Number("{{ remaining_seconds|default(0) }}");
+
+const button = document.getElementById("resendBtn");
+const timer = document.getElementById("timer");
+
+function updateTimer(){
+
+    if(remaining<=0){
+
+        button.disabled=false;
+        button.innerHTML="Resend OTP";
+
+        clearInterval(interval);
+
+        return;
+
+    }
+
+    const minutes=Math.floor(remaining/60);
+    const seconds=remaining%60;
+
+    timer.textContent=
+        minutes + ":" + String(seconds).padStart(2,"0");
+
+    remaining--;
+
+}
+
+updateTimer();
+
+const interval=setInterval(updateTimer,1000);
+
+</script>
+
+{% endif %}
+
+<script src="{{ url_for('static', filename='js/retrieve.js') }}"></script>
+
+{% endblock %}

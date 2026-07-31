@@ -1,0 +1,70 @@
+/* *{margin:0;padding:0;} */
+
+.container{background:linear-gradient(110deg,rgb(243, 244, 247) 70%,#fff 30%);margin:3%;border-radius:15px;border-top-right-radius:0;
+border-bottom-left-radius:0;padding:40px;border:1.5px dotted darkblue;font-family: "Inter", sans-serif;margin-top:10px;}
+
+.badge{text-align: center;margin-bottom:30px;}
+#main-heading{background:linear-gradient(110deg,rgb(210 249 249) 70%,#fff 30%);display: inline;padding:15px 25px 15px 25px;border-radius:10px;
+    border:1px solid darkblue;outline: none;color: rgb(0, 104, 139);font-size:1.4em;font-family: "Pacifico", sans-serif;}
+
+.alert-box{display: flex;justify-content: center;align-items: center;margin-top:15px;}
+.alert{padding:12px;border-radius:15px;font-size:1.2em;display: inline;padding-left:20px;padding-right:20px;}
+
+.alert.alert-success{background-color:#ECFDF3;border:1px solid #A7F3D0;
+box-shadow:0px 4px 12px rgba(22,163,74,0.15);}
+
+.alert.alert-danger{background-color: #FEF2F2;border:1px solid #FECACA;
+box-shadow:0px 4px 12px rgba(220, 38,38,0,15);color:#991B1B;}
+
+
+.form-style{/*background-color: rgb(213, 208, 217);*/margin-top:20px;padding:5px;text-align: center;}
+
+/* .mb-3{display:flex;align-items: center;justify-content: center;} */
+.mb-3 label{width: 330px; font-size:1.3em;color: darkblue;display: flex;align-items: center;justify-content: flex-end;}
+.mb-3 label span{color: rgb(249, 116, 116);font-size:1.4em;font-weight: bold;margin-right:10px;margin-left:5px;}
+.inner-fields{display: flex;align-items:center;gap: 15px; }
+.fa-eye,.fa-eye-slash{position: relative;right:36px;top:5px;}
+
+.err-block{margin-left:3%;margin-right:3%;padding:5px;border-radius:10px;margin-top:15px;display: flex;
+justify-content:center;align-items: center;display: none;}
+.err{font-size:1.2em;color: rgb(249, 116, 116); border-radius:10px;margin-left:0px;padding:5px;padding-left:25px;padding-right:25px;background-color: #FEF2F2;border:1px solid #FECACA;
+box-shadow:0px 4px 12px rgba(220, 38,38,0,15);color:#991B1B;display:inline;}
+
+.input-field{display: flex;justify-content: center;align-items: center; flex: 1;}
+
+.mb-3 input{outline:none;padding:12px;border-radius:10px;border:1px solid rgba(0, 0, 139,0.2);width:70%;margin-top:10px;
+font-size:1.2em;color: darkblue;width:100%;}
+
+.mb-3 input::placeholder{color: darkblue;opacity:0.7;}
+
+.mb-3 input:hover{box-shadow: 0 2px 8px rgba(14,165,233,0.12);color: #0F172A;border:1.5px dotted rgba(0, 0, 139, 0.463);}
+
+.mb-3 input.error {border-color: rgb(249, 116, 116);box-shadow: 0 0 0 2px rgba(220, 53, 69, 0.08);}
+.mb-3 input.success {border-color: rgb(116, 249, 151);box-shadow: 0 0 0 2px rgba(25, 135, 84, 0.08);}
+.mb-3 input.error:hover {border-color:rgb(249, 116, 116);box-shadow: 0 0 0 0.15rem rgba(220, 53, 69, 0.2);}
+.mb-3 input.success:hover {border-color: rgb(116, 249, 151);box-shadow:  0 0 0 0.15rem rgba(25, 135, 84, 0.2);}
+.err-block.failure{display: block;}
+
+.btn.btn-primary{outline: none;margin-top:25px;padding:10px 35px;border-radius:10px;border:2px dotted darkblue;
+background-color: rgb(243, 250, 248);margin-bottom:20px;color: darkblue;font-weight: 500;
+font-size:1.2em;}
+
+.btn.btn-primary:hover{background:linear-gradient(110deg,rgba(207, 217, 247,0.5) 70%,#fff 30%);}
+
+.text-end{margin-top:10px;margin-bottom:10px;}
+.text-end a{font-size:1.2em;text-decoration: none;color: rgb(0, 104, 139);}
+
+.links-heading{font-size: 1.25em;}
+
+/* responsiveness */
+@media (max-width:785px){.inner-fields {flex-direction: column;margin-bottom:10px;align-items:unset;justify-content: left;}
+.mb-3 label {justify-content: flex-start;width:auto;}.form-style {padding: 0px;} .container{margin:0;padding:10px;
+}.err{display: block;}
+}
+@media (max-width:259px) {body{display: none;}}
+
+@media (max-width:399px) {.mb-3 input{font-size:15px;}.mb-3 label{font-size:1.1em;}
+.err{font-size:15px;}.err-block {margin-left: 0%;margin-right: 0%;} .mb-3{width: 100%;}
+.alert{font-size:15px;}.btn.btn-primary{font-size:1.1em;}.text-end a {font-size: 1.1em;}
+.links-heading {font-size: 1.12em;} #main-heading{font-size:1.3em;}}
+

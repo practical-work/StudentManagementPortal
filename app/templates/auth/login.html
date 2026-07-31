@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Login to SMP{% endblock %}
+
+<!-- Extra CSS -->
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/auth.css')}}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="badge">
+        <button id="main-heading">Student Login</button>
+    </div>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert-box">
+                    <p class="alert alert-{{ category }}">{{ message }}</p>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form class="form-style" method="POST" action="{{ url_for('auth.login') }}">
+        <input type="hidden"
+           name="csrf_token"
+           value="{{ csrf_token() }}">
+        <div class="mb-3">
+           <div class="inner-fields">
+              <label for="application_no" class="form-label"><p>Application Number</p><span>*</span></label>
+              <div class="input-field">
+               <input type="text" id="application_no" name="application_no" class="form-control" placeholder="Enter Application Number">
+              </div>
+           </div>
+           <div class="err-block">
+              <p class="err" id="app-err">err</p>
+           </div>
+        </div>
+        <div class="mb-3">
+           <div class="inner-fields">
+            <label for="password" class="form-label"><p>Password</p><span>*</span></label>
+            <div class="input-field">
+                <input type="password" name="password"id="password"class="form-control" placeholder="Enter password"> 
+                <i class="fa-solid fa-eye"></i>  
+            </div> 
+           </div>
+           <div class="err-block">
+              <p class="err" id="pass-err">err</p>
+           </div>    
+        </div>
+        <button type="submit" class="btn btn-primary">
+            Login
+        </button>
+        <div class="text-end mt-2">
+            <a href="{{ url_for('forgot.forgot_password') }}">
+                Forgot Password ?
+            </a>
+        </div>
+        <p class="links-heading">Forgot Application NO. ? Click Below Link</p>
+        <div class="text-end mt-2">
+            <a href="{{ url_for('retrieve.retrieve_application') }}">
+                Retrieve Application Number
+            </a>
+        </div>
+        <p class="links-heading">Not Registered Yet ? Click Below Link</p>
+        <div class="text-end mt-2">
+                <a href="{{ url_for('auth.registration') }}">
+                    Register here
+                </a>
+        </div>
+    </form>
+</div>
+<script src="{{url_for('static',filename='js/login.js')}}"></script>
+{% endblock %}

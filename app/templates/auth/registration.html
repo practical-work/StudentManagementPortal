@@ -1,0 +1,238 @@
+{% extends "base.html" %}
+
+{% block title %}Registration | Student Portal{% endblock %}
+
+<!-- Extra CSS -->
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/reg1.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="badge">
+        <button id="main-heading">Student Registration</button>
+        <p class="sub-main-heading">Create your account to continue application</p>
+    </div>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert-box">
+                    <p class="alert alert-{{ category }}">{{ message }}</p>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <!-- Registration Form -->
+    <form autocomplete="on" class="form-style" method="POST" action="{{ url_for('auth.step1') }}">
+        <input type="hidden"
+           name="csrf_token"
+           value="{{ csrf_token() }}">
+        <!-- Full Name -->
+        <div class="mb-3">
+            <div class="inner-fields">
+                <label for="full_name" class="form-label">
+                    <p>Full Name</p><span>*</span>
+                </label>
+
+                <div class="input-field">
+                    <input type="text" id="full_name" name="full_name" class="form-control"
+                        placeholder="Enter Full Name" autocapitalize="on" value="{{ full_name if full_name else '' }}"
+                        {% if otp_sent %}disabled{% endif %}>
+                </div>
+            </div>
+
+            <div class="err-block">
+                <p class="err" id="name-err"></p>
+            </div>
+        </div>
+
+        <!-- Email -->
+        <div class="mb-3">
+            <div class="inner-fields">
+                <label for="email" class="form-label">
+                    <p>Email Address</p><span>*</span>
+                </label>
+
+                <div class="input-field">
+                    <input type="email" autocapitalize="on" id="email" name="email" class="form-control" placeholder="Enter Email Address" {% if otp_sent %}disabled{% endif %}
+                    value="{{ email if email else '' }}">
+                </div>
+            </div>
+
+            <div class="err-block">
+                <p class="err" id="email-err"></p>
+            </div>
+        </div>
+
+        <!-- Mobile -->
+        <div class="mb-3">
+            <div class="inner-fields">
+                <label for="mobile" class="form-label">
+                    <p>Mobile Number</p><span>*</span>
+                </label>
+
+                <div class="input-field">
+                    <input type="text" id="mobile" name="mobile" class="form-control"
+                        placeholder="Enter Mobile Number" value="{{ mobile if mobile else '' }}"
+                        {% if otp_sent %}disabled{% endif %}>
+                </div>
+            </div>
+
+            <div class="err-block">
+                <p class="err" id="mobile-err"></p>
+            </div>
+        </div>
+
+        <!-- Password -->
+        <div class="mb-3">
+            <div class="inner-fields">
+                <label for="password" class="form-label">
+                    <p>Password</p><span>*</span>
+                </label>
+
+                <div class="input-field">
+                    <input type="password" id="password"  name="password" class="form-control"
+                        placeholder="Enter Password" {% if otp_sent %}disabled{% endif %} >
+                    <i class="fa-solid fa-eye"></i>
+                </div>
+            </div>
+
+            <div class="err-block">
+                <p class="err" id="pass-err"></p>
+            </div>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="mb-3">
+            <div class="inner-fields">
+                <label for="confirm_password" class="form-label">
+                    <p>Confirm Password</p><span>*</span>
+                </label>
+
+                <div class="input-field">
+                    <input type="password" id="confirm_password" name="confirm_password"
+                        class="form-control"  placeholder="Confirm Password" {% if otp_sent %}disabled{% endif %}>
+                </div>
+            </div>
+
+            <div class="err-block">
+                <p class="err" id="confirm-pass-err"></p>
+            </div>
+        </div>
+
+        {% if not otp_sent %}
+        <button type="submit" class="btn btn-primary">
+            Send OTP
+        </button>
+        {% endif %}
+
+    </form>
+
+    <!-- OTP Verification -->
+    {% if otp_sent %}
+
+    <div class="mt-4">
+
+        <h5 class="text-success">Email Verification</h5>
+
+        <p id="info-msg">
+            OTP has been sent to
+            <strong>{{ email }}</strong>
+        </p>
+
+        <form autocomplete="on" name="otp-form" class="form-style" method="POST" action="{{ url_for('auth.verify_otp') }}">
+            <input type="hidden"
+           name="csrf_token"
+           value="{{ csrf_token() }}">
+            <div class="mb-3">
+
+                <div class="inner-fields">
+
+                    <label for="entered_otp" class="form-label">
+                        <p>Enter OTP</p><span>*</span>
+                    </label>
+
+                    <div class="input-field">
+                        <input type="text" id="entered_otp" name="entered_otp" class="form-control"
+                            placeholder="Enter OTP">
+                    </div>
+
+                </div>
+
+                <div class="err-block">
+                    <p class="err" id="otp-err"></p>
+                </div>
+
+            </div>
+
+            <button class="btn btn-success">
+                Verify OTP
+            </button>
+
+        </form>
+
+        <form autocomplete="on"
+            method="POST"
+            action="{{ url_for('auth.resend_otp') }}"
+            class="mt-3" name="resend-form">
+            <input type="hidden"
+           name="csrf_token"
+           value="{{ csrf_token() }}">
+            <button type="submit" id="resendBtn" class="btn btn-warning" disabled >
+                Resend OTP (<span id="timer"></span>)
+            </button>
+        </form>
+    </div>
+    {% endif %}
+    <p class="links-heading">Already Registered ? Click Below Link</p>
+    <div class="text-end mt-2">
+            <a href="{{ url_for('auth.login') }}">
+                Login here
+            </a>
+    </div>
+</div>
+
+{% if otp_sent %}
+<script>
+
+let remaining = Number("{{ remaining_seconds|default(0) }}");
+
+const button = document.getElementById("resendBtn");
+const timer = document.getElementById("timer");
+
+function updateTimer() {
+
+    if (remaining <= 0) {
+
+        button.disabled = false;
+        button.innerHTML = "Resend OTP";
+        clearInterval(interval);
+        return;
+
+    }
+
+    const minutes = Math.floor(remaining / 60);
+    const seconds = remaining % 60;
+
+    timer.textContent =
+        minutes + ":" + String(seconds).padStart(2, "0");
+
+    remaining--;
+
+}
+
+updateTimer();
+
+const interval = setInterval(updateTimer, 1000);
+
+</script>
+{% endif %}
+
+<script src="{{ url_for('static', filename='js/reg1.js') }}"></script>
+
+{% endblock %}

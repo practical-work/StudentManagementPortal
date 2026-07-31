@@ -1,0 +1,605 @@
+{% extends "base.html" %}
+
+{% block title %}
+Family Details
+{% endblock %}
+
+{% block css %}
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/registration-step5.css') }}">
+
+{% endblock %}
+
+{% block content %}
+
+<div class="step5-container">
+
+    <div class="step5-header">
+
+        <h2>
+            Step 5 : Family & Other Details
+        </h2>
+
+        <p>
+            Enter additional information.
+        </p>
+
+        <hr>
+
+    </div>
+
+    <div class="application-info">
+
+        <div>
+
+            <strong>
+                Application No
+            </strong>
+
+            <br>
+
+            {{ student.application_no }}
+
+        </div>
+
+        <div>
+
+            <strong>
+                Applicant
+            </strong>
+
+            <br>
+
+            {{ student.full_name }}
+
+        </div>
+
+    </div>
+
+    <form method="POST"
+          action="{{ url_for('application.save_step5') }}">
+          <div class="card">
+     <input type="hidden"
+           name="csrf_token"
+           value="{{ csrf_token() }}">
+    <h3>
+        Occupation Details
+    </h3>
+
+    <div class="grid">
+
+        <div>
+
+            <label>Father Occupation</label>
+
+            <select name="father_occupation"
+            {% if view_mode %}disabled{% endif %}>
+
+                <option value="">Select</option>
+
+                <option value="Government Employee"
+                {% if family and family.father_occupation=="Government Employee" %}selected{% endif %}>
+                Government Employee
+                </option>
+
+                <option value="Private Employee"
+                {% if family and family.father_occupation=="Private Employee" %}selected{% endif %}>
+                Private Employee
+                </option>
+
+                <option value="Business"
+                {% if family and family.father_occupation=="Business" %}selected{% endif %}>
+                Business
+                </option>
+
+                <option value="Farmer"
+                {% if family and family.father_occupation=="Farmer" %}selected{% endif %}>
+                Farmer
+                </option>
+
+                <option value="Self Employed"
+                {% if family and family.father_occupation=="Self Employed" %}selected{% endif %}>
+                Self Employed
+                </option>
+
+                <option value="Retired"
+                {% if family and family.father_occupation=="Retired" %}selected{% endif %}>
+                Retired
+                </option>
+
+                <option value="Other"
+                {% if family and family.father_occupation=="Other" %}selected{% endif %}>
+                Other
+                </option>
+
+            </select>
+
+        </div>
+
+        <div>
+
+            <label>Mother Occupation</label>
+
+            <select name="mother_occupation"
+            {% if view_mode %}disabled{% endif %}>
+
+                <option value="">Select</option>
+
+                {% for item in [
+                "Government Employee",
+                "Private Employee",
+                "Business",
+                "Farmer",
+                "Self Employed",
+                "Retired",
+                "Other"] %}
+
+                <option value="{{ item }}"
+                {% if family and family.mother_occupation==item %}selected{% endif %}>
+                {{ item }}
+                </option>
+
+                {% endfor %}
+
+            </select>
+
+        </div>
+
+        <div>
+
+            <label>Guardian Occupation</label>
+
+            <select name="guardian_occupation"
+            {% if view_mode %}disabled{% endif %}>
+
+                <option value="">Select</option>
+
+                {% for item in [
+                "Government Employee",
+                "Private Employee",
+                "Business",
+                "Farmer",
+                "Self Employed",
+                "Retired",
+                "Other"] %}
+
+                <option value="{{ item }}"
+                {% if family and family.guardian_occupation==item %}selected{% endif %}>
+                {{ item }}
+                </option>
+
+                {% endfor %}
+
+            </select>
+
+        </div>
+
+    </div>
+
+</div>
+<div class="card">
+
+    <h3>
+        Twin Information
+    </h3>
+
+    <label>
+        Are you Twin?
+    </label>
+
+    <select
+        name="is_twin"
+        class="toggle"
+        {% if view_mode %}disabled{% endif %}>
+
+        <option value="no"
+            {% if not family or not family.is_twin %}selected{% endif %}>
+            No
+        </option>
+
+        <option value="yes"
+            {% if family and family.is_twin %}selected{% endif %}>
+            Yes
+        </option>
+
+    </select>
+
+    <div
+        class="hidden-box"
+        {% if family and family.is_twin %}
+        style="display:block;"
+        {% endif %}>
+
+        <input
+            type="text"
+            name="twin_name"
+            placeholder="Twin Name"
+            value="{{ family.twin_name if family else '' }}"
+            {% if view_mode %}readonly{% endif %}>
+        <br>
+        <input
+            type="text"
+            name="twin_relation"
+            placeholder="Relation"
+            value="{{ family.twin_relation if family else '' }}"
+            {% if view_mode %}readonly{% endif %}>
+
+    </div>
+
+</div>
+<div class="card">
+
+    <h3>
+        Freedom Fighter
+    </h3>
+
+    <label>
+        Are you from a Freedom Fighter Family?
+    </label>
+
+    <select
+        name="is_freedom_fighter"
+        class="toggle"
+        {% if view_mode %}disabled{% endif %}>
+
+        <option value="no"
+            {% if not family or not family.is_freedom_fighter %}selected{% endif %}>
+            No
+        </option>
+
+        <option value="yes"
+            {% if family and family.is_freedom_fighter %}selected{% endif %}>
+            Yes
+        </option>
+
+    </select>
+
+    <div
+        class="hidden-box"
+        {% if family and family.is_freedom_fighter %}
+        style="display:block;"
+        {% endif %}>
+
+        <input
+            type="text"
+            name="freedom_fighter_name"
+            placeholder="Freedom Fighter Name"
+            value="{{ family.freedom_fighter_name if family else '' }}"
+            {% if view_mode %}readonly{% endif %}>
+        <br>
+        <input
+            type="text"
+            name="freedom_fighter_relation"
+            placeholder="Relation"
+            value="{{ family.freedom_fighter_relation if family else '' }}"
+            {% if view_mode %}readonly{% endif %}>
+        <br>
+        <input
+            type="text"
+            name="freedom_fighter_certificate_no"
+            placeholder="Certificate No"
+            value="{{ family.freedom_fighter_certificate_no if family else '' }}"
+            {% if view_mode %}readonly{% endif %}>
+
+    </div>
+
+</div>
+<div class="card">
+
+    <h3>
+        NCC Candidate
+    </h3>
+
+    <label>
+        Are you an NCC Candidate?
+    </label>
+
+    <select
+        name="is_ncc_candidate"
+        class="toggle"
+        {% if view_mode %}disabled{% endif %}>
+
+        <option value="no"
+            {% if not family or not family.is_ncc_candidate %}selected{% endif %}>
+            No
+        </option>
+
+        <option value="yes"
+            {% if family and family.is_ncc_candidate %}selected{% endif %}>
+            Yes
+        </option>
+
+    </select>
+
+    <div
+        class="hidden-box"
+        {% if family and family.is_ncc_candidate %}
+        style="display:block;"
+        {% endif %}>
+
+        <input
+            type="text"
+            name="ncc_certificate_no"
+            placeholder="NCC Certificate No"
+            value="{{ family.ncc_certificate_no if family else '' }}"
+            {% if view_mode %}readonly{% endif %}>
+        <br>
+        <select
+            name="ncc_level"
+            {% if view_mode %}disabled{% endif %}>
+
+            <option value="">Select NCC Level</option>
+
+            <option value="A"
+                {% if family and family.ncc_level=="A" %}selected{% endif %}>
+                A
+            </option>
+
+            <option value="B"
+                {% if family and family.ncc_level=="B" %}selected{% endif %}>
+                B
+            </option>
+
+            <option value="C"
+                {% if family and family.ncc_level=="C" %}selected{% endif %}>
+                C
+            </option>
+
+        </select>
+
+    </div>
+
+</div>
+<div class="card">
+
+    <h3>
+        Criminal Case
+    </h3>
+
+    <label>
+        Any Criminal Case?
+    </label>
+
+    <select
+        name="criminal_case"
+        class="toggle"
+        {% if view_mode %}disabled{% endif %}>
+
+        <option value="no"
+            {% if not family or not family.criminal_case %}selected{% endif %}>
+            No
+        </option>
+
+        <option value="yes"
+            {% if family and family.criminal_case %}selected{% endif %}>
+            Yes
+        </option>
+
+    </select>
+
+    <div
+        class="hidden-box"
+        {% if family and family.criminal_case %}
+        style="display:block;"
+        {% endif %}>
+
+        <textarea
+            name="criminal_case_details"
+            placeholder="Enter Criminal Case Details"
+            style="resize:none;"
+            {% if view_mode %}readonly{% endif %}>{{ family.criminal_case_details if family else '' }}</textarea>
+
+    </div>
+
+</div>
+<div class="card">
+
+    <h3>
+        Other Details
+    </h3>
+
+    <div class="grid">
+
+        <!-- Ex Servicemen -->
+
+        <div>
+
+            <label>
+                Ex-Servicemen
+            </label>
+
+            <select
+                name="is_ex_servicemen"
+                class="toggle"
+                {% if view_mode %}disabled{% endif %}>
+
+                <option value="no"
+                    {% if not family or not family.is_ex_servicemen %}selected{% endif %}>
+                    No
+                </option>
+
+                <option value="yes"
+                    {% if family and family.is_ex_servicemen %}selected{% endif %}>
+                    Yes
+                </option>
+
+            </select>
+
+            <div
+                class="hidden-box"
+                {% if family and family.is_ex_servicemen %}
+                style="display:block;"
+                {% endif %}>
+
+                <textarea
+                    name="ex_servicemen_details"
+                    placeholder="Ex-Servicemen Details"
+                    style="resize:none;"
+                    {% if view_mode %}readonly{% endif %}>{{ family.ex_servicemen_details if family else '' }}</textarea>
+
+            </div>
+
+        </div>
+
+        <!-- PwBD -->
+
+        <div>
+
+            <label>
+                PwBD Candidate
+            </label>
+
+            <select
+                name="is_pwbd"
+                class="toggle"
+                {% if view_mode %}disabled{% endif %}>
+
+                <option value="no"
+                    {% if not family or not family.is_pwbd %}selected{% endif %}>
+                    No
+                </option>
+
+                <option value="yes"
+                    {% if family and family.is_pwbd %}selected{% endif %}>
+                    Yes
+                </option>
+
+            </select>
+
+            <div
+                class="hidden-box"
+                {% if family and family.is_pwbd %}
+                style="display:block;"
+                {% endif %}>
+
+                <input
+                    type="text"
+                    name="pwbd_category"
+                    placeholder="PwBD Category"
+                    value="{{ family.pwbd_category if family else '' }}"
+                    {% if view_mode %}readonly{% endif %}>
+                <br>
+                <br>
+                <input
+                    type="text"
+                    name="pwbd_certificate_no"
+                    placeholder="Certificate Number"
+                    value="{{ family.pwbd_certificate_no if family else '' }}"
+                    {% if view_mode %}readonly{% endif %}>
+
+            </div>
+
+        </div>
+
+        <!-- Domicile Status -->
+
+        <div>
+
+            <label>
+                Domicile Status
+            </label>
+
+            <select
+                name="domicile_status"
+                {% if view_mode %}disabled{% endif %}>
+
+                <option value="">Select</option>
+
+                <option value="Haryana Resident"
+                    {% if family and family.domicile_status=="Haryana Resident" %}selected{% endif %}>
+                    Haryana Resident
+                </option>
+
+                <option value="Other State Resident"
+                    {% if family and family.domicile_status=="Other State Resident" %}selected{% endif %}>
+                    Other State Resident
+                </option>
+
+                <option value="NRI"
+                    {% if family and family.domicile_status=="NRI" %}selected{% endif %}>
+                    NRI
+                </option>
+
+            </select>
+
+        </div>
+
+        <!-- Domicile State -->
+
+        <div>
+
+            <label>
+                Domicile State
+            </label>
+
+            <input
+                type="text"
+                name="domicile_state"
+                value="{{ family.domicile_state if family else '' }}"
+                {% if view_mode %}readonly{% endif %}>
+
+        </div>
+
+        <!-- Marital Status -->
+
+        <div>
+
+            <label>
+                Marital Status
+            </label>
+
+            <select
+                name="marital_status"
+                {% if view_mode %}disabled{% endif %}>
+
+                <option value="Single"
+                    {% if family and family.marital_status=="Single" %}selected{% endif %}>
+                    Single
+                </option>
+
+                <option value="Married"
+                    {% if family and family.marital_status=="Married" %}selected{% endif %}>
+                    Married
+                </option>
+
+                <option value="Divorced"
+                    {% if family and family.marital_status=="Divorced" %}selected{% endif %}>
+                    Divorced
+                </option>
+
+                <option value="Widow/Widower"
+                    {% if family and family.marital_status=="Widow/Widower" %}selected{% endif %}>
+                    Widow/Widower
+                </option>
+
+            </select>
+
+        </div>
+
+    </div>
+
+</div>
+<div class="footer">
+
+{% if not view_mode %}
+<button type="submit">
+
+Save & Continue
+
+</button>
+{% endif %}
+
+</div>
+</form>
+
+
+</div>
+
+
+
+<script src="{{ url_for('static', filename='js/registration-step5.js') }}">
+</script>
+
+
+{% endblock %}

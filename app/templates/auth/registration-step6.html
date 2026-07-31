@@ -1,0 +1,738 @@
+{% extends "base.html" %}
+
+{% block title %}Document Upload{% endblock %}
+
+{% block css %}
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/registration-step6.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="step6-container">
+
+    <div class="step6-header">
+
+        <h2>Step 6 : Document Upload</h2>
+
+        {% if not view_mode %}
+         <p>
+            Upload all required documents in PDF/JPG/JPEG/PNG format.
+            Maximum file size: 5 MB.
+         </p>
+        {% endif %}
+        <hr>
+
+    </div>
+
+    <div class="application-info">
+
+        <div>
+
+            <strong>Application No.</strong><br>
+            <br>
+            {{ student.application_no }}
+
+        </div>
+
+        <div>
+
+            <strong>Applicant</strong><br>
+             <br>
+            {{ student.full_name }}
+
+        </div>
+
+    </div>
+
+    <form
+        method="POST"
+        enctype="multipart/form-data"
+        action="{{ url_for('application.save_step6') }}">
+        <input type="hidden"
+           name="csrf_token"
+           value="{{ csrf_token() }}">
+        <!-- ====================================== -->
+        <!-- PERSONAL DOCUMENTS -->
+        <!-- ====================================== -->
+
+        <div class="document-card">
+
+            <h3>Personal Documents</h3>
+
+            <div class="document-grid">
+
+                <!-- Profile Photo -->
+
+                <div class="document-item">
+
+                    <label>
+
+                        Profile Photo *
+
+                    </label>
+
+                    {% if documents and documents.profile_photo %}
+
+                        <div class="button-group">
+
+                            <a
+                                href="{{ url_for('static', filename=documents.profile_photo) }}"
+                                target="_blank"
+                                class="view-btn">
+
+                                View
+
+                            </a>
+
+                            <label class="upload-btn">
+
+                                Change
+
+                                <input
+                                    type="file"
+                                    name="profile_photo"
+                                    class="file-input"
+                                    accept=".jpg,.jpeg,.png" {% if view_mode %}disabled{% endif %}>
+
+                            </label>
+
+                        </div>
+
+                    {% else %}
+
+                        <label class="upload-btn">
+
+                            Upload
+
+                            <input
+                                type="file"
+                                name="profile_photo"
+                                class="file-input"
+                                accept=".jpg,.jpeg,.png"
+                                required {% if view_mode %}disabled{% endif %}>
+
+                        </label>
+
+                    {% endif %}
+
+                </div>
+
+
+
+                <!-- Signature -->
+
+                <div class="document-item">
+
+                    <label>
+
+                        Signature *
+
+                    </label>
+
+                    {% if documents and documents.signature %}
+
+                        <div class="button-group">
+
+                            <a
+                                href="{{ url_for('static', filename=documents.signature) }}"
+                                target="_blank"
+                                class="view-btn">
+
+                                View
+
+                            </a>
+
+                            <label class="upload-btn">
+
+                                Change
+
+                                <input
+                                    type="file"
+                                    name="signature"
+                                    class="file-input"
+                                    accept=".jpg,.jpeg,.png" {% if view_mode %}disabled{% endif %}>
+
+                            </label>
+
+                        </div>
+
+                    {% else %}
+
+                        <label class="upload-btn">
+
+                            Upload
+
+                            <input
+                                type="file"
+                                name="signature"
+                                class="file-input"
+                                accept=".jpg,.jpeg,.png"
+                                required {% if view_mode %}disabled{% endif %}>
+
+                        </label>
+
+                    {% endif %}
+
+                </div>
+
+
+
+                <!-- Aadhaar Card -->
+
+                <div class="document-item">
+
+                    <label>
+
+                        Aadhaar Card *
+
+                    </label>
+
+                    {% if documents and documents.aadhaar_card %}
+
+                        <div class="button-group">
+
+                            <a
+                                href="{{ url_for('static', filename=documents.aadhaar_card) }}"
+                                target="_blank"
+                                class="view-btn">
+
+                                View
+
+                            </a>
+
+                            <label class="upload-btn">
+
+                                Change
+
+                                <input
+                                    type="file"
+                                    name="aadhaar_card"
+                                    class="file-input"
+                                    accept=".pdf,.jpg,.jpeg,.png" {% if view_mode %}disabled{% endif %}>
+
+                            </label>
+
+                        </div>
+
+                    {% else %}
+
+                        <label class="upload-btn">
+
+                            Upload
+
+                            <input
+                                type="file"
+                                name="aadhaar_card"
+                                class="file-input"
+                                accept=".pdf,.jpg,.jpeg,.png"
+                                required {% if view_mode %}disabled{% endif %}>
+
+                        </label>
+
+                    {% endif %}
+
+                </div>
+
+
+
+                <!-- Birth Certificate -->
+
+                <div class="document-item">
+
+                    <label>
+
+                        Birth Certificate *
+
+                    </label>
+
+                    {% if documents and documents.birth_certificate %}
+
+                        <div class="button-group">
+
+                            <a
+                                href="{{ url_for('static', filename=documents.birth_certificate) }}"
+                                target="_blank"
+                                class="view-btn">
+
+                                View
+
+                            </a>
+
+                            <label class="upload-btn">
+
+                                Change
+
+                                <input
+                                    type="file"
+                                    name="birth_certificate"
+                                    class="file-input"
+                                    accept=".pdf,.jpg,.jpeg,.png" {% if view_mode %}disabled{% endif %}>
+
+                            </label>
+
+                        </div>
+
+                    {% else %}
+
+                        <label class="upload-btn">
+
+                            Upload
+
+                            <input
+                                type="file"
+                                name="birth_certificate"
+                                class="file-input"
+                                accept=".pdf,.jpg,.jpeg,.png"
+                                required {% if view_mode %}disabled{% endif %}>
+
+                        </label>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+                <!-- ====================================== -->
+        <!-- EDUCATIONAL DOCUMENTS -->
+        <!-- ====================================== -->
+
+        <div class="document-card">
+
+            <h3>Educational Documents</h3>
+           {% if not view_mode %}
+            <p class="section-note">
+                Upload the marksheet/certificate corresponding to each qualification added in Step 3.
+            </p>
+           {% endif %}
+            <div class="document-grid">
+
+                {% for record in academic_records %}
+
+                {% set doc = academic_documents.get(record.id) %}
+
+                <div class="document-item">
+
+                    <label>
+
+                        {{ record.qualification }}
+
+                        {% if loop.first %}
+                            *
+                        {% endif %}
+
+                    </label>
+
+                    {% if doc %}
+
+                        <div class="button-group">
+
+                            <a
+                                href="{{ url_for('static', filename=doc.file_path) }}"
+                                target="_blank"
+                                class="view-btn">
+
+                                View
+
+                            </a>
+
+                            <label class="upload-btn">
+
+                                Change
+
+                                <input
+                                    type="file"
+                                    class="file-input"
+                                    name="academic_{{ record.id }}"
+                                    accept=".pdf,.jpg,.jpeg,.png" {% if view_mode %}disabled{% endif %}>
+
+                            </label>
+
+                        </div>
+
+                        <small class="uploaded-text">
+
+                            {{ doc.document_name }}
+
+                        </small>
+
+                    {% else %}
+
+                        <label class="upload-btn">
+
+                            Upload
+
+                            <input
+                                type="file"
+                                class="file-input"
+                                name="academic_{{ record.id }}"
+                                accept=".pdf,.jpg,.jpeg,.png"
+                                {% if loop.first %}required{% endif %} {% if view_mode %}disabled{% endif %}>
+
+                        </label>
+
+                    {% endif %}
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ====================================== -->
+        <!-- RESERVATION DOCUMENTS -->
+        <!-- ====================================== -->
+
+        {% if personal and personal.category and personal.category.category_name|lower != "general" %}
+
+        <div class="document-card">
+
+            <h3>Reservation Documents</h3>
+
+            <div class="document-grid">
+
+                <div class="document-item">
+
+                    <label>
+
+                        Category Certificate
+
+                    </label>
+
+                    {% if documents and documents.caste_certificate %}
+
+                        <div class="button-group">
+
+                            <a
+                                href="{{ url_for('static', filename=documents.caste_certificate) }}"
+                                target="_blank"
+                                class="view-btn">
+
+                                View
+
+                            </a>
+
+                            <label class="upload-btn">
+
+                                Change
+
+                                <input
+                                    type="file"
+                                    class="file-input"
+                                    name="caste_certificate"
+                                    accept=".pdf,.jpg,.jpeg,.png" {% if view_mode %}disabled{% endif %}>
+
+                            </label>
+
+                        </div>
+
+                    {% else %}
+
+                        <label class="upload-btn">
+
+                            Upload
+
+                            <input
+                                type="file"
+                                class="file-input"
+                                name="caste_certificate"
+                                accept=".pdf,.jpg,.jpeg,.png" {% if view_mode %}disabled{% endif %}>
+
+                        </label>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+
+
+        {% if family and family.is_pwbd %}
+
+        <div class="document-card">
+
+            <h3>PwBD Certificate</h3>
+
+            <div class="document-grid">
+
+                <div class="document-item">
+
+                    <label>
+
+                        PwBD Certificate
+
+                    </label>
+
+                    {% if documents and documents.pwbd_certificate %}
+
+                        <div class="button-group">
+
+                            <a
+                                href="{{ url_for('static', filename=documents.pwbd_certificate) }}"
+                                target="_blank"
+                                class="view-btn">
+
+                                View
+
+                            </a>
+
+                            <label class="upload-btn">
+
+                                Change
+
+                                <input
+                                    type="file"
+                                    class="file-input"
+                                    name="pwbd_certificate"
+                                    accept=".pdf,.jpg,.jpeg,.png" {% if view_mode %}disabled{% endif %}>
+
+                            </label>
+
+                        </div>
+
+                    {% else %}
+
+                        <label class="upload-btn">
+
+                            Upload
+
+                            <input
+                                type="file"
+                                class="file-input"
+                                name="pwbd_certificate"
+                                accept=".pdf,.jpg,.jpeg,.png" {% if view_mode %}disabled{% endif %}>
+
+                        </label>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endif %}
+                <!-- ====================================== -->
+        <!-- OTHER DOCUMENTS -->
+        <!-- ====================================== -->
+
+        <div class="document-card">
+
+            <h3>Other Documents</h3>
+
+            <div class="document-grid">
+
+                <!-- Income Certificate -->
+
+                <div class="document-item">
+
+                    <label>
+
+                        Income Certificate
+
+                    </label>
+
+                    {% if documents and documents.income_certificate %}
+
+                        <div class="button-group">
+
+                            <a
+                                href="{{ url_for('static', filename=documents.income_certificate) }}"
+                                target="_blank"
+                                class="view-btn">
+
+                                View
+
+                            </a>
+
+                            <label class="upload-btn">
+
+                                Change
+
+                                <input
+                                    type="file"
+                                    class="file-input"
+                                    name="income_certificate"
+                                    accept=".pdf,.jpg,.jpeg,.png" {% if view_mode %}disabled{% endif %}>
+
+                            </label>
+
+                        </div>
+
+                    {% else %}
+
+                        <label class="upload-btn">
+
+                            Upload
+
+                            <input
+                                type="file"
+                                class="file-input"
+                                name="income_certificate"
+                                accept=".pdf,.jpg,.jpeg,.png" {% if view_mode %}disabled{% endif %}>
+
+                        </label>
+
+                    {% endif %}
+
+                </div>
+
+
+
+                <!-- Domicile -->
+
+                <div class="document-item">
+
+                    <label>
+
+                        Domicile / Resident Certificate
+
+                    </label>
+
+                    {% if documents and documents.domicile_certificate %}
+
+                        <div class="button-group">
+
+                            <a
+                                href="{{ url_for('static', filename=documents.domicile_certificate) }}"
+                                target="_blank"
+                                class="view-btn">
+
+                                View
+
+                            </a>
+
+                            <label class="upload-btn">
+
+                                Change
+
+                                <input
+                                    type="file"
+                                    class="file-input"
+                                    name="domicile_certificate"
+                                    accept=".pdf,.jpg,.jpeg,.png" {% if view_mode %}disabled{% endif %}>
+
+                            </label>
+
+                        </div>
+
+                    {% else %}
+
+                        <label class="upload-btn">
+
+                            Upload
+
+                            <input
+                                type="file"
+                                class="file-input"
+                                name="domicile_certificate"
+                                accept=".pdf,.jpg,.jpeg,.png" {% if view_mode %}disabled{% endif %}>
+
+                        </label>
+
+                    {% endif %}
+
+                </div>
+
+
+
+                <!-- Migration -->
+
+                <div class="document-item">
+
+                    <label>
+
+                        Migration Certificate
+                        <small>(Optional)</small>
+
+                    </label>
+
+                    {% if documents and documents.migration_certificate %}
+
+                        <div class="button-group">
+
+                            <a
+                                href="{{ url_for('static', filename=documents.migration_certificate) }}"
+                                target="_blank"
+                                class="view-btn">
+
+                                View
+
+                            </a>
+
+                            <label class="upload-btn">
+
+                                Change
+
+                                <input
+                                    type="file"
+                                    class="file-input"
+                                    name="migration_certificate"
+                                    accept=".pdf,.jpg,.jpeg,.png" {% if view_mode %}disabled{% endif %}>
+
+                            </label>
+
+                        </div>
+
+                    {% else %}
+
+                        <label class="upload-btn">
+
+                            Upload
+
+                            <input
+                                type="file"
+                                class="file-input"
+                                name="migration_certificate"
+                                accept=".pdf,.jpg,.jpeg,.png" {% if view_mode %}disabled{% endif %}>
+
+                        </label>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ====================================== -->
+        <!-- SUBMIT -->
+        <!-- ====================================== -->
+
+        <div class="footer">
+            {% if not view_mode %}
+            <button
+                type="submit"
+                class="save-btn">
+
+                Save Documents
+
+            </button>
+            {% endif %}
+        </div>
+
+    </form>
+
+</div>
+
+<script
+src="{{ url_for('static',
+filename='js/registration-step6.js') }}">
+</script>
+
+{% endblock %}

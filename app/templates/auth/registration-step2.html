@@ -1,0 +1,751 @@
+{% extends "base.html" %}
+
+{% block title %}Personal Details{% endblock %}
+
+{% block css %}
+<link rel="stylesheet"
+      href="{{ url_for('static', filename='css/registration-step2.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="badge">
+        <button id="main-heading">Step 2 : Personal Details</button>
+
+        <p class="sub-main-heading">
+            Complete your personal information carefully.
+        </p>
+    </div>
+
+    <div class="application-info">
+
+        <div>
+            <strong>Application No</strong><br>
+            <br>
+            {{ student.application_no }}
+        </div>
+
+        <div>
+            <strong>Applicant</strong><br>
+            <br>
+            {{ student.full_name }}
+        </div>
+
+    </div>
+
+    <form class="form-style"
+          method="POST"
+          action="{{ url_for('application.save_step2') }}">
+
+        <input type="hidden"
+               name="csrf_token"
+               value="{{ csrf_token() }}">
+
+        <!-- Email -->
+
+        <div class="mb-3">
+
+            <div class="inner-fields">
+
+                <label>
+                    <p>Email</p>
+                </label>
+
+                <div class="input-field">
+
+                    <input
+                        type="email"
+                        class="form-control"
+                        value="{{ student.email }}"
+                        readonly
+                        disabled>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Mobile -->
+
+        <div class="mb-3">
+
+            <div class="inner-fields">
+
+                <label>
+                    <p>Mobile Number</p>
+                </label>
+
+                <div class="input-field">
+
+                    <input
+                        type="text"
+                        class="form-control"
+                        value="{{ student.mobile }}"
+                        readonly
+                        disabled>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- First Name -->
+
+        <div class="mb-3">
+
+            <div class="inner-fields">
+
+                <label for="first_name">
+
+                    <p>First Name</p>
+                    <span>*</span>
+
+                </label>
+
+                <div class="input-field">
+
+                    <input
+                        type="text"
+                        id="first_name"
+                        name="first_name"
+                        class="form-control"
+                        value="{{ personal.first_name if personal else '' }}"
+                        {% if view_mode %}disabled{% endif %}>
+
+                </div>
+
+            </div>
+
+            <div class="err-block">
+                <p class="err" id="first-name-err"></p>
+            </div>
+
+        </div>
+
+        <!-- Middle Name -->
+
+        <div class="mb-3">
+
+            <div class="inner-fields">
+
+                <label for="middle_name">
+                    <p>Middle Name</p>
+                </label>
+
+                <div class="input-field">
+
+                    <input
+                        type="text"
+                        id="middle_name"
+                        name="middle_name"
+                        class="form-control"
+                        value="{{ personal.middle_name if personal else '' }}"
+                        {% if view_mode %}disabled{% endif %}>
+
+                </div>
+
+            </div>
+
+            <div class="err-block">
+                <p class="err" id="middle-name-err"></p>
+            </div>
+
+        </div>
+
+        <!-- Last Name -->
+
+        <div class="mb-3">
+
+            <div class="inner-fields">
+
+                <label for="last_name">
+
+                    <p>Last Name</p>
+
+                </label>
+
+                <div class="input-field">
+
+                    <input
+                        type="text"
+                        id="last_name"
+                        name="last_name"
+                        class="form-control"
+                        value="{{ personal.last_name if personal else '' }}"
+                        {% if view_mode %}disabled{% endif %}>
+
+                </div>
+
+            </div>
+
+            <div class="err-block">
+                <p class="err" id="last-name-err"></p>
+            </div>
+
+        </div>
+
+        <!-- Gender -->
+
+        <div class="mb-3">
+
+            <div class="inner-fields">
+
+                <label for="gender_id">
+
+                    <p>Gender</p>
+                    <span>*</span>
+
+                </label>
+
+                <div class="input-field">
+
+                    <select
+                        id="gender_id"
+                        name="gender_id"
+                        class="form-control"
+                        {% if view_mode %}disabled{% endif %}>
+
+                        <option value="">Select Gender</option>
+
+                        {% for gender in genders %}
+
+                        <option
+                            value="{{ gender.id }}"
+                            {% if personal and personal.gender_id==gender.id %}selected{% endif %}>
+
+                            {{ gender.gender_name }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div class="err-block">
+                <p class="err" id="gender-err"></p>
+            </div>
+
+        </div>
+
+        <!-- Date of Birth -->
+
+        <div class="mb-3">
+
+            <div class="inner-fields">
+
+                <label for="date_of_birth">
+
+                    <p>Date of Birth</p>
+                    <span>*</span>
+
+                </label>
+
+                <div class="input-field">
+
+                    <input
+                        type="date"
+                        id="date_of_birth"
+                        name="date_of_birth"
+                        class="form-control"
+                        value="{{ personal.date_of_birth if personal else '' }}"
+                        {% if view_mode %}disabled{% endif %}>
+
+                </div>
+
+            </div>
+
+            <div class="err-block">
+                <p class="err" id="dob-err"></p>
+            </div>
+
+        </div>
+                <!-- Blood Group -->
+
+        <div class="mb-3">
+
+            <div class="inner-fields">
+
+                <label for="blood_group_id">
+                    <p>Blood Group</p>
+                </label>
+
+                <div class="input-field">
+
+                    <select
+                        id="blood_group_id"
+                        name="blood_group_id"
+                        class="form-control"
+                        {% if view_mode %}disabled{% endif %}>
+
+                        <option value="">Select Blood Group</option>
+
+                        {% for bg in blood_groups %}
+
+                        <option
+                            value="{{ bg.id }}"
+                            {% if personal and personal.blood_group_id == bg.id %}selected{% endif %}>
+
+                            {{ bg.blood_group_name }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div class="err-block">
+                <p class="err" id="blood-group-err"></p>
+            </div>
+
+        </div>
+
+        <!-- Category -->
+
+        <div class="mb-3">
+
+            <div class="inner-fields">
+
+                <label for="category_id">
+
+                    <p>Category</p>
+                    <span>*</span>
+
+                </label>
+
+                <div class="input-field">
+
+                    <select
+                        id="category_id"
+                        name="category_id"
+                        class="form-control"
+                        {% if view_mode %}disabled{% endif %}>
+
+                        <option value="">Select Category</option>
+
+                        {% for category in categories %}
+
+                        <option
+                            value="{{ category.id }}"
+                            {% if personal and personal.category_id == category.id %}selected{% endif %}>
+
+                            {{ category.category_name }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div class="err-block">
+                <p class="err" id="category-err"></p>
+            </div>
+
+        </div>
+
+        <!-- Religion -->
+
+        <div class="mb-3">
+
+            <div class="inner-fields">
+
+                <label for="religion_id">
+
+                    <p>Religion</p>
+                    <span>*</span>
+
+                </label>
+
+                <div class="input-field">
+
+                    <select
+                        id="religion_id"
+                        name="religion_id"
+                        class="form-control"
+                        {% if view_mode %}disabled{% endif %}>
+
+                        <option value="">Select Religion</option>
+
+                        {% for religion in religions %}
+
+                        <option
+                            value="{{ religion.id }}"
+                            {% if personal and personal.religion_id == religion.id %}selected{% endif %}>
+
+                            {{ religion.religion_name }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div class="err-block">
+                <p class="err" id="religion-err"></p>
+            </div>
+
+        </div>
+
+        <!-- Nationality -->
+
+        <div class="mb-3">
+
+            <div class="inner-fields">
+
+                <label for="nationality_id">
+
+                    <p>Nationality</p>
+                    <span>*</span>
+
+                </label>
+
+                <div class="input-field">
+
+                    <select
+                        id="nationality_id"
+                        name="nationality_id"
+                        class="form-control"
+                        {% if view_mode %}disabled{% endif %}>
+
+                        {% for nationality in nationalities %}
+
+                        <option
+                            value="{{ nationality.id }}"
+                            {% if personal and personal.nationality_id == nationality.id %}selected{% endif %}>
+
+                            {{ nationality.nationality_name }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div class="err-block">
+                <p class="err" id="nationality-err"></p>
+            </div>
+
+        </div>
+
+        <!-- Aadhaar Number -->
+
+        <div class="mb-3">
+
+            <div class="inner-fields">
+
+                <label for="aadhaar_no">
+
+                    <p>Aadhaar Number</p>
+                    <span>*</span>
+
+                </label>
+
+                <div class="input-field">
+
+                    <input
+                        type="text"
+                        id="aadhaar_no"
+                        name="aadhaar_no"
+                        class="form-control"
+                        value="{{ personal.aadhaar_no if personal else '' }}"
+                        {% if view_mode %}disabled{% endif %}>
+
+                </div>
+
+            </div>
+
+            <div class="err-block">
+                <p class="err" id="aadhaar-err"></p>
+            </div>
+
+        </div>
+
+        <!-- Alternate Email -->
+
+        <div class="mb-3">
+
+            <div class="inner-fields">
+
+                <label for="alternate_email">
+                    <p>Alternate Email</p>
+                </label>
+
+                <div class="input-field">
+
+                    <input
+                        type="email"
+                        id="alternate_email"
+                        name="alternate_email"
+                        class="form-control"
+                        value="{{ personal.alternate_email if personal else '' }}"
+                        {% if view_mode %}disabled{% endif %}>
+
+                </div>
+
+            </div>
+
+            <div class="err-block">
+                <p class="err" id="alternate-email-err"></p>
+            </div>
+
+        </div>
+
+        <!-- Alternate Mobile -->
+
+        <div class="mb-3">
+
+            <div class="inner-fields">
+
+                <label for="alternate_mobile">
+                    <p>Alternate Mobile</p>
+                </label>
+
+                <div class="input-field">
+
+                    <input
+                        type="text"
+                        id="alternate_mobile"
+                        name="alternate_mobile"
+                        class="form-control"
+                        value="{{ personal.alternate_mobile if personal else '' }}"
+                        {% if view_mode %}disabled{% endif %}>
+
+                </div>
+
+            </div>
+
+            <div class="err-block">
+                <p class="err" id="alternate-mobile-err"></p>
+            </div>
+
+        </div>
+                <!-- Father's Name -->
+
+        <div class="mb-3">
+
+            <div class="inner-fields">
+
+                <label for="father_name">
+
+                    <p>Father's Name</p>
+                    <span>*</span>
+
+                </label>
+
+                <div class="input-field">
+
+                    <input
+                        type="text"
+                        id="father_name"
+                        name="father_name"
+                        class="form-control"
+                        value="{{ personal.father_name if personal else '' }}"
+                        {% if view_mode %}disabled{% endif %}>
+
+                </div>
+
+            </div>
+
+            <div class="err-block">
+                <p class="err" id="father-name-err"></p>
+            </div>
+
+        </div>
+
+        <!-- Father's Mobile -->
+
+        <div class="mb-3">
+
+            <div class="inner-fields">
+
+                <label for="father_mobile">
+
+                    <p>Father's Mobile</p>
+                    <span>*</span>
+
+                </label>
+
+                <div class="input-field">
+
+                    <input
+                        type="text"
+                        id="father_mobile"
+                        name="father_mobile"
+                        class="form-control"
+                        value="{{ personal.father_mobile if personal else '' }}"
+                        {% if view_mode %}disabled{% endif %}>
+
+                </div>
+
+            </div>
+
+            <div class="err-block">
+                <p class="err" id="father-mobile-err"></p>
+            </div>
+
+        </div>
+
+        <!-- Mother's Name -->
+
+        <div class="mb-3">
+
+            <div class="inner-fields">
+
+                <label for="mother_name">
+                    <p>Mother's Name</p>
+                </label>
+
+                <div class="input-field">
+
+                    <input
+                        type="text"
+                        id="mother_name"
+                        name="mother_name"
+                        class="form-control"
+                        value="{{ personal.mother_name if personal else '' }}"
+                        {% if view_mode %}disabled{% endif %}>
+
+                </div>
+
+            </div>
+
+            <div class="err-block">
+                <p class="err" id="mother-name-err"></p>
+            </div>
+
+        </div>
+
+        <!-- Mother's Mobile -->
+
+        <div class="mb-3">
+
+            <div class="inner-fields">
+
+                <label for="mother_mobile">
+                    <p>Mother's Mobile</p>
+                </label>
+
+                <div class="input-field">
+
+                    <input
+                        type="text"
+                        id="mother_mobile"
+                        name="mother_mobile"
+                        class="form-control"
+                        value="{{ personal.mother_mobile if personal else '' }}"
+                        {% if view_mode %}disabled{% endif %}>
+
+                </div>
+
+            </div>
+
+            <div class="err-block">
+                <p class="err" id="mother-mobile-err"></p>
+            </div>
+
+        </div>
+
+        <!-- Guardian's Name -->
+
+        <div class="mb-3">
+
+            <div class="inner-fields">
+
+                <label for="guardian_name">
+                    <p>Guardian's Name</p>
+                </label>
+
+                <div class="input-field">
+
+                    <input
+                        type="text"
+                        id="guardian_name"
+                        name="guardian_name"
+                        class="form-control"
+                        value="{{ personal.guardian_name if personal else '' }}"
+                        {% if view_mode %}disabled{% endif %}>
+
+                </div>
+
+            </div>
+
+            <div class="err-block">
+                <p class="err" id="guardian-name-err"></p>
+            </div>
+
+        </div>
+
+        <!-- Guardian's Mobile -->
+
+        <div class="mb-3">
+
+            <div class="inner-fields">
+
+                <label for="guardian_mobile">
+                    <p>Guardian's Mobile</p>
+                </label>
+
+                <div class="input-field">
+
+                    <input
+                        type="text"
+                        id="guardian_mobile"
+                        name="guardian_mobile"
+                        class="form-control"
+                        value="{{ personal.guardian_mobile if personal else '' }}"
+                        {% if view_mode %}disabled{% endif %}>
+
+                </div>
+
+            </div>
+
+            <div class="err-block">
+                <p class="err" id="guardian-mobile-err"></p>
+            </div>
+
+        </div>
+
+        <div class="step2-footer">
+
+            {% if not view_mode %}
+
+            <button
+                type="submit"
+                class="btn btn-primary">
+
+                Save & Continue
+
+            </button>
+
+            {% endif %}
+
+        </div>
+
+    </form>
+
+</div>
+<script src="{{url_for('static',filename='js/registration-step2.js')}}"></script>
+{% endblock %}

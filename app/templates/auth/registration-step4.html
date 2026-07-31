@@ -1,0 +1,395 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+Address Details
+{% endblock %}
+
+
+
+{% block css %}
+
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/registration-step4.css') }}">
+
+{% endblock %}
+
+
+
+
+{% block content %}
+
+
+<div class="step4-container">
+
+
+    <div class="step4-header">
+
+        <h2>
+            Step 4 : Address Details
+        </h2>
+
+        <p>
+            Enter your permanent and correspondence address.
+        </p>
+
+        <hr>
+
+    </div>
+
+
+
+    <div class="application-info">
+
+
+        <div>
+
+            <strong>
+                Application No
+            </strong>
+            <br>
+            <br>
+
+            {{ student.application_no }}
+
+        </div>
+
+
+
+        <div>
+
+            <strong>
+                Applicant
+            </strong>
+            <br>
+            <br>
+
+            {{ student.full_name }}
+
+        </div>
+
+
+    </div>
+
+
+<form method="POST"
+action="{{ url_for('application.save_step4') }}">
+
+
+  <input type="hidden"
+           name="csrf_token"
+           value="{{ csrf_token() }}">
+
+
+<!-- Permanent Address -->
+
+<div class="address-card">
+
+
+<h3>
+Permanent Address
+</h3>
+
+
+
+<div class="grid">
+
+
+
+<div class="full">
+
+<label>
+Address *
+</label>
+
+
+<textarea style="resize: none;"
+name="permanent_address"
+required {% if view_mode %}disabled{% endif %}>{{ address.permanent_address if address else '' }}</textarea>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+State *
+</label>
+
+
+<input
+type="text"
+name="permanent_state"
+value="{{ address.permanent_state if address else '' }}"
+required {% if view_mode %}disabled{% endif %}>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+District *
+</label>
+
+
+<input
+type="text"
+name="permanent_district"
+value="{{ address.permanent_district if address else '' }}"
+required {% if view_mode %}disabled{% endif %}>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+City *
+</label>
+
+
+<input
+type="text"
+name="permanent_city"
+value="{{ address.permanent_city if address else '' }}"
+required {% if view_mode %}disabled{% endif %}>
+
+
+</div>
+
+
+
+
+
+<div>
+
+<label>
+Pincode *
+</label>
+
+
+<input
+type="text"
+maxlength="6"
+pattern="[0-9]{6}"
+name="permanent_pincode"
+value="{{ address.permanent_pincode if address else '' }}"
+required {% if view_mode %}disabled{% endif %}>
+
+
+</div>
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- Correspondence Address -->
+
+
+<div class="address-card">
+
+
+<h3>
+Correspondence Address
+</h3>
+
+
+
+<div class="same-address">
+
+
+<input
+type="checkbox"
+id="sameAddress" {% if view_mode %}disabled{% endif %}>
+
+
+<label for="sameAddress">
+
+Same as Permanent Address
+
+</label>
+
+
+</div>
+
+
+
+
+
+<div class="grid">
+
+
+
+<div class="full">
+
+
+<label>
+Address *
+</label>
+
+
+<textarea
+name="correspondence_address" style="resize: none;"
+required {% if view_mode %}disabled{% endif %}>{{ address.correspondence_address if address else '' }}</textarea>
+
+
+</div>
+
+
+
+
+
+
+<div>
+
+<label>
+State *
+</label>
+
+
+<input
+type="text"
+name="correspondence_state"
+value="{{ address.correspondence_state if address else '' }}"
+required {% if view_mode %}disabled{% endif %}>
+
+
+</div>
+
+
+
+
+
+
+<div>
+
+<label>
+District *
+</label>
+
+
+<input
+type="text"
+name="correspondence_district"
+value="{{ address.correspondence_district if address else '' }}"
+required {% if view_mode %}disabled{% endif %}>
+
+
+</div>
+
+
+
+
+
+
+<div>
+
+<label>
+City *
+</label>
+
+
+<input
+type="text"
+name="correspondence_city"
+value="{{ address.correspondence_city if address else '' }}"
+required {% if view_mode %}disabled{% endif %}>
+
+
+</div>
+
+
+
+
+
+
+<div>
+
+<label>
+Pincode *
+</label>
+
+
+<input
+type="text"
+maxlength="6"
+pattern="[0-9]{6}"
+name="correspondence_pincode"
+value="{{ address.correspondence_pincode if address else '' }}"
+required {% if view_mode %}disabled{% endif %}>
+
+
+</div>
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div class="footer">
+
+{% if not view_mode %}
+<button type="submit">
+
+Save & Continue
+
+</button>
+{% endif %}
+
+</div>
+
+
+
+
+
+</form>
+
+
+</div>
+
+
+
+
+
+<script src="{{ url_for('static', filename='js/registration-step4.js') }}">
+</script>
+
+
+
+{% endblock %}

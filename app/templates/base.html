@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title%}Student Management Portal{% endblock %}</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="icon" href="{{url_for('static',filename='assets/images/logo.png')}}">
+    <link rel="apple-touch-icon" href="{{url_for('static',filename='assets/images/logo.png')}}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Great+Vibes&family=Kaushan+Script&family=Pacifico&family=Satisfy&display=swap" rel="stylesheet">
+    <!-- Page CSS -->
+    {% block css %}{% endblock %}
+</head>
+<body>
+    <!-- header -->
+    <header id="header-tag">
+         <div id="menu-bar">
+            <a href="{{url_for('auth.home')}}">
+                <img id="main-logo" src="{{url_for('static',filename='assets/images/logo.png')}}" alt="LOGO">
+            </a>
+            <p>☰ Menu</p>
+        </div>
+        <nav class="nav-bar-links">
+            <li class="navbar-li"><a href="{{url_for('auth.home')}}"><i class="fa-solid fa-house"></i> Home</a></li>
+            <li class="navbar-li"><a href="{{url_for('pages.about')}}"><i class="fa-solid fa-circle-info"></i> About Us</a></li>
+            <li class="navbar-li"><a href="{{url_for('pages.notices')}}"><i class="fa-solid fa-bullhorn"></i> Notices</a></li>
+            <li class="navbar-li"><a href="{{url_for('pages.courses')}}"><i class="fa-solid fa-book"></i> Courses</a></li>
+            <li class="navbar-li"><a href="{{url_for('pages.admissions')}}"><i class="fa-solid fa-user-plus"></i> Admissions</a></li>
+            <li class="navbar-li"><a href="{{url_for('pages.dashboard')}}"><i class="fa-solid fa-graduation-cap"></i> Student Dashboard</a></li>
+            <li class="navbar-li"><a href="{{url_for('auth.registration')}}"><i class="fa-solid fa-address-card"></i> New Registration </a></li>
+            <li class="navbar-li"><a href="{{url_for('pages.results')}}"><i class="fa-solid fa-square-poll-vertical"></i> Results</a></li>
+            <li class="navbar-li"><a href="{{url_for('pages.attendance')}}"><i class="fa-solid fa-calendar-check"></i> Attendance</a></li>
+            <li class="navbar-li"><a href="{{url_for('pages.study_material')}}"><i class="fa-solid fa-book-open"></i> Study Material</a></li>
+            <li class="navbar-li"><a href="{{url_for('pages.timetable')}}"><i class="fa-solid fa-calendar-days"></i> Timetable</a></li>
+            <li class="navbar-li"><a href="{{url_for('pages.fees')}}"><i class="fa-solid fa-money-bill-wave"></i> Fees</a></li>
+            <li class="navbar-li"><a href="{{url_for('pages.certificates')}}"><i class="fa-solid fa-certificate"></i> Certificates</a></li>
+            <li class="navbar-li"><a href="{{url_for('pages.assignments')}}"><i class="fa-solid fa-file-lines"></i> Assignments</a></li>
+            <li class="navbar-li"><a href="{{url_for('pages.faculty')}}"><i class="fa-solid fa-chalkboard-user"></i> Faculty</a></li>
+            <li class="navbar-li"><a href="{{url_for('pages.contact')}}"><i class="fa-solid fa-address-book"></i> Contact Us</a></li>
+            <li class="navbar-li"><a href="{{url_for('pages.help')}}"><i class="fa-solid fa-circle-question"></i> Help / FAQ</a></li>
+        </nav>
+    </header>
+    <!-- main -->
+    <main>
+        {% block content%}  {% endblock%}
+       <!-- topbar button -->
+      <button id="topbar-btn"></button>
+    </main>
+    <!-- footer -->
+    <footer id="footer-tag">
+         <p id="footer-para"> &copy; <script>new Date().getFullYear()</script>All Rights Reserved.</p>
+    </footer>
+    <script src="{{url_for('static',filename='js/script.js')}}"></script>
+</body>
+</html>

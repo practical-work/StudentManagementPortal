@@ -1,0 +1,289 @@
+/* ===========================
+   Step 6 Main Container 
+   (Matches Previous Steps)
+=========================== */
+.step6-container {
+    margin: 3%;
+    margin-top: 15px;
+    padding: 40px;
+    border-radius: 15px;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border: 1.5px dotted darkblue;
+    background: linear-gradient(110deg, #f3f4f7 70%, #ffffff 30%);
+    font-family: "Inter", sans-serif;
+}
+
+/* ===========================
+   Heading
+=========================== */
+.step6-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.step6-header h2 {
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 10px;
+    border: 1px solid darkblue;
+    background: linear-gradient(110deg, #d2f9f9 70%, #fff 30%);
+    color: rgb(0, 104, 139);
+    font-size: 1.45rem;
+    font-family: "Pacifico", sans-serif;
+    margin-bottom: 15px;
+}
+
+.step6-header p {
+    color: darkblue;
+    font-size: 1.05rem;
+    font-weight: 500;
+}
+
+.step6-header hr {
+    display: none;
+}
+
+/* ===========================
+   Application Info
+=========================== */
+.application-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    margin: 30px 0;
+    padding: 18px 25px;
+    border-radius: 10px;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 139, .15);
+}
+
+.application-info div {
+    flex: 1;
+    text-align: center;
+    color: darkblue;
+    font-size: 1rem;
+}
+
+.application-info strong {
+    color: #003366;
+}
+
+/* ===========================
+   Document Cards & Grid
+=========================== */
+.document-card {
+    background: #ffffff;
+    border: 1px solid rgba(0,0,139,.15);
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+}
+
+.document-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: darkblue;
+    border-bottom: 1px dashed rgba(0,0,139,.2);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.section-note {
+    font-size: 0.95rem;
+    color: #495057;
+    margin-bottom: 20px;
+    background: #f8f9fa;
+    padding: 10px 15px;
+    border-left: 4px solid #0ea5e9;
+    border-radius: 4px;
+}
+
+.document-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+/* ===========================
+   Individual Document Item
+=========================== */
+.document-item {
+    background: #f8f9fa;
+    border: 1px dashed rgba(0,0,139,.3);
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: 0.3s;
+}
+
+.document-item:hover {
+    border-color: #0ea5e9;
+    background: #f0f8ff;
+}
+
+.document-item label {
+    font-size: 1.05rem;
+    color: darkblue;
+    font-weight: 600;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.document-item label small {
+    font-weight: 400;
+    color: #6c757d;
+    font-size: 0.85rem;
+}
+
+/* ===========================
+   Buttons & Uploads
+=========================== */
+.file-input {
+    display: none; /* Hide the actual ugly file input */
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.upload-btn, .view-btn {
+    flex: 1;
+    display: inline-block;
+    text-align: center;
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.2s;
+    font-size: 0.95rem;
+    box-sizing: border-box;
+}
+
+.upload-btn {
+    background: #f3faf8;
+    color: darkblue;
+    border: 1.5px dotted darkblue;
+    margin-bottom: 0 !important;
+}
+
+.upload-btn:hover:not(.disabled) {
+    background: #e0f2fe;
+    border-color: #0ea5e9;
+    color: #0284c7;
+}
+
+.view-btn {
+    background: #ffffff;
+    color: #0ea5e9;
+    border: 1.5px solid #0ea5e9;
+    text-decoration: none;
+}
+
+.view-btn:hover {
+    background: #0ea5e9;
+    color: #ffffff;
+}
+
+/* Displays the name of the file just selected */
+.file-name-display {
+    font-size: 0.85rem;
+    color: #198754;
+    margin-top: 10px;
+    word-break: break-all;
+    font-weight: 500;
+    display: none;
+}
+
+.uploaded-text {
+    display: block;
+    margin-top: 10px;
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+/* ===========================
+   Validation Errors
+=========================== */
+.err-block {
+    margin-top: 10px;
+    width: 100%;
+    display: none;
+}
+
+.err-block.failure {
+    display: block;
+}
+
+.err {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px 12px;
+    border-radius: 6px;
+    background: #FEF2F2;
+    border: 1px solid #FECACA;
+    color: #991B1B;
+    font-size: .85rem;
+    margin: 0;
+}
+
+.upload-btn.error {
+    border-color: #dc3545 !important;
+    background: #FEF2F2 !important;
+    color: #dc3545 !important;
+}
+
+.upload-btn.success {
+    border-color: #198754 !important;
+    background: #f0fdf4 !important;
+    color: #15803d !important;
+}
+
+/* ===========================
+   Footer & Submit
+=========================== */
+.footer {
+    margin-top: 35px;
+    display: flex;
+    justify-content: center;
+    border-top: 1px dashed rgba(0,0,139,.2);
+    padding-top: 25px;
+}
+
+.save-btn {
+    padding: 12px 38px;
+    border-radius: 10px;
+    border: 2px dotted darkblue;
+    background: #f3faf8;
+    color: darkblue;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.save-btn:hover {
+    background: linear-gradient(110deg, rgba(207,217,247,.5) 70%, #fff 30%);
+}
+
+/* ===========================
+   Responsive
+=========================== */
+@media(max-width: 768px) {
+    .step6-container { margin: 15px; padding: 25px; }
+    .document-grid { grid-template-columns: 1fr; }
+    .application-info { flex-direction: column; }
+    .step6-header h2 { font-size: 1.25rem; }
+}
+
+@media(max-width: 576px) {
+    .step6-container { margin: 5px; padding: 15px; }
+    .document-card { padding: 15px; }
+    .save-btn { width: 100%; }
+}

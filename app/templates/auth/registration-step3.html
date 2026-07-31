@@ -1,0 +1,626 @@
+{% extends "base.html" %}
+
+{% block title %}Academic Details{% endblock %}
+
+{% block css %}
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/registration-step2.css') }}">
+<link rel="stylesheet"
+href="{{ url_for('static', filename='css/registration-step3.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="badge">
+
+        <button id="main-heading">
+            Academic Details
+        </button>
+
+        <p class="sub-main-heading">
+            Add all your educational qualifications.
+        </p>
+
+    </div>
+
+    <div class="application-info">
+
+        <div>
+
+            <strong>Application No.</strong><br>
+             <br>
+            {{ student.application_no }}
+
+        </div>
+
+        <div>
+
+            <strong>Applicant</strong><br>
+             <br>
+            {{ student.full_name }}
+
+        </div>
+
+    </div>
+
+    <form
+        class="form-style"
+        method="POST"
+        action="{{ url_for('application.save_step3') }}">
+
+        <input
+            type="hidden"
+            name="csrf_token"
+            value="{{ csrf_token() }}">
+
+        <input
+            type="hidden"
+            id="deleted_ids"
+            name="deleted_ids"
+            value="">
+
+        <div id="qualificationContainer">
+
+{% if academic_records %}
+
+{% for record in academic_records %}
+
+<div class="qualification-card">
+
+<input
+type="hidden"
+name="qualification_id[]"
+value="{{ record.id }}"
+{% if view_mode %}disabled{% endif %}>
+
+<div class="card-title">
+
+<span class="title-text">
+
+Qualification {{ loop.index }}
+
+</span>
+
+{% if not view_mode %}
+
+<button
+type="button"
+class="remove-btn">
+
+Remove
+
+</button>
+
+{% endif %}
+
+</div>
+
+<div class="grid">
+
+<!-- Qualification -->
+
+<div>
+
+<label>
+
+Qualification
+
+<span>*</span>
+
+</label>
+
+<input
+type="text"
+name="qualification[]"
+class="qualification"
+value="{{ record.qualification or '' }}"
+{% if view_mode %}disabled{% endif %}>
+
+<div class="err-block">
+
+<p class="err qualification-err"></p>
+
+</div>
+
+</div>
+
+<!-- Board -->
+
+<div>
+
+<label>
+
+Board / University
+
+<span>*</span>
+
+</label>
+
+<input
+type="text"
+name="board[]"
+class="board"
+value="{{ record.board_university or '' }}"
+{% if view_mode %}disabled{% endif %}>
+
+<div class="err-block">
+
+<p class="err board-err"></p>
+
+</div>
+
+</div>
+
+<!-- Institute -->
+
+<div>
+
+<label>
+
+Institute
+
+<span>*</span>
+
+</label>
+
+<input
+type="text"
+name="institute[]"
+class="institute"
+value="{{ record.institute_name or '' }}"
+{% if view_mode %}disabled{% endif %}>
+
+<div class="err-block">
+
+<p class="err institute-err"></p>
+
+</div>
+
+</div>
+
+<!-- Roll Number -->
+
+<div>
+
+<label>
+
+Roll Number
+
+</label>
+
+<input
+type="text"
+name="roll[]"
+class="roll"
+value="{{ record.roll_number or '' }}"
+{% if view_mode %}disabled{% endif %}>
+
+<div class="err-block">
+
+<p class="err roll-err"></p>
+
+</div>
+
+</div>
+
+<!-- Registration -->
+
+<div>
+
+<label>
+
+Registration Number
+
+</label>
+
+<input
+type="text"
+name="registration[]"
+class="registration"
+value="{{ record.registration_number or '' }}"
+{% if view_mode %}disabled{% endif %}>
+
+<div class="err-block">
+
+<p class="err registration-err"></p>
+
+</div>
+
+</div>
+
+<!-- Stream -->
+
+<div>
+
+<label>
+
+Stream
+
+</label>
+
+<input
+type="text"
+name="stream[]"
+class="stream"
+value="{{ record.stream or '' }}"
+{% if view_mode %}disabled{% endif %}>
+
+<div class="err-block">
+
+<p class="err stream-err"></p>
+
+</div>
+
+</div>
+
+<!-- Medium -->
+
+<div>
+
+<label>
+
+Medium
+
+</label>
+
+<input
+type="text"
+name="medium[]"
+class="medium"
+value="{{ record.medium or '' }}"
+{% if view_mode %}disabled{% endif %}>
+
+<div class="err-block">
+
+<p class="err medium-err"></p>
+
+</div>
+
+</div>
+
+<!-- Passing Year -->
+
+<div>
+
+<label>
+
+Passing Year
+
+<span>*</span>
+
+</label>
+
+<input
+type="text"
+name="passing_year[]"
+class="passing-year"
+value="{{ record.passing_year or '' }}"
+{% if view_mode %}disabled{% endif %}>
+
+<div class="err-block">
+
+<p class="err passing-year-err"></p>
+
+</div>
+
+</div>
+        <!-- Marks Type -->
+
+        <div>
+
+            <label>
+
+                Marks Type
+
+            </label>
+
+            <select
+                name="marks_type[]"
+                class="marksType"
+                {% if view_mode %}disabled{% endif %}>
+
+                <option value="">Select</option>
+
+                <option
+                    value="Percentage"
+                    {% if record.marks_type=="Percentage" %}selected{% endif %}>
+
+                    Percentage
+
+                </option>
+
+                <option
+                    value="CGPA"
+                    {% if record.marks_type=="CGPA" %}selected{% endif %}>
+
+                    CGPA
+
+                </option>
+
+            </select>
+
+            <div class="err-block">
+
+                <p class="err marks-type-err"></p>
+
+            </div>
+
+        </div>
+
+        <!-- Percentage -->
+
+        <div class="percentageBox">
+
+            <label>
+
+                Percentage
+
+            </label>
+
+            <input
+                type="text"
+                name="percentage[]"
+                class="percentage"
+                value="{{ record.percentage or '' }}"
+                {% if view_mode %}disabled{% endif %}>
+
+            <div class="err-block">
+
+                <p class="err percentage-err"></p>
+
+            </div>
+
+        </div>
+
+        <!-- CGPA -->
+
+        <div class="cgpaBox">
+
+            <label>
+
+                CGPA
+
+            </label>
+
+            <input
+                type="text"
+                name="cgpa[]"
+                class="cgpa"
+                value="{{ record.cgpa or '' }}"
+                {% if view_mode %}disabled{% endif %}>
+
+            <div class="err-block">
+
+                <p class="err cgpa-err"></p>
+
+            </div>
+
+        </div>
+
+        <!-- Total Marks -->
+
+        <div>
+
+            <label>
+
+                Total Marks
+
+            </label>
+
+            <input
+                type="text"
+                name="total_marks[]"
+                class="total-marks"
+                value="{{ record.total_marks or '' }}"
+                {% if view_mode %}disabled{% endif %}>
+
+            <div class="err-block">
+
+                <p class="err total-marks-err"></p>
+
+            </div>
+
+        </div>
+
+        <!-- Obtained Marks -->
+
+        <div>
+
+            <label>
+
+                Obtained Marks
+
+            </label>
+
+            <input
+                type="text"
+                name="obtained_marks[]"
+                class="obtained-marks"
+                value="{{ record.obtained_marks or '' }}"
+                {% if view_mode %}disabled{% endif %}>
+
+            <div class="err-block">
+
+                <p class="err obtained-marks-err"></p>
+
+            </div>
+
+        </div>
+
+        <!-- Subjects -->
+
+        <div class="full">
+
+            <label>
+
+                Subjects
+
+            </label>
+
+            <textarea
+                class="subjects"
+                name="subjects[]"
+                style="resize:none;"
+                {% if view_mode %}disabled{% endif %}>{{ record.subjects or '' }}</textarea>
+
+            <div class="err-block">
+
+                <p class="err subjects-err"></p>
+
+            </div>
+
+        </div>
+
+        <!-- Entrance Exam -->
+
+        <div>
+
+            <label>
+
+                Entrance Exam
+
+            </label>
+
+            <input
+                type="text"
+                name="entrance_exam[]"
+                class="entrance-exam"
+                value="{{ record.entrance_exam or '' }}"
+                {% if view_mode %}disabled{% endif %}>
+
+            <div class="err-block">
+
+                <p class="err entrance-exam-err"></p>
+
+            </div>
+
+        </div>
+
+        <!-- Entrance Roll -->
+
+        <div>
+
+            <label>
+
+                Entrance Roll No.
+
+            </label>
+
+            <input
+                type="text"
+                name="entrance_roll[]"
+                class="entrance-roll"
+                value="{{ record.entrance_roll_number or '' }}"
+                {% if view_mode %}disabled{% endif %}>
+
+            <div class="err-block">
+
+                <p class="err entrance-roll-err"></p>
+
+            </div>
+
+        </div>
+
+        <!-- Rank -->
+
+        <div>
+
+            <label>
+
+                Rank
+
+            </label>
+
+            <input
+                type="text"
+                name="entrance_rank[]"
+                class="entrance-rank"
+                value="{{ record.entrance_rank or '' }}"
+                {% if view_mode %}disabled{% endif %}>
+
+            <div class="err-block">
+
+                <p class="err entrance-rank-err"></p>
+
+            </div>
+
+        </div>
+
+        <!-- Score -->
+
+        <div>
+
+            <label>
+
+                Score
+
+            </label>
+
+            <input
+                type="text"
+                name="entrance_score[]"
+                class="entrance-score"
+                value="{{ record.entrance_score or '' }}"
+                {% if view_mode %}disabled{% endif %}>
+
+            <div class="err-block">
+
+                <p class="err entrance-score-err"></p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+{% else %}
+
+<!-- Empty card added through JavaScript -->
+
+{% endif %}
+
+</div>
+
+{% if not view_mode %}
+
+<button
+    type="button"
+    id="addQualification"
+    class="btn btn-secondary">
+
+    + Add Qualification
+
+</button>
+
+{% endif %}
+
+<div class="step3-footer">
+
+{% if not view_mode %}
+
+<button
+    type="submit"
+    class="btn btn-primary">
+
+    Save & Continue
+
+</button>
+
+{% endif %}
+
+</div>
+
+</form>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/registration-step3.js') }}"></script>
+<script src="{{ url_for('static', filename='js/registration-step3-validation.js') }}"></script>
+
+{% endblock %}
