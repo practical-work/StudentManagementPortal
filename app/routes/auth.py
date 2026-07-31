@@ -3,7 +3,6 @@ from datetime import datetime, timedelta
 from werkzeug.security import generate_password_hash, check_password_hash
 import random
 import re
-
 from app import student_db
 from app.models.student_account import StudentAccount
 from app.models.email_otp import EmailOTP
