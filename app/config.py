@@ -23,15 +23,7 @@ load_dotenv()
 
 class Config:
     SECRET_KEY = os.getenv("SECRET_KEY")
-    
-    # Automatically grab Railway's MYSQL_URL, or fall back to a local/custom DATABASE_URL
-    database_url = os.getenv("MYSQL_URL") or os.getenv("DATABASE_URL")
-    
-    # SQLAlchemy requires 'mysql+pymysql://' for MySQL connections
-    if database_url and database_url.startswith("mysql://"):
-        database_url = database_url.replace("mysql://", "mysql+pymysql://", 1)
-        
-    SQLALCHEMY_DATABASE_URI = database_url
+    SQLALCHEMY_DATABASE_URI = os.environ["MYSQL_URL"]
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     UPLOAD_FOLDER = os.getenv("UPLOAD_FOLDER")
     MAIL_SERVER = "smtp.gmail.com"
