@@ -15,16 +15,22 @@
 #     MAIL_PASSWORD = os.getenv("MAIL_PASSWORD")
 #     MAIL_DEFAULT_SENDER = ("Student Management Portal",os.getenv("MAIL_USERNAME"))
 
-
 import os
 from dotenv import load_dotenv
 
 load_dotenv()
 
+# Read DATABASE_URL from environment
 db_url = os.getenv("DATABASE_URL")
 
-if db_url and db_url.startswith("mysql://"):
+# If DATABASE_URL is not set, use SQLite by default
+if not db_url:
+    db_url = "sqlite:///student.db"
+
+# Railway/Render compatibility
+if db_url.startswith("mysql://"):
     db_url = db_url.replace("mysql://", "mysql+pymysql://", 1)
+
 
 class Config:
     SECRET_KEY = os.getenv("SECRET_KEY")
