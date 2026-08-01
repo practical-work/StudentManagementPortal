@@ -5,7 +5,7 @@ import random
 import os
 import re
 from werkzeug.utils import secure_filename
-
+from datetime import datetime
 from app.models.email_otp import EmailOTP
 from app.models.master_gender import MasterGender
 from app.models.master_category import MasterCategory
@@ -95,7 +95,14 @@ def save_step2():
     personal.middle_name = request.form.get("middle_name", "").strip()
     personal.last_name = request.form.get("last_name", "").strip()
     personal.gender_id = request.form["gender_id"]
-    personal.date_of_birth = request.form["date_of_birth"]
+    dob = request.form.get("date_of_birth")
+
+    dob = datetime.strptime(
+        dob,
+        "%Y-%m-%d"
+    ).date()
+    
+    personal.date_of_birth = dob
     personal.blood_group_id = request.form.get("blood_group_id") or None
     personal.category_id = request.form["category_id"]
     personal.religion_id = request.form["religion_id"]
