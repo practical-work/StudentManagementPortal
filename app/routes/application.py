@@ -107,7 +107,17 @@ def save_step2():
     personal.category_id = request.form["category_id"]
     personal.religion_id = request.form["religion_id"]
     personal.nationality_id = request.form["nationality_id"]
-    personal.aadhaar_no = request.form["aadhaar_no"].strip()
+    aadhaar_no = request.form["aadhaar_no"].strip()
+    existing = StudentPersonal.query.filter(
+    StudentPersonal.aadhaar_no == aadhaar_no,
+    StudentPersonal.student_id != student.student_id
+    ).first()
+    
+    if existing:
+       flash("This Aadhaar number is already registered.", "danger")
+       return redirect(url_for("application.step2"))
+        
+    personal.aadhaar_no = aadhaar_no
     personal.father_name = request.form["father_name"].strip()
     personal.father_mobile = request.form["father_mobile"].strip()
     personal.mother_name = request.form.get("mother_name", "").strip()
