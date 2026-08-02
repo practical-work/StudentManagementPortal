@@ -5,3 +5,9 @@ venv/
 .env
 .idea/
 .vscode/
+# Database
+instance/
+*.db
+
+# Uploads
+app/static/uploads/
