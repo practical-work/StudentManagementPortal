@@ -30,7 +30,11 @@ href="{{ url_for('static', filename='css/registration-step4.css') }}">
         </h2>
 
         <p>
-            Enter your permanent and correspondence address.
+           {% if view_mode %}
+           View your address information.
+           {% else %}
+           Enter your permanent and correspondence address.
+           {% endif %}
         </p>
 
         <hr>

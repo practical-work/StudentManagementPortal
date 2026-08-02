@@ -15,7 +15,11 @@
         <button id="main-heading">Step 2 : Personal Details</button>
 
         <p class="sub-main-heading">
-            Complete your personal information carefully.
+           {% if view_mode %} 
+            View your personal information.
+            {% else %}
+            Please complete your personal information carefully.
+            {% endif %}
         </p>
     </div>
 

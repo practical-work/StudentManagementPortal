@@ -22,7 +22,11 @@ href="{{ url_for('static', filename='css/registration-step5.css') }}">
         </h2>
 
         <p>
-            Enter additional information.
+           {% if view_mode %}
+           View your family and other details.
+           {% else %}
+           Enter additional information.
+           {% endif %}
         </p>
 
         <hr>

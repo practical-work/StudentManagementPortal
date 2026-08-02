@@ -20,7 +20,11 @@ href="{{ url_for('static', filename='css/registration-step3.css') }}">
         </button>
 
         <p class="sub-main-heading">
+            {% if view_mode %}
+            View your academic information.
+            {% else %}
             Add all your educational qualifications.
+            {% endif %}
         </p>
 
     </div>
