@@ -1,0 +1,475 @@
+/* --- Base Reset & Universal Box-Sizing --- */
+* { 
+    box-sizing: border-box; 
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+/* --- Main Page Container --- */
+.timetable-page-container {
+    background: linear-gradient(110deg, rgb(243, 244, 247) 70%, #fff 30%);
+    margin: 20px auto;
+    max-width: 1300px; 
+    width: 95%;
+    border-radius: 15px;
+    padding: 40px 20px;
+    border: 1.5px dotted darkblue;
+    font-family: "Inter", sans-serif;
+}
+
+/* --- SaaS Header Area --- */
+.hero-section {
+    max-width: 800px;
+    margin: 0 auto 30px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 10px;
+}
+
+.hero-pill {
+    background: white;
+    border: 1.5px dotted darkblue;
+    padding: 6px 16px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: darkblue;
+    margin-bottom: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 139, 0.05);
+}
+
+.hero-pill i { color: rgb(0, 104, 139); }
+
+.hero-title {
+    font-size: 2.8rem;
+    color: darkblue;
+    font-weight: 800;
+    margin: 0 0 5px 0;
+    line-height: 1.1;
+    word-break: break-word;
+}
+
+.hero-subtitle {
+    font-size: 2.8rem;
+    font-weight: 800;
+    margin: 0 0 15px 0;
+    line-height: 1.1;
+    word-break: break-word;
+}
+
+.text-gradient {
+    background: linear-gradient(90deg, darkblue, rgb(0, 150, 255));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-desc {
+    color: #4a5568;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    max-width: 700px;
+}
+
+/* --- Quick Status / Pinned Bar --- */
+.quick-status-bar {
+    background: white;
+    border: 1.5px dotted darkblue;
+    border-radius: 12px;
+    padding: 18px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,139,0.03);
+}
+
+.status-info .live-badge {
+    color: rgb(22, 163, 74);
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 4px;
+}
+
+.status-info h3 {
+    color: darkblue;
+    font-size: 1.1rem;
+    word-break: break-word;
+}
+
+.status-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn-pin {
+    background: rgba(0, 104, 139, 0.08);
+    border: 1px solid rgb(0, 104, 139);
+    color: darkblue;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-pin:hover, .btn-pin.pinned {
+    background: darkblue;
+    color: white;
+}
+
+.update-timestamp {
+    color: #666;
+    font-size: 0.85rem;
+}
+
+/* --- Filter Card --- */
+.filter-card {
+    background: white;
+    border: 1.5px dotted darkblue;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 20px rgba(0, 0, 139, 0.04);
+}
+
+.filter-title {
+    color: darkblue;
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.filter-title i { color: rgb(0, 150, 255); }
+
+.filter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.input-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: darkblue;
+}
+
+.input-box {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 139, 0.2);
+    font-size: 1rem;
+    color: darkblue;
+    background: #fdfdfd;
+    outline: none;
+    font-family: "Inter", sans-serif;
+}
+
+.input-box:focus {
+    border-color: rgb(0, 150, 255);
+    box-shadow: 0 0 0 3px rgba(0, 150, 255, 0.15);
+}
+
+.filter-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 5px;
+}
+
+.full-width { grid-column: 1 / -1; }
+
+.btn-primary, .btn-secondary {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-primary {
+    background-color: darkblue;
+    color: white;
+    border: 2px solid darkblue;
+}
+
+.btn-primary:hover { background: rgb(0, 0, 100); }
+
+.btn-secondary {
+    background-color: white;
+    color: darkblue;
+    border: 2px dotted darkblue;
+}
+
+.btn-secondary:hover { background: rgba(0,104,139,0.05); }
+
+/* --- Timetable Grid Table --- */
+.timetable-wrapper {
+    background: white;
+    border: 1.5px dotted darkblue;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 5px 20px rgba(0, 0, 139, 0.04);
+    margin-bottom: 30px;
+}
+
+.table-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed rgba(0,0,139,0.2);
+}
+
+.legend-container {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: darkblue;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.dot.theory { background-color: rgb(0, 104, 139); }
+.dot.lab { background-color: rgb(22, 163, 74); }
+.dot.tutorial { background-color: rgb(202, 138, 4); }
+.dot.exam { background-color: rgb(220, 38, 38); }
+
+.export-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1px solid darkblue;
+    color: darkblue;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    transition: 0.3s;
+}
+
+.btn-outline:hover {
+    background: darkblue;
+    color: white;
+}
+
+/* Responsive Table Container with Smooth Mobile Touch Scroll */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.timetable-grid {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 1050px;
+}
+
+.timetable-grid th, .timetable-grid td {
+    border: 1px solid rgba(0,0,139,0.15);
+    padding: 10px;
+    text-align: left;
+    vertical-align: top;
+}
+
+.timetable-grid th {
+    background-color: rgba(0, 104, 139, 0.08);
+    color: darkblue;
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+.time-slot {
+    font-weight: 600;
+    color: darkblue;
+    background: #f8f9fa;
+    white-space: nowrap;
+    width: 85px;
+    text-align: center;
+    font-size: 0.8rem;
+}
+
+/* Class Cells */
+.class-cell {
+    padding: 8px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.class-cell strong { font-size: 0.85rem; }
+.class-cell span { font-size: 0.75rem; opacity: 0.9; }
+.class-cell small { font-size: 0.7rem; margin-top: 3px; display: inline-flex; align-items: center; gap: 4px; }
+
+.class-cell.theory { background-color: rgba(0, 104, 139, 0.07); border-left: 4px solid rgb(0, 104, 139); color: darkblue; }
+.class-cell.lab { background-color: rgba(22, 163, 74, 0.07); border-left: 4px solid rgb(22, 163, 74); color: #065F46; }
+.class-cell.tutorial { background-color: rgba(202, 138, 4, 0.07); border-left: 4px solid rgb(202, 138, 4); color: #854D0E; }
+.class-cell.break { background-color: #f1f5f9; border-left: 4px solid #64748b; color: #475569; text-align: center; }
+
+.class-cell.multi-group {
+    background-color: rgba(22, 163, 74, 0.05);
+    border-left: 4px solid rgb(22, 163, 74);
+    gap: 3px;
+}
+
+.badge-group {
+    background: rgba(22, 163, 74, 0.15);
+    color: #065F46;
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-weight: 700;
+    font-size: 0.65rem;
+    display: inline-block;
+    margin-right: 3px;
+}
+
+/* --- Empty State & Notes --- */
+.empty-state {
+    text-align: center;
+    padding: 40px 15px;
+    background: white;
+    border: 1.5px dotted darkblue;
+    border-radius: 12px;
+    margin-bottom: 30px;
+}
+
+.empty-state i { font-size: 3rem; color: rgb(0, 150, 255); margin-bottom: 12px; }
+.empty-state h3 { color: darkblue; font-size: 1.3rem; margin-bottom: 8px; }
+.empty-state p { color: #555; font-size: 0.95rem; }
+
+.notes-section {
+    background: white;
+    border: 1.5px dotted darkblue;
+    border-radius: 12px;
+    padding: 20px 25px;
+    box-shadow: 0 4px 15px rgba(0,0,139,0.03);
+}
+
+.notes-section h3 {
+    color: darkblue;
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.notes-section h3 i { color: rgb(220, 38, 38); }
+
+.styled-list {
+    padding-left: 18px;
+    color: #555;
+    line-height: 1.5;
+    font-size: 0.9rem;
+}
+
+.styled-list li { margin-bottom: 6px; }
+
+/* =========================================
+   MOBILE & TABLET RESPONSIVE MEDIA QUERIES
+   ========================================= */
+
+@media (max-width: 992px) {
+    .hero-title, .hero-subtitle { font-size: 2.2rem; }
+    .quick-status-bar { flex-direction: column; align-items: flex-start; }
+}
+
+@media (max-width: 768px) {
+    .timetable-page-container {
+        padding: 25px 12px;
+        margin: 10px auto;
+        width: 98%;
+        border-radius: 10px;
+    }
+    
+    .hero-title, .hero-subtitle { font-size: 1.8rem; }
+    .hero-desc { font-size: 0.95rem; }
+    
+    .filter-card, .timetable-wrapper, .notes-section {
+        padding: 18px 12px;
+    }
+    
+    .filter-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .filter-actions {
+        flex-direction: column;
+    }
+    
+    .btn-primary, .btn-secondary {
+        width: 100%;
+    }
+    
+    .table-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .export-buttons {
+        justify-content: space-between;
+    }
+    
+    .btn-outline {
+        flex: 1;
+        justify-content: center;
+    }
+}

@@ -1,12 +1,216 @@
 {% extends "base.html" %}
 
-{% block title%}About US{% endblock %}
+{% block title %}About Us | Student Management Portal{% endblock %}
 
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+{% endblock %}
 
-{% block content%}  
-   <p class="temp">Work is ongoing on Portal  ...</p>
-   <a href="{{url_for('auth.registration')}}">Registration</a>
-{% endblock%}
-
+{% block content %}
+<div class="about-page-container">
     
+    <!-- SaaS Style Header -->
+    <div class="hero-section">
+        <div class="hero-pill">
+            <i class="fa-solid fa-building-columns"></i> Who We Are
+        </div>
+
+        <h1 class="hero-title">About the Student</h1>
+        <h1 class="hero-subtitle">Management <span class="text-gradient">Portal</span></h1>
+        
+        <p class="hero-desc">
+            A modern, secure, and user-friendly web application designed to simplify academic and administrative processes for students and educational institutions.
+        </p>
+    </div>
+
+    <!-- Main Content Layout (Sidebar + Content) -->
+    <div class="about-layout">
+        
+        <!-- Sticky Sidebar Navigation -->
+        <aside class="about-sidebar">
+            <ul class="sidebar-nav">
+                <li><a href="#overview" class="active"><i class="fa-solid fa-bullseye"></i> Mission & Vision</a></li>
+                <li><a href="#features"><i class="fa-solid fa-layer-group"></i> Features & Services</a></li>
+                <li><a href="#values"><i class="fa-regular fa-gem"></i> Our Core Values</a></li>
+                <li><a href="#technology"><i class="fa-solid fa-code"></i> Technology & Security</a></li>
+                <li><a href="#future"><i class="fa-solid fa-rocket"></i> Future Enhancements</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="about-content">
+            
+            <!-- Section 1: Overview & Mission -->
+            <section id="overview" class="about-section">
+                <h2 class="section-title">Welcome to the Portal</h2>
+                <div class="info-card">
+                    <p>Our goal is to provide a centralized digital platform where students can manage their academic information, complete registrations, upload documents, and access essential services anytime and from anywhere. The portal is built with a focus on efficiency, transparency, security, and ease of use, ensuring a seamless experience for both students and administrators.</p>
+                </div>
+
+                <div class="grid-2-col" style="margin-top: 20px;">
+                    <div class="info-card primary-card">
+                        <h3><i class="fa-solid fa-rocket" style="color: rgb(0, 150, 255);"></i> Our Mission</h3>
+                        <p>Our mission is to modernize student administration by providing a reliable and efficient digital platform that reduces paperwork, streamlines academic processes, and enhances communication between students and the institution.</p>
+                    </div>
+                    <div class="info-card success-card">
+                        <h3><i class="fa-solid fa-lightbulb" style="color: rgb(22, 163, 74);"></i> Our Vision</h3>
+                        <p>Our vision is to create a smart, technology-driven academic environment where every student can easily access educational services through a secure and intelligent online platform.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 2: Features & Offerings -->
+            <section id="features" class="about-section">
+                <h2 class="section-title">What We Offer</h2>
+                <p class="section-subtitle">The Student Management Portal provides a wide range of digital services:</p>
+                
+                <div class="info-card">
+                    <ul class="styled-grid-list">
+                        <li><i class="fa-solid fa-check"></i> Student Registration</li>
+                        <li><i class="fa-solid fa-check"></i> Secure Student Login</li>
+                        <li><i class="fa-solid fa-check"></i> Email OTP Verification</li>
+                        <li><i class="fa-solid fa-check"></i> Student Dashboard</li>
+                        <li><i class="fa-solid fa-check"></i> Personal Profile Management</li>
+                        <li><i class="fa-solid fa-check"></i> Academic Info Management</li>
+                        <li><i class="fa-solid fa-check"></i> Document Upload & Verification</li>
+                        <li><i class="fa-solid fa-check"></i> Timetable Access</li>
+                        <li><i class="fa-solid fa-check"></i> Faculty Information</li>
+                        <li><i class="fa-solid fa-check"></i> Announcements & Notifications</li>
+                    </ul>
+                </div>
+
+                <h2 class="section-title" style="margin-top: 40px;">Key Features</h2>
+                <div class="grid-2-col">
+                    <div class="feature-box">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <h4>Secure Authentication</h4>
+                        <p>User accounts are protected through secure login mechanisms and email verification.</p>
+                    </div>
+                    <div class="feature-box">
+                        <i class="fa-solid fa-desktop"></i>
+                        <h4>User-Friendly Interface</h4>
+                        <p>A clean, responsive, and intuitive interface allows students to navigate the portal with ease on desktops, tablets, and mobile devices.</p>
+                    </div>
+                    <div class="feature-box">
+                        <i class="fa-solid fa-file-arrow-up"></i>
+                        <h4>Digital Document Management</h4>
+                        <p>Students can securely upload and manage academic and identity documents without the need for physical paperwork.</p>
+                    </div>
+                    <div class="feature-box">
+                        <i class="fa-solid fa-server"></i>
+                        <h4>Centralized Student Records</h4>
+                        <p>Student information is stored in a structured and organized manner, making academic management more efficient.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 3: Core Values -->
+            <section id="values" class="about-section">
+                <h2 class="section-title">Our Core Values</h2>
+                <div class="values-grid">
+                    <div class="value-card">
+                        <i class="fa-solid fa-star"></i>
+                        <h4>Excellence</h4>
+                        <p>We strive to deliver a reliable and high-quality digital experience.</p>
+                    </div>
+                    <div class="value-card">
+                        <i class="fa-solid fa-microchip"></i>
+                        <h4>Innovation</h4>
+                        <p>We continuously adopt modern technologies to improve academic services.</p>
+                    </div>
+                    <div class="value-card">
+                        <i class="fa-solid fa-eye"></i>
+                        <h4>Transparency</h4>
+                        <p>We believe in maintaining clear and accurate academic processes.</p>
+                    </div>
+                    <div class="value-card">
+                        <i class="fa-solid fa-lock"></i>
+                        <h4>Security</h4>
+                        <p>Protecting student information is our highest priority.</p>
+                    </div>
+                    <div class="value-card">
+                        <i class="fa-solid fa-mobile-screen"></i>
+                        <h4>Accessibility</h4>
+                        <p>Our portal is designed to be accessible from any device with an internet connection.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 4: Technology & Security -->
+            <section id="technology" class="about-section">
+                <h2 class="section-title">Technology & Security</h2>
+                <div class="info-card">
+                    <p>The Student Management Portal is developed using modern web technologies to ensure performance, security, and scalability.</p>
+                    
+                    <h4 style="margin-top: 20px; color: darkblue;">Frontend Stack</h4>
+                    <div class="tags-container">
+                        <span class="tag">HTML5</span>
+                        <span class="tag">CSS3</span>
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">Bootstrap 5</span>
+                    </div>
+
+                    <h4 style="margin-top: 20px; color: darkblue;">Backend & Database</h4>
+                    <div class="tags-container">
+                        <span class="tag">Python</span>
+                        <span class="tag">Flask Framework</span>
+                        <span class="tag">SQLAlchemy ORM</span>
+                        <span class="tag">SQLite / MySQL</span>
+                    </div>
+
+                    <h4 style="margin-top: 20px; color: darkblue;">Additional Integrations</h4>
+                    <div class="tags-container">
+                        <span class="tag">Cloudinary (Storage)</span>
+                        <span class="tag">Email OTP Verification</span>
+                        <span class="tag">Secure Session Management</span>
+                    </div>
+                </div>
+
+                <div class="info-card danger-card" style="margin-top: 20px;">
+                    <h3><i class="fa-solid fa-user-lock"></i> Security & Privacy</h3>
+                    <p>The portal follows industry-standard security practices to protect user information. Authentication, input validation, secure password handling, and controlled access mechanisms help ensure that student data remains confidential and protected. We are committed to respecting user privacy and handling personal information responsibly.</p>
+                </div>
+            </section>
+
+            <!-- Section 5: Future Enhancements & Conclusion -->
+            <section id="future" class="about-section">
+                <h2 class="section-title">Future Enhancements</h2>
+                <p class="section-subtitle">The portal will continue to evolve with additional features such as:</p>
+                
+                <div class="info-card">
+                    <ul class="styled-grid-list">
+                        <li><i class="fa-solid fa-arrow-trend-up"></i> Student Attendance Management</li>
+                        <li><i class="fa-solid fa-arrow-trend-up"></i> Online Fee Management</li>
+                        <li><i class="fa-solid fa-arrow-trend-up"></i> Examination & Result Processing</li>
+                        <li><i class="fa-solid fa-arrow-trend-up"></i> Library & Hostel Management</li>
+                        <li><i class="fa-solid fa-arrow-trend-up"></i> Placement Management</li>
+                        <li><i class="fa-solid fa-arrow-trend-up"></i> Mobile Application Support</li>
+                    </ul>
+                </div>
+
+                <!-- Footer Quote -->
+                <div class="quote-box">
+                    <i class="fa-solid fa-quote-left"></i>
+                    <h2>Empowering Education Through Technology – Making Student Management Simple, Secure, and Smarter.</h2>
+                    <p>- Student Management Portal Team</p>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</div>
+
+<!-- Sidebar Scroll & Active State JS -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
     
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            sidebarLinks.forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+});
+</script>
+{% endblock %}

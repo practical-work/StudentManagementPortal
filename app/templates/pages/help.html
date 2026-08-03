@@ -1,0 +1,214 @@
+{% extends "base.html" %}
+
+{% block title %}Help & FAQs | Student Management Portal{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/help.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="help-page-container">
+    
+    <!-- New SaaS Header -->
+    <div class="hero-section">
+        <!-- The "Pill" Badge -->
+        <div class="hero-pill">
+            <i class="fa-solid fa-circle-question"></i> Help & Support Center
+        </div>
+
+        <!-- Huge Main Headline -->
+        <h1 class="hero-title">Student Management</h1>
+        <h1 class="hero-subtitle">Portal <span class="text-gradient">Help & FAQs</span></h1>
+        
+        <!-- Subheading Paragraph -->
+        <p class="hero-desc">
+            Welcome to the Student Management Portal Help Center. Find answers, guidelines, and technical support below.
+        </p>
+    </div>
+
+    <!-- Main Content Layout (Pushed a little down) -->
+    <div class="help-layout">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="help-sidebar">
+            <ul class="sidebar-nav">
+                <li><a href="#faqs" class="active"><i class="fa-solid fa-comments"></i> Frequently Asked Questions</a></li>
+                <li><a href="#guidelines"><i class="fa-solid fa-list-check"></i> Registration Guidelines</a></li>
+                <li><a href="#security"><i class="fa-solid fa-shield-halved"></i> Security & Passwords</a></li>
+                <li><a href="#support"><i class="fa-solid fa-headset"></i> Technical Support</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="help-content">
+            
+            <!-- FAQs Section (Super Smooth Interactive Accordion) -->
+            <section id="faqs" class="help-section">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                
+                <div class="accordion">
+                    <!-- Q1 -->
+                    <div class="accordion-item">
+                        <button class="accordion-header">Who can use this portal?</button>
+                        <div class="accordion-content">
+                            <div class="accordion-inner">
+                                <p>This portal is intended for students who wish to register, manage their academic information, and access available student services.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Q2 -->
+                    <div class="accordion-item">
+                        <button class="accordion-header">How do I create a new account?</button>
+                        <div class="accordion-content">
+                            <div class="accordion-inner">
+                                <p>Click on <strong>New Registration</strong> from the homepage and complete the registration process by entering your personal details, contact information, and required documents.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Q3 -->
+                    <div class="accordion-item">
+                        <button class="accordion-header">Is email verification required?</button>
+                        <div class="accordion-content">
+                            <div class="accordion-inner">
+                                <p><strong>Yes.</strong> A One-Time Password (OTP) will be sent to your registered email address during registration. Your account will only be created after successful email verification.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Q4 -->
+                    <div class="accordion-item">
+                        <button class="accordion-header">What should I do if I do not receive the OTP?</button>
+                        <div class="accordion-content">
+                            <div class="accordion-inner">
+                                <ul class="styled-list">
+                                    <li>Ensure your email address is entered correctly.</li>
+                                    <li>Check your Spam or Junk folder.</li>
+                                    <li>Wait a few minutes for delivery.</li>
+                                    <li>Request a new OTP if the previous one expires.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Q5 -->
+                    <div class="accordion-item">
+                        <button class="accordion-header">What documents are required during registration?</button>
+                        <div class="accordion-content">
+                            <div class="accordion-inner">
+                                <p>Depending on registration requirements, you may be asked to upload:</p>
+                                <ul class="styled-list">
+                                    <li>Aadhaar Card</li>
+                                    <li>Passport-size Photograph</li>
+                                    <li>Academic Certificates</li>
+                                    <li>Identity Proof & Other supporting documents</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Q6 -->
+                    <div class="accordion-item">
+                        <button class="accordion-header">Which file formats are accepted?</button>
+                        <div class="accordion-content">
+                            <div class="accordion-inner">
+                                <p>Supported file formats include: <strong>JPG, JPEG, PNG, and PDF</strong>. Please ensure all uploaded documents are clear and readable.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Q7 -->
+                    <div class="accordion-item">
+                        <button class="accordion-header">Why is my Aadhaar number already registered?</button>
+                        <div class="accordion-content">
+                            <div class="accordion-inner">
+                                <p>Each Aadhaar number can only be linked to one student account. If you believe this is an error, please contact the portal administrator.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Registration Guidelines Section -->
+            <section id="guidelines" class="help-section">
+                <h2 class="section-title">Registration Guidelines</h2>
+                <div class="info-card">
+                    <p>Before starting your registration, please ensure that:</p>
+                    <ul class="styled-list">
+                        <li>You have a valid email address and stable internet connection.</li>
+                        <li>You have all required documents ready (clear and readable).</li>
+                        <li>All information entered is accurate.</li>
+                        <li>You complete all mandatory fields marked with an asterisk (*).</li>
+                        <li>You do not refresh or close the browser during registration.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Security Tips Section -->
+            <section id="security" class="help-section">
+                <h2 class="section-title">Security & Passwords</h2>
+                <div class="grid-2-col">
+                    <div class="info-card danger-card">
+                        <h3><i class="fa-solid fa-lock"></i> Password Guidelines</h3>
+                        <ul class="styled-list">
+                            <li>Use at least 8 characters.</li>
+                            <li>Include uppercase and lowercase letters, numbers, and special characters.</li>
+                            <li>Never share your password with anyone.</li>
+                            <li>Change your password periodically.</li>
+                        </ul>
+                    </div>
+                    <div class="info-card success-card">
+                        <h3><i class="fa-solid fa-shield-halved"></i> Security Tips</h3>
+                        <ul class="styled-list">
+                            <li>Never share your OTP.</li>
+                            <li>Always log out after using a public computer.</li>
+                            <li>Verify the website address before logging in.</li>
+                            <li>Report suspicious activity immediately.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Support & Disclaimer Section -->
+            <section id="support" class="help-section">
+                <h2 class="section-title">Technical Support</h2>
+                <div class="info-card primary-card">
+                    <p>If you encounter technical issues (Login problems, Registration errors, Document upload failures, OTP issues, or Dashboard loading problems), please contact the system administrator with:</p>
+                    <ul class="styled-list">
+                        <li>Your registered email address</li>
+                        <li>A brief description of the issue</li>
+                        <li>A screenshot of the error (if available)</li>
+                    </ul>
+                    <div class="contact-btn-wrapper">
+                        <a href="{{ url_for('pages.contact') }}" class="btn-primary">Go to Contact Us Page</a>
+                    </div>
+                </div>
+
+                <div class="disclaimer-box">
+                    <strong>Disclaimer:</strong> The Student Management Portal is intended to simplify student registration and academic management processes. While every effort is made to ensure accuracy and security, users are responsible for providing correct information. Submission of incorrect or misleading information may result in rejection or cancellation of the application.
+                </div>
+            </section>
+
+        </div>
+    </div>
+</div>
+
+<!-- Accordion Logic JS -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const accordions = document.querySelectorAll(".accordion-header");
+    
+    accordions.forEach(acc => {
+        acc.addEventListener("click", function() {
+            // Toggle the active class (for the + / - icon)
+            this.classList.toggle("active");
+            
+            // Get the content panel right next to the button
+            const panel = this.nextElementSibling;
+            
+            // The smooth height calculation
+            if (panel.style.maxHeight) {
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            } 
+        });
+    });
+});
+</script>
+{% endblock %}

@@ -14,11 +14,41 @@ auth_bp = Blueprint("auth", __name__)
 # ==========================================
 # HOME 
 # ==========================================
-@auth_bp.route("/")
+from flask import render_template
+from datetime import datetime
+
+# ... your other auth code ...
+
+@auth_bp.route('/')
 def home():
-    return render_template("index.html")
+    # Create your list of announcements here (eventually this will come from your database)
+    current_announcements = [
+        {
+            "id": 1,
+            "title": "Admissions 2026-27 Open",
+            "excerpt": "Admissions for the upcoming 2026-27 academic session are now officially open.",
+            "date": datetime(2026, 4, 15)
+        },
+        {
+            "id": 2,
+            "title": "B.Tech Sessional Exams",
+            "excerpt": "B.Tech 4th semester sessional exams will commence next week. Check your timetable.",
+            "date": datetime(2026, 4, 12)
+        },
+        {
+            "id": 3,
+            "title": "New ML Assignments",
+            "excerpt": "New machine learning lab assignments have been uploaded to the portal.",
+            "date": datetime(2026, 4, 10)
+        }
+    ]
 
-
+    return render_template(
+        "index.html", 
+        stats={}, 
+        gallery_images=[], 
+        latest_news=[]
+    )
 # ==========================================
 # REGISTRATION PAGE (GET)
 # ==========================================

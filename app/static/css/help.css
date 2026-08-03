@@ -1,0 +1,281 @@
+html {
+    scroll-behavior: smooth;
+}
+/* --- Base Container --- */
+.help-page-container {
+    background: linear-gradient(110deg, rgb(243, 244, 247) 70%, #fff 30%);
+    margin: 2% auto;
+    max-width: 1200px; 
+    border-radius: 15px;
+    padding: 50px 30px;
+    border: 1.5px dotted darkblue;
+    font-family: "Inter", sans-serif;
+}
+
+/* --- SaaS Header Area --- */
+.hero-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* --- Content Sections --- */
+.help-section { 
+    margin-bottom: 60px; 
+    padding-top: 20px;
+    scroll-margin-top: 120px; 
+}
+
+.hero-pill {
+    background: white;
+    border: 1.5px dotted darkblue;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: darkblue;
+    margin-bottom: 25px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 139, 0.05);
+}
+
+.hero-pill i { color: rgb(0, 104, 139); }
+
+.hero-title {
+    font-size: 3.5rem;
+    color: darkblue;
+    font-weight: 800;
+    margin: 0 0 5px 0;
+    line-height: 1.1;
+    letter-spacing: -1px;
+}
+
+.hero-subtitle {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin: 0 0 20px 0;
+    line-height: 1.1;
+    letter-spacing: -1px;
+}
+
+.text-gradient {
+    background: linear-gradient(90deg, darkblue, rgb(0, 150, 255));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-desc {
+    color: #4a5568;
+    font-size: 1.15rem;
+    line-height: 1.6;
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+/* --- Main Layout Grid (Pushed a little down) --- */
+.help-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 40px;
+    align-items: start;
+    margin-top: 30px; /* Fixes layout a little further down */
+}
+
+/* --- Sidebar Navigation --- */
+.help-sidebar {
+    background: white;
+    border: 1.5px dotted darkblue;
+    border-radius: 12px;
+    padding: 20px 0;
+    position: sticky;
+    top: 150px;
+    box-shadow: 0 4px 15px rgba(0,0,139,0.03);
+}
+
+.sidebar-nav { list-style: none; padding: 0; margin: 0; }
+
+.sidebar-nav li a {
+    display: block;
+    padding: 12px 25px;
+    color: darkblue;
+    text-decoration: none;
+    font-weight: 500;
+    border-left: 4px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.sidebar-nav li a i { margin-right: 10px; width: 20px; color: rgb(0, 150, 255); }
+
+.sidebar-nav li a:hover, .sidebar-nav li a.active {
+    background: rgba(0, 104, 139, 0.05);
+    border-left: 4px solid darkblue;
+    font-weight: 600;
+}
+
+/* --- Content Sections --- */
+.help-section { margin-bottom: 60px; padding-top: 20px; }
+
+.section-title {
+    color: darkblue;
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    border-bottom: 2px dotted rgb(0, 104, 139);
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+/* --- Smooth Accordion (FAQs) --- */
+.accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.accordion-item {
+    background: white;
+    border: 1.5px dotted rgba(0, 0, 139, 0.4);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.accordion-header {
+    background-color: white;
+    color: darkblue;
+    cursor: pointer;
+    padding: 18px 25px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: background-color 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Unicode plus sign */
+.accordion-header::after {
+    content: '\002B'; 
+    color: rgb(0, 150, 255);
+    font-weight: bold;
+    font-size: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.accordion-header.active {
+    background-color: rgba(0, 104, 139, 0.05);
+}
+
+/* Unicode minus sign */
+.accordion-header.active::after {
+    content: "\2212"; 
+}
+
+/* The wrapper that hides overflow and animates smoothly */
+.accordion-content {
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-in-out;
+    padding: 0 25px; /* Horizontal padding only */
+}
+
+/* The inner padding prevents height calculation jumping */
+.accordion-inner {
+    padding: 15px 0 25px 0;
+}
+
+.accordion-inner p { margin: 0 0 10px 0; color: #555; line-height: 1.6; }
+.accordion-inner p:last-child { margin: 0; }
+
+/* --- Info Cards & Grids --- */
+.grid-2-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+.info-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1.5px dotted darkblue;
+    box-shadow: 0 4px 15px rgba(0,0,139,0.03);
+}
+
+.info-card h3 { color: darkblue; margin-bottom: 15px; font-size: 1.2rem; }
+.info-card p { color: #555; line-height: 1.6; margin-bottom: 10px; }
+
+.styled-list { padding-left: 20px; margin-top: 10px; color: #555; line-height: 1.6; }
+.styled-list li { margin-bottom: 10px; }
+
+/* Colored Card Variants */
+.danger-card { border-color: rgb(249, 116, 116); background: #FEF2F2; }
+.danger-card h3 { color: #991B1B; }
+.success-card { border-color: rgb(116, 249, 151); background: #ECFDF3; }
+.success-card h3 { color: #065F46; }
+.primary-card { background: rgba(0, 104, 139, 0.03); }
+
+/* --- Support Section --- */
+.contact-btn-wrapper { margin-top: 25px; text-align: center; }
+
+.btn-primary {
+    display: inline-block;
+    background-color: darkblue;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+    border: 2px solid darkblue;
+}
+.btn-primary:hover { background: rgb(0, 0, 100); transform: translateY(-2px); }
+
+.disclaimer-box {
+    margin-top: 30px;
+    padding: 15px 20px;
+    background: #f8f9fa;
+    border-left: 4px solid rgb(249, 116, 116);
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    border-radius: 4px;
+}
+/* The outer wrapper handles the smooth animation */
+.accordion-content {
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    /* Make sure it's ease-in-out for the smoothest slide */
+    transition: max-height 0.4s ease-in-out;
+    
+    /* CRITICAL FIX: No top or bottom padding here! Only side padding is safe. */
+    padding: 0 25px; 
+}
+
+/* The inner div holds the vertical spacing */
+.accordion-inner {
+    /* Apply your top and bottom spacing here instead */
+    padding: 15px 0 25px 0;
+}
+
+.accordion-inner p { 
+    margin: 0; /* Remove default paragraph margins to prevent jumping */
+    color: #555; 
+    line-height: 1.6; 
+}
+/* --- Mobile Responsiveness --- */
+@media (max-width: 992px) {
+    .hero-title, .hero-subtitle { font-size: 2.8rem; }
+    .help-layout { grid-template-columns: 1fr; margin-top: 20px; }
+    .help-sidebar { position: relative; top: 0; }
+}
+
+@media (max-width: 768px) {
+    .help-page-container { padding: 30px 15px; margin: 10px; border-radius: 10px; }
+    .hero-title, .hero-subtitle { font-size: 2.2rem; }
+    .grid-2-col { grid-template-columns: 1fr; }
+}

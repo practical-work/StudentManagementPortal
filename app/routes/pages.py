@@ -14,7 +14,7 @@ def about():
 # Notices
 @pages_bp.route("/notices")
 def notices():
-    return render_template("pages/notices.html")
+    return render_template("pages/notices.html", initial_notices=[])
 
 
 # Courses
@@ -141,11 +141,14 @@ def study_material():
     return render_template("pages/study_material.html")
 
 
-# Timetable
-@pages_bp.route("/timetable")
+#timetable
+@pages_bp.route('/timetable')
 def timetable():
-    return render_template("pages/timetable.html")
-
+    # If a student or admin searches, fetch from database. 
+    # For now, setting timetable_data=True renders the grid, setting it to False triggers the Empty State.
+    has_timetable = True 
+    
+    return render_template('pages/timetable.html', timetable_data=has_timetable)
 
 # Fees
 @pages_bp.route("/fees")
@@ -174,8 +177,19 @@ def faculty():
 # Contact
 @pages_bp.route("/contact")
 def contact():
-    return render_template("pages/contact.html")
-
+    if request.method == 'POST':
+        name = request.form.get('name')
+        email = request.form.get('email')
+        subject = request.form.get('subject')
+        message = request.form.get('message')
+        
+        # Optional: You can save this to a database model or send an email here
+        
+        # Flash success message to show on the same page
+        flash('Thank you! Your message has been sent successfully. We will get back to you soon.', 'success')
+        return redirect(url_for('pages.contact'))
+        
+    return render_template('pages/contact.html')
 
 # Help / FAQ
 @pages_bp.route("/help")

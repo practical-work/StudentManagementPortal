@@ -1,12 +1,174 @@
 {% extends "base.html" %}
 
-{% block title%}Contact US{% endblock %}
+{% block title %}Contact Us | Student Management Portal{% endblock %}
 
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/contact.css') }}">
+{% endblock %}
 
-{% block content%}  
-   <p class="temp">Work is ongoing on Portal  ...</p>
-   <a href="{{url_for('auth.registration')}}">Registration</a>
-{% endblock%}
-
+{% block content %}
+<div class="contact-page-container">
     
+    <!-- SaaS Style Header -->
+    <div class="hero-section">
+        <div class="hero-pill">
+            <i class="fa-solid fa-envelope-open-text"></i> We'd Love to Hear From You
+        </div>
+
+        <h1 class="hero-title">Get in Touch with</h1>
+        <h1 class="hero-subtitle">Our <span class="text-gradient">Support Team</span></h1>
+        
+        <p class="hero-desc">
+            If you have any questions, need technical assistance, or want to provide feedback, please feel free to contact us. We are committed to helping you as quickly as possible.
+        </p>
+    </div>
+
+    <!-- Inline Status Alert Box (Hidden by default, shown via JS on submission) -->
+    <div id="form-status-alert" class="alert-box" style="display: none;">
+        <i id="status-icon" class="fa-solid"></i> 
+        <span id="status-message"></span>
+    </div>
+
+    <!-- Main Content Layout (2 Columns: Form & Info) -->
+    <div class="contact-layout">
+        
+        <!-- Left Column: The Form -->
+        <div class="contact-form-card">
+            <h2 class="card-title">Send a Message</h2>
+            <p style="color: #666; margin-bottom: 20px;">Fill out the form below and our team will get back to you within 24–48 business hours.</p>
+            
+            <!-- Form with AJAX Handler -->
+            <form id="feedback-form" action="https://formspree.io/f/xeoanplj" method="POST" class="form-grid">
+                
+                <div class="input-group">
+                    <label>Full Name *</label>
+                    <input type="text" name="name" class="input-box" placeholder="Your Full Name" required>
+                </div>
+
+                <div class="input-group">
+                    <label>University Roll No. *</label>
+                    <input type="text" name="roll_no" class="input-box" placeholder="Enter Roll No." required>
+                </div>
+
+                <div class="input-group">
+                    <label>Email Address *</label>
+                    <input type="email" name="email" class="input-box" placeholder="Your registered email address" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Subject / Issue *</label>
+                    <select name="subject" class="input-box" required>
+                        <option value="" disabled selected>Select a reason...</option>
+                        <option value="Login Issue">Login / Password Issue</option>
+                        <option value="Registration Error">Registration Error</option>
+                        <option value="Document Upload">Document Upload Failure</option>
+                        <option value="Feedback">General Feedback / Suggestion</option>
+                        <option value="Bug Report">Report a Bug</option>
+                    </select>
+                </div>
+
+                <div class="input-group full-width">
+                    <label>Message / Description *</label>
+                    <textarea name="message" class="input-box" rows="5" placeholder="Describe your question, issue, or feedback in detail..." required></textarea>
+                </div>
+
+                <button type="submit" id="submit-btn" class="btn-primary full-width">Submit Feedback</button>
+            </form>
+            
+            <div class="privacy-notice">
+                <strong><i class="fa-solid fa-lock"></i> Privacy Notice:</strong> Any information you submit will be used solely to respond to your enquiry. Your data is handled securely.
+            </div>
+        </div>
+
+        <!-- Right Column: Contact Details & Guidelines -->
+        <div class="contact-info-sidebar">
+            
+            <!-- Direct Contact Info -->
+            <div class="info-card primary-card">
+                <h3><i class="fa-solid fa-address-book"></i> General Enquiries</h3>
+                <ul class="contact-list">
+                    <li><i class="fa-solid fa-envelope"></i> <strong>Email:</strong> <a href="mailto:studentportal.ai@gmail.com" style="text-decoration: none;color: rgb(0, 150, 255);">studentportal.ai@gmail.com</a></li>
+                    <li><i class="fa-solid fa-phone"></i> <strong>Phone:</strong> +91 7988202003</li>
+                    <li><i class="fa-regular fa-clock"></i> <strong>Hours:</strong> Mon – Fri, 9:00 AM – 5:00 PM (IST)</li>
+                    <li><i class="fa-solid fa-building"></i> <strong>Address:</strong> Student Management Portal<br> Ganaur , Haryana , India</li>
+                </ul>
+            </div>
+
+            <!-- Before Contacting Support -->
+            <div class="info-card">
+                <h3><i class="fa-solid fa-list-check"></i> Before Contacting Support</h3>
+                <ul class="styled-list">
+                    <li>Read the <a href="{{ url_for('pages.help') }}">Help & FAQs</a> section for common solutions.</li>
+                    <li>Ensure you are using the latest web browser version.</li>
+                    <li>Check your Spam/Junk folder for email OTPs.</li>
+                    <li>Try refreshing the page or clearing your cache.</li>
+                </ul>
+            </div>
+
+            <!-- Bug Reporting -->
+            <div class="info-card danger-card">
+                <h3><i class="fa-solid fa-bug"></i> Reporting Technical Issues</h3>
+                <p>If you discover a system error (Dashboard loading problems, submission failures), please include:</p>
+                <ul class="styled-list">
+                    <li>Application ID (if available)</li>
+                    <li>Steps to reproduce the problem</li>
+                    <li>Browser and Device details</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- JavaScript to handle AJAX submission without redirecting -->
+<script>
+document.getElementById("feedback-form").addEventListener("submit", async function(e) {
+    e.preventDefault();
     
+    const form = e.target;
+    const submitBtn = document.getElementById("submit-btn");
+    const alertBox = document.getElementById("form-status-alert");
+    const statusIcon = document.getElementById("status-icon");
+    const statusMsg = document.getElementById("status-message");
+    
+    // Disable button & show loading state
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Submitting...';
+    
+    const data = new FormData(form);
+    
+    try {
+        const response = await fetch(form.action, {
+            method: form.method,
+            body: data,
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+        
+        alertBox.style.display = "flex";
+        
+        if (response.ok) {
+            alertBox.className = "alert-box success-alert";
+            statusIcon.className = "fa-solid fa-circle-check";
+            statusMsg.innerHTML = "Thank you! Your message has been sent successfully. We will get back to you soon.";
+            form.reset();
+        } else {
+            alertBox.className = "alert-box error-alert";
+            statusIcon.className = "fa-solid fa-circle-exclamation";
+            statusMsg.innerHTML = "Oops! There was a problem submitting your form. Please try again.";
+        }
+    } catch (error) {
+        alertBox.style.display = "flex";
+        alertBox.className = "alert-box error-alert";
+        statusIcon.className = "fa-solid fa-circle-exclamation";
+        statusMsg.innerHTML = "Network error. Please check your connection and try again.";
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = "Submit Feedback";
+        // Scroll smoothly to show the alert message
+        alertBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+});
+</script>
+{% endblock %}

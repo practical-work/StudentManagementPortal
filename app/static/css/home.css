@@ -1,0 +1,321 @@
+/* --- Base Reset --- */
+* { box-sizing: border-box; }
+
+/* --- Main Background Container --- */
+.landing-container {
+    background: linear-gradient(110deg, rgb(243, 244, 247) 70%, #fff 30%);
+    margin: 2% auto;
+    max-width: 1200px;
+    border-radius: 15px;
+    padding: 60px 20px;
+    font-family: "Inter", sans-serif;
+    text-align: center; 
+}
+
+/* --- Hero Section --- */
+.hero-section {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero-pill {
+    background: white;
+    border: 1.5px dotted darkblue;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: darkblue;
+    margin-bottom: 30px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 139, 0.05);
+}
+
+.hero-pill i { color: rgb(0, 104, 139); }
+
+.hero-title {
+    font-size: 3.5rem;
+    color: darkblue;
+    font-weight: 800;
+    margin: 0 0 5px 0;
+    line-height: 1.1;
+    letter-spacing: -1px;
+}
+
+.hero-subtitle {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin: 0 0 25px 0;
+    line-height: 1.1;
+    letter-spacing: -1px;
+}
+
+.text-gradient {
+    background: linear-gradient(90deg, darkblue, rgb(0, 150, 255));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-desc {
+    color: #4a5568;
+    font-size: 1.15rem;
+    line-height: 1.6;
+    max-width: 650px;
+    margin: 0 auto 40px auto;
+}
+
+/* --- Themed Buttons --- */
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    outline: none;
+    padding: 14px 35px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1.1em;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: darkblue;
+    border: 2px solid darkblue;
+    color: white;
+    box-shadow: 0 8px 20px rgba(0, 0, 139, 0.2);
+}
+
+.btn-primary:hover {
+    background: rgb(0, 0, 100);
+    transform: translateY(-3px);
+}
+
+.btn-secondary {
+    background-color: white;
+    border: 2px dotted darkblue;
+    color: darkblue;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+
+.btn-secondary:hover {
+    background: linear-gradient(110deg, rgba(207, 217, 247, 0.3) 70%, #fff 30%);
+    transform: translateY(-3px);
+}
+
+/* --- 3 Floating Feature Cards --- */
+.feature-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 70px;
+    padding: 0 20px;
+}
+
+.card {
+    background: white;
+    border: 1.5px dotted darkblue;
+    border-radius: 15px;
+    padding: 40px 25px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 139, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 139, 0.1);
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    color: rgb(0, 104, 139);
+    margin-bottom: 20px;
+}
+
+.card h3 {
+    color: darkblue;
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+}
+
+.card p {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* --- Bottom Sections (News & Announcements) --- */
+.bottom-section {
+    margin-top: 80px;
+    padding: 0 20px;
+    text-align: left; 
+}
+
+.section-heading {
+    font-size: 2rem;
+    color: darkblue;
+    margin-bottom: 40px;
+    text-align: center;
+    border-bottom: 2px dotted rgb(0, 104, 139);
+    padding-bottom: 10px;
+    display: inline-block;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Fluidly scales */
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.news-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    border-left: 4px solid darkblue;
+    border-top: 1.5px dotted darkblue;
+    border-right: 1.5px dotted darkblue;
+    border-bottom: 1.5px dotted darkblue;
+    box-shadow: 0 5px 15px rgba(0,0,139,0.04);
+    text-align: left;
+    display: flex;
+    flex-direction: column; /* Pushes the 'read more' to bottom naturally */
+}
+
+.news-date {
+    font-size: 0.85rem;
+    color: rgb(0, 104, 139);
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.news-card h4 {
+    color: darkblue;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.news-card p {
+    color: #666;
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+    line-height: 1.5;
+    flex-grow: 1; /* Ensures cards are equal height if text varies */
+}
+
+.read-more {
+    text-decoration: none;
+    color: rgb(0, 150, 255);
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-top: auto; /* Aligns to bottom */
+}
+
+.read-more:hover { text-decoration: underline; }
+
+/* View All Announcements Button */
+.view-all-container {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.btn-outline-blue {
+    display: inline-block;
+    padding: 12px 30px;
+    border: 1.5px solid darkblue;
+    color: darkblue;
+    background: transparent;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-outline-blue:hover {
+    background: darkblue;
+    color: white;
+}
+
+
+/* --- Empty State (When No Announcements Exist) --- */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    background: white;
+    border: 1.5px dotted darkblue;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 139, 0.03);
+    margin: 0 auto 40px auto;
+    max-width: 600px; /* Keeps it nicely contained */
+}
+
+.empty-state i {
+    font-size: 3.5rem;
+    color: rgb(0, 150, 255); /* Uses your light blue accent */
+    margin-bottom: 20px;
+    opacity: 0.8;
+}
+
+.empty-state h3 {
+    color: darkblue;
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+}
+
+.empty-state p {
+    color: #666;
+    font-size: 1.05rem;
+    line-height: 1.5;
+}
+
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 992px) {
+    .hero-title, .hero-subtitle { font-size: 2.8rem; }
+    .feature-cards { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+    .landing-container { 
+        padding: 40px 15px; 
+        margin: 0; 
+        border-radius: 0; 
+    }
+    .hero-title, .hero-subtitle { 
+        font-size: 2.2rem; 
+    }
+    .hero-buttons { 
+        flex-direction: column; 
+        width: 100%; 
+    }
+    .btn { 
+        width: 100%; 
+        text-align: center; 
+    }
+    .feature-cards { 
+        grid-template-columns: 1fr; 
+        margin-top: 50px; 
+    }
+    /* Strictly forces announcements into a single column on mobile */
+    .news-grid { 
+        grid-template-columns: 1fr; 
+        gap: 20px; 
+    }
+    .btn-outline-blue {
+        width: 100%; /* Makes 'View All' button full width on phones */
+    }
+}

@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+
+{% block title %}Notices & Announcements{% endblock %}
+
+{% block css %}
+<!-- Link to your specific notices CSS -->
+<link rel="stylesheet" href="{{ url_for('static', filename='css/notices.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="notices-page-container">
+    
+    <!-- New Header matching the SaaS Image style -->
+    <div class="hero-section" style="margin-bottom: 40px;">
+        
+        <!-- The "Pill" Badge -->
+        <div class="hero-pill">
+            <i class="fa-solid fa-bullhorn"></i> Campus Portal Updates
+        </div>
+
+        <!-- Huge Main Headline -->
+        <h1 class="hero-title">Official Campus</h1>
+        <h1 class="hero-subtitle">Notices & <span class="text-gradient">Announcements</span></h1>
+        
+        <!-- Subheading Paragraph -->
+        <p class="hero-desc">
+            Stay informed with the latest official announcements, examination schedules, 
+            departmental updates, and campus events.
+        </p>
+
+    </div>
+
+    <!-- The Grid holding the notices -->
+    <div class="notices-grid" id="notices-container">
+        
+        <!-- INITIAL NOTICES (Loaded normally via Flask Jinja) -->
+        <!-- In your routes.py, pass a list of the 6 newest notices as 'initial_notices' -->
+        {% if initial_notices %}
+            {% for notice in initial_notices %}
+                <div class="notice-card">
+                    <div class="notice-date"><i class="fa-regular fa-calendar"></i> {{ notice.date }}</div>
+                    <h3 class="notice-title">{{ notice.title }}</h3>
+                    <p class="notice-text">{{ notice.excerpt }}</p>
+                    <div class="notice-footer">
+                        <span class="notice-dept">{{ notice.department }}</span>
+                        <button class="btn-read">Read Full &rarr;</button>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <!-- Placeholder Initial Data just so you can see the design -->
+            <div class="notice-card">
+                <div class="notice-date"><i class="fa-regular fa-calendar"></i> Apr 15, 2026</div>
+                <h3 class="notice-title">Admissions 2026-27 Open</h3>
+                <p class="notice-text">Admissions for the upcoming 2026-27 academic session are now officially open for all B.Tech branches.</p>
+                <div class="notice-footer">
+                    <span class="notice-dept">Admissions Office</span>
+                    <button class="btn-read">Read Full &rarr;</button>
+                </div>
+            </div>
+            <div class="notice-card">
+                <div class="notice-date"><i class="fa-regular fa-calendar"></i> Apr 12, 2026</div>
+                <h3 class="notice-title">B.Tech 4th Sem Sessional Exams</h3>
+                <p class="notice-text">Sessional examinations will commence next week. Please download your admit cards from the portal.</p>
+                <div class="notice-footer">
+                    <span class="notice-dept">Examination Branch</span>
+                    <button class="btn-read">Read Full &rarr;</button>
+                </div>
+            </div>
+        {% endif %}
+
+    </div>
+
+    <!-- THE LOADER (Hidden by default, shows when scrolling hits bottom) -->
+    <div id="scroll-loader" class="loader-container">
+        <div class="spinner"></div>
+        <p>Loading older notices...</p>
+    </div>
+
+</div>
+
+<!-- The Infinite Scroll Logic -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const container = document.getElementById("notices-container");
+        const loader = document.getElementById("scroll-loader");
+        let isFetching = false;
+
+        // Counter to track how many times we loaded (to simulate reaching the end)
+        let loadCount = 0; 
+
+        // Function that runs when the user scrolls to the bottom
+        function loadMoreNotices() {
+            if (isFetching) return;
+            isFetching = true;
+            
+            // Show the spinning loader
+            loader.classList.add("active");
+
+            // SIMULATE A NETWORK DELAY ("wait sec") using setTimeout (1.5 seconds)
+            setTimeout(() => {
+                
+                // This is where you will eventually use fetch('/api/get_older_notices') 
+                // For now, we dynamically create dummy older notices to show it working
+                const fakeOlderNotices = `
+                    <div class="notice-card old-notice">
+                        <div class="notice-date"><i class="fa-regular fa-calendar"></i> Mar 28, 2026</div>
+                        <h3 class="notice-title">HKRN Portal Update</h3>
+                        <p class="notice-text">New employment opportunities for 12th pass students have been posted on the state portal.</p>
+                        <div class="notice-footer">
+                            <span class="notice-dept">Placement Cell</span>
+                            <button class="btn-read">Read Full &rarr;</button>
+                        </div>
+                    </div>
+                    <div class="notice-card old-notice">
+                        <div class="notice-date"><i class="fa-regular fa-calendar"></i> Mar 10, 2026</div>
+                        <h3 class="notice-title">Machine Learning Lab File</h3>
+                        <p class="notice-text">The deadline for submitting the 15 practical ML python programs is approaching.</p>
+                        <div class="notice-footer">
+                            <span class="notice-dept">CSE Department</span>
+                            <button class="btn-read">Read Full &rarr;</button>
+                        </div>
+                    </div>
+                `;
+
+                // Add the new notices to the grid
+                container.insertAdjacentHTML('beforeend', fakeOlderNotices);
+                
+                // Hide the loader, ready for next scroll
+                loader.classList.remove("active");
+                isFetching = false;
+                loadCount++;
+
+                // Stop loading after 3 scrolls just as an example
+                if (loadCount >= 3) {
+                    loader.innerHTML = "<p style='color: darkblue; font-weight:600;'>No more older notices to show.</p>";
+                    loader.classList.add("active");
+                    observer.disconnect(); // Stop watching scroll
+                }
+
+            }, 1500); // Wait 1.5 seconds before showing data
+        }
+
+        // The Observer watches the loader div. When it enters the screen, trigger loadMoreNotices!
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                loadMoreNotices();
+            }
+        });
+
+        observer.observe(loader);
+    });
+</script>
+{% endblock %}

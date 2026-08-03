@@ -1,0 +1,235 @@
+/* --- Base Container --- */
+.notices-page-container {
+    background: linear-gradient(110deg, rgb(243, 244, 247) 70%, #fff 30%);
+    margin: 2% auto;
+    max-width: 1000px; /* Slightly narrower than home page for readability */
+    border-radius: 15px;
+    padding: 50px 30px;
+    border: 1.5px dotted darkblue;
+    font-family: "Inter", sans-serif;
+}
+
+
+.hero-desc {
+    color: darkblue;
+    font-size: 1.15rem;
+    opacity: 0.85;
+}
+
+/* --- Notices Grid --- */
+.notices-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+/* --- Individual Notice Card --- */
+.notice-card {
+    background: white;
+    padding: 30px 25px;
+    border-radius: 12px;
+    border-left: 5px solid rgb(0, 104, 139);
+    border-top: 1.5px dotted darkblue;
+    border-right: 1.5px dotted darkblue;
+    border-bottom: 1.5px dotted darkblue;
+    box-shadow: 0 5px 15px rgba(0,0,139,0.04);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+}
+
+.notice-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,139,0.08);
+}
+
+.notice-date {
+    font-size: 0.9rem;
+    color: rgb(0, 150, 255);
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.notice-title {
+    color: darkblue;
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+    line-height: 1.3;
+}
+
+.notice-text {
+    color: #555;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    flex-grow: 1; /* Pushes the footer to the bottom */
+}
+
+/* Footer of the card holding Dept and Button */
+.notice-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px dashed rgba(0, 0, 139, 0.15);
+    padding-top: 15px;
+}
+
+.notice-dept {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgb(0, 104, 139);
+    background: rgba(0, 104, 139, 0.1);
+    padding: 5px 12px;
+    border-radius: 20px;
+}
+
+.btn-read {
+    background: transparent;
+    border: none;
+    color: darkblue;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.btn-read:hover {
+    color: rgb(0, 150, 255);
+}
+
+/* Animation for the newly loaded older cards */
+.old-notice {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- THE LOADER CSS --- */
+.loader-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0;
+    opacity: 0; /* Hidden initially */
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+}
+
+/* The active class is toggled by javascript */
+.loader-container.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.loader-container p {
+    color: rgb(0, 104, 139);
+    margin-top: 15px;
+    font-weight: 500;
+}
+
+/* The Rotating Spinner Ring */
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(0, 0, 139, 0.1);
+    border-top: 4px solid rgb(0, 104, 139); /* Colored part that spins */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+
+/* --- Header Area (Matches Home Page SaaS Style) --- */
+.hero-section {
+    max-width: 800px;
+    margin: 0 auto 50px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.hero-pill {
+    background: white;
+    border: 1.5px dotted darkblue;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: darkblue;
+    margin-bottom: 25px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 139, 0.05);
+}
+
+.hero-pill i {
+    color: rgb(0, 104, 139);
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    color: darkblue;
+    font-weight: 800;
+    margin: 0 0 5px 0;
+    line-height: 1.1;
+    letter-spacing: -1px;
+}
+
+.hero-subtitle {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin: 0 0 20px 0;
+    line-height: 1.1;
+    letter-spacing: -1px;
+}
+
+.text-gradient {
+    background: linear-gradient(90deg, darkblue, rgb(0, 150, 255));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-desc {
+    color: #4a5568;
+    font-size: 1.15rem;
+    line-height: 1.6;
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+/* --- Mobile Responsiveness for Header --- */
+@media (max-width: 992px) {
+    .hero-title, .hero-subtitle { font-size: 2.8rem; }
+}
+
+@media (max-width: 768px) {
+    .hero-title, .hero-subtitle { font-size:1.5rem; }
+    .hero-section { margin-bottom: 30px; }
+}
+
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+    .notices-page-container {
+        padding: 30px 15px;
+        margin: 10px;
+        border-radius: 10px;
+    }
+    
+
+    .notices-grid {
+        grid-template-columns: 1fr; /* 1 column on phones */
+    }
+}

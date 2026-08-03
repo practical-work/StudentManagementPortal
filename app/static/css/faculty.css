@@ -1,0 +1,314 @@
+/* --- Base Reset & Universal Box-Sizing --- */
+* { 
+    box-sizing: border-box; 
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+/* --- Main Page Container --- */
+.faculty-page-container {
+    background: linear-gradient(110deg, rgb(243, 244, 247) 70%, #fff 30%);
+    margin: 2% auto;
+    max-width: 1200px; 
+    width: 95%;
+    border-radius: 15px;
+    padding: 50px 30px;
+    border: 1.5px dotted darkblue;
+    font-family: "Inter", sans-serif;
+}
+
+/* --- SaaS Header Area --- */
+.hero-section {
+    max-width: 800px;
+    margin: 0 auto 50px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.hero-pill {
+    background: white;
+    border: 1.5px dotted darkblue;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: darkblue;
+    margin-bottom: 25px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 139, 0.05);
+}
+
+.hero-pill i { color: rgb(0, 104, 139); }
+
+.hero-title {
+    font-size: 3.5rem;
+    color: darkblue;
+    font-weight: 800;
+    margin: 0 0 5px 0;
+    line-height: 1.1;
+    letter-spacing: -1px;
+}
+
+.hero-subtitle {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin: 0 0 20px 0;
+    line-height: 1.1;
+    letter-spacing: -1px;
+}
+
+.text-gradient {
+    background: linear-gradient(90deg, darkblue, rgb(0, 150, 255));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-desc {
+    color: #4a5568;
+    font-size: 1.15rem;
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* --- Main Layout Grid (Sidebar + Content) --- */
+.faculty-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 40px;
+    align-items: start;
+    margin-top: 30px;
+}
+
+/* --- Sidebar Navigation --- */
+.faculty-sidebar {
+    background: white;
+    border: 1.5px dotted darkblue;
+    border-radius: 12px;
+    padding: 20px 0;
+    position: sticky;
+    top: 150px;
+    box-shadow: 0 4px 15px rgba(0,0,139,0.03);
+}
+
+.sidebar-nav { 
+    list-style: none; 
+    padding: 0; 
+    margin: 0; 
+}
+
+.sidebar-nav li a {
+    display: block;
+    padding: 12px 25px;
+    color: darkblue;
+    text-decoration: none;
+    font-weight: 500;
+    border-left: 4px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.sidebar-nav li a i { 
+    margin-right: 10px; 
+    width: 20px; 
+    color: rgb(0, 150, 255); 
+}
+
+.sidebar-nav li a:hover, .sidebar-nav li a.active {
+    background: rgba(0, 104, 139, 0.05);
+    border-left: 4px solid darkblue;
+    font-weight: 600;
+}
+
+/* --- Content Sections --- */
+.faculty-section { 
+    margin-bottom: 60px; 
+    padding-top: 20px;
+    scroll-margin-top: 120px; /* Prevents fixed header from covering titles */
+}
+
+.section-title {
+    color: darkblue;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    border-bottom: 2px dotted rgb(0, 104, 139);
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+.section-subtitle {
+    color: #555;
+    margin-bottom: 20px;
+    font-size: 1.05rem;
+}
+
+/* --- Info Cards & Layouts --- */
+.info-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1.5px dotted darkblue;
+    box-shadow: 0 4px 15px rgba(0,0,139,0.03);
+}
+
+.info-card h3 { 
+    color: darkblue; 
+    margin-bottom: 15px; 
+    font-size: 1.2rem; 
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.info-card h3 i {
+    color: rgb(0, 150, 255);
+}
+
+.info-card p { 
+    color: #555; 
+    line-height: 1.6; 
+    margin-bottom: 10px; 
+}
+
+/* --- Departments Grid --- */
+.dept-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 15px;
+}
+
+.dept-card {
+    background: white;
+    border: 1.5px dotted darkblue;
+    padding: 20px;
+    border-radius: 10px;
+    color: darkblue;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,139,0.02);
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.dept-card i {
+    font-size: 1.5rem;
+    color: rgb(0, 104, 139);
+}
+
+.dept-card:hover {
+    transform: translateY(-3px);
+    background: rgba(0, 104, 139, 0.03);
+}
+
+/* --- Expertise Tags --- */
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.tag {
+    background: rgba(0, 150, 255, 0.1);
+    color: darkblue;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: 1px solid rgba(0, 150, 255, 0.2);
+}
+
+/* --- Grid Lists & 2-Col Layouts --- */
+.grid-2-col { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 20px; 
+}
+
+.styled-grid-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 20px;
+    list-style: none;
+    padding: 0;
+}
+
+.styled-grid-list li {
+    color: #555;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.styled-grid-list li i {
+    color: rgb(0, 150, 255);
+}
+
+.styled-list { 
+    padding-left: 20px; 
+    color: #555; 
+    line-height: 1.6; 
+}
+
+.styled-list li { 
+    margin-bottom: 8px; 
+}
+
+/* Colored Card Variants */
+.primary-card { background: rgba(0, 104, 139, 0.03); border-color: darkblue; }
+.success-card { border-color: rgb(116, 249, 151); background: #ECFDF3; }
+.success-card h3, .success-card h3 i { color: #065F46; }
+.danger-card { border-color: rgb(249, 116, 116); background: #FEF2F2; }
+.danger-card h3, .danger-card h3 i { color: #991B1B; }
+
+/* --- Commitment Box --- */
+.commitment-box {
+    margin-top: 30px;
+    padding: 25px;
+    background: white;
+    border: 1.5px dotted darkblue;
+    border-left: 5px solid darkblue;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,139,0.03);
+}
+
+.commitment-box h3 {
+    color: darkblue;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.commitment-box h3 i {
+    color: rgb(0, 150, 255);
+}
+
+.commitment-box p {
+    color: #555;
+    line-height: 1.6;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 992px) {
+    .hero-title, .hero-subtitle { font-size: 2.8rem; }
+    .faculty-layout { grid-template-columns: 1fr; margin-top: 20px; }
+    .faculty-sidebar { position: relative; top: 0; }
+    .grid-2-col, .styled-grid-list { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+    .faculty-page-container { padding: 30px 15px; margin: 10px; border-radius: 10px; width: 100%; }
+    .hero-title, .hero-subtitle { font-size: 2.2rem; }
+    .dept-grid { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,378 @@
+/* --- Base Reset & Universal Box-Sizing --- */
+* { 
+    box-sizing: border-box; 
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+/* --- Main Page Container --- */
+.contact-page-container {
+    background: linear-gradient(110deg, rgb(243, 244, 247) 70%, #fff 30%);
+    margin: 20px auto;
+    max-width: 1200px; 
+    width: 92%;
+    border-radius: 15px;
+    padding: 40px 25px;
+    border: 1.5px dotted darkblue;
+    font-family: "Inter", sans-serif;
+}
+
+/* --- SaaS Header Area --- */
+.hero-section {
+    max-width: 800px;
+    margin: 0 auto 40px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 10px;
+}
+
+.hero-pill {
+    background: white;
+    border: 1.5px dotted darkblue;
+    padding: 6px 16px;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: darkblue;
+    margin-bottom: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 139, 0.05);
+}
+
+.hero-pill i { 
+    color: rgb(0, 104, 139); 
+}
+
+.hero-title {
+    font-size: 2.8rem;
+    color: darkblue;
+    font-weight: 800;
+    margin: 0 0 5px 0;
+    line-height: 1.2;
+    word-break: break-word;
+}
+
+.hero-subtitle {
+    font-size: 2.8rem;
+    font-weight: 800;
+    margin: 0 0 15px 0;
+    line-height: 1.2;
+    word-break: break-word;
+}
+
+.text-gradient {
+    background: linear-gradient(90deg, darkblue, rgb(0, 150, 255));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-desc {
+    color: #4a5568;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    max-width: 700px;
+}
+
+/* --- Main Layout Grid --- */
+.contact-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 30px;
+    align-items: start;
+    width: 100%;
+}
+
+/* --- Form Card Styling --- */
+.contact-form-card {
+    background: white;
+    border: 1.5px dotted darkblue;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 5px 20px rgba(0, 0, 139, 0.04);
+    width: 100%;
+}
+
+.card-title {
+    color: darkblue;
+    font-size: 1.6rem;
+    margin-bottom: 5px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+}
+
+.full-width {
+    grid-column: 1 / -1; 
+}
+
+.input-group label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: darkblue;
+}
+
+.input-box {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 139, 0.2);
+    font-size: 1rem;
+    color: darkblue;
+    background: #fdfdfd;
+    outline: none;
+    font-family: "Inter", sans-serif;
+}
+
+/* Strictly locks textarea size */
+textarea.input-box {
+    resize: none !important; 
+}
+
+.input-box::placeholder {
+    color: rgba(0, 0, 139, 0.4);
+}
+
+.input-box:focus {
+    background: white;
+    border-color: rgb(0, 150, 255);
+    box-shadow: 0 0 0 3px rgba(0, 150, 255, 0.15);
+}
+
+.btn-primary {
+    background-color: darkblue;
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    border: 2px solid darkblue;
+    cursor: pointer;
+    transition: 0.3s ease;
+    margin-top: 10px;
+    width: 100%; 
+}
+
+.btn-primary:hover {
+    background: rgb(0, 0, 100);
+}
+
+.privacy-notice {
+    margin-top: 20px;
+    padding: 12px;
+    background: #ECFDF3;
+    border: 1px solid #A7F3D0;
+    color: #065F46;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+/* --- Info Sidebar --- */
+.contact-info-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.info-card {
+    background: white;
+    padding: 22px;
+    border-radius: 12px;
+    border: 1.5px dotted rgba(0, 0, 139, 0.3);
+    box-shadow: 0 4px 15px rgba(0,0,139,0.03);
+    width: 100%;
+}
+
+.info-card h3 {
+    color: darkblue;
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.info-card h3 i { 
+    color: rgb(0, 150, 255); 
+}
+
+.info-card p {
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+.contact-list { 
+    list-style: none; 
+    padding: 0; 
+    margin: 0; 
+}
+
+.contact-list li {
+    color: #4a5568;
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    word-break: break-word;
+}
+
+.contact-list li i {
+    color: rgb(0, 104, 139);
+    margin-top: 3px;
+}
+
+.styled-list {
+    padding-left: 18px;
+    color: #555;
+    line-height: 1.5;
+    font-size: 0.9rem;
+}
+
+.styled-list li { 
+    margin-bottom: 6px; 
+}
+
+.styled-list li a { 
+    color: rgb(0, 150, 255); 
+    text-decoration: none; 
+    font-weight: 600; 
+}
+
+/* Card Variations */
+.primary-card { 
+    background: rgba(0, 104, 139, 0.03); 
+    border-color: darkblue; 
+}
+
+.danger-card { 
+    border-color: rgb(249, 116, 116); 
+    background: #FEF2F2; 
+}
+
+.danger-card h3, .danger-card h3 i { 
+    color: #991B1B; 
+}
+
+/* Alert box styling for inline feedback */
+.alert-box {
+    max-width: 100%;
+    margin-bottom: 25px;
+    padding: 15px 20px;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.success-alert {
+    background-color: #ECFDF3;
+    border: 1.5px dashed rgb(22, 163, 74);
+    color: #065F46;
+}
+
+.success-alert i {
+    color: rgb(22, 163, 74);
+    font-size: 1.2rem;
+}
+
+.error-alert {
+    background-color: #FEF2F2;
+    border: 1.5px dashed rgb(220, 38, 38);
+    color: #991B1B;
+}
+
+.error-alert i {
+    color: rgb(220, 38, 38);
+    font-size: 1.2rem;
+}
+
+/* =========================================
+   FLUID MOBILE & TABLET MEDIA QUERIES
+   ========================================= */
+
+@media (max-width: 992px) {
+    .contact-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+    }
+    
+    .hero-title, .hero-subtitle { 
+        font-size: 2.4rem; 
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-page-container {
+        width: 96%;
+        padding: 25px 15px;
+        margin: 10px auto;
+    }
+
+    .hero-title, .hero-subtitle { 
+        font-size: 1.9rem; 
+    }
+
+    .hero-desc {
+        font-size: 0.95rem;
+    }
+
+    .contact-form-card {
+        padding: 20px 15px;
+    }
+
+    .form-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .input-box {
+        font-size: 16px; /* Prevents auto-zoom on mobile safari/chrome */
+        padding: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title, .hero-subtitle { 
+        font-size: 1.5rem; 
+    }
+    
+    .card-title {
+        font-size: 1.3rem;
+    }
+
+    .contact-page-container {
+        width: 98%;
+        padding: 15px 10px;
+    }
+}

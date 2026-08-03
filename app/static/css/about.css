@@ -1,0 +1,423 @@
+/* --- Base Reset & Universal Box-Sizing --- */
+* { 
+    box-sizing: border-box; 
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+/* --- Main Page Container --- */
+.about-page-container {
+    background: linear-gradient(110deg, rgb(243, 244, 247) 70%, #fff 30%);
+    margin: 2% auto;
+    max-width: 1200px; 
+    width: 95%;
+    border-radius: 15px;
+    padding: 50px 30px;
+    border: 1.5px dotted darkblue;
+    font-family: "Inter", sans-serif;
+}
+
+/* --- SaaS Header Area --- */
+.hero-section {
+    max-width: 800px;
+    margin: 0 auto 50px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 10px;
+}
+
+.hero-pill {
+    background: white;
+    border: 1.5px dotted darkblue;
+    padding: 8px 20px;
+    border-radius: 30px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: darkblue;
+    margin-bottom: 25px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 139, 0.05);
+}
+
+.hero-pill i { color: rgb(0, 104, 139); }
+
+.hero-title {
+    font-size: 3.5rem;
+    color: darkblue;
+    font-weight: 800;
+    margin: 0 0 5px 0;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    word-break: break-word;
+}
+
+.hero-subtitle {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin: 0 0 20px 0;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    word-break: break-word;
+}
+
+.text-gradient {
+    background: linear-gradient(90deg, darkblue, rgb(0, 150, 255));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-desc {
+    color: #4a5568;
+    font-size: 1.15rem;
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* --- Main Layout Grid (Sidebar + Content) --- */
+.about-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 40px;
+    align-items: start;
+    margin-top: 30px;
+}
+
+/* --- Sticky Sidebar Navigation --- */
+.about-sidebar {
+    background: white;
+    border: 1.5px dotted darkblue;
+    border-radius: 12px;
+    padding: 20px 0;
+    position: sticky;
+    top: 150px;
+    box-shadow: 0 4px 15px rgba(0,0,139,0.03);
+}
+
+.sidebar-nav { 
+    list-style: none; 
+    padding: 0; 
+    margin: 0; 
+}
+
+.sidebar-nav li a {
+    display: block;
+    padding: 12px 25px;
+    color: darkblue;
+    text-decoration: none;
+    font-weight: 500;
+    border-left: 4px solid transparent;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.sidebar-nav li a i { 
+    margin-right: 10px; 
+    width: 20px; 
+    color: rgb(0, 150, 255); 
+}
+
+.sidebar-nav li a:hover, .sidebar-nav li a.active {
+    background: rgba(0, 104, 139, 0.05);
+    border-left: 4px solid darkblue;
+    font-weight: 600;
+}
+
+/* --- Content Sections --- */
+.about-section { 
+    margin-bottom: 60px; 
+    padding-top: 20px;
+    scroll-margin-top: 120px; 
+}
+
+.section-title {
+    color: darkblue;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    border-bottom: 2px dotted rgb(0, 104, 139);
+    padding-bottom: 10px;
+    display: inline-block;
+}
+
+.section-subtitle {
+    color: #555;
+    margin-bottom: 20px;
+    font-size: 1.05rem;
+}
+
+/* --- Info Cards & Basic Layouts --- */
+.info-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1.5px dotted darkblue;
+    box-shadow: 0 4px 15px rgba(0,0,139,0.03);
+}
+
+.info-card h3 { 
+    color: darkblue; 
+    margin-bottom: 15px; 
+    font-size: 1.2rem; 
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.info-card p { 
+    color: #555; 
+    line-height: 1.6; 
+}
+
+/* Grid Layouts */
+.grid-2-col { 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 20px; 
+}
+
+.styled-grid-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px 20px;
+    list-style: none;
+    padding: 0;
+}
+
+.styled-grid-list li {
+    color: #555;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.styled-grid-list li i { 
+    color: rgb(0, 150, 255); 
+}
+
+/* Colored Card Variants */
+.primary-card { 
+    background: rgba(0, 104, 139, 0.03); 
+    border-color: darkblue; 
+}
+
+.success-card { 
+    border-color: rgb(116, 249, 151); 
+    background: #ECFDF3; 
+}
+
+.success-card h3, .success-card h3 i { 
+    color: #065F46; 
+}
+
+.danger-card { 
+    border-color: rgb(249, 116, 116); 
+    background: #FEF2F2; 
+}
+
+.danger-card h3, .danger-card h3 i { 
+    color: #991B1B; 
+}
+
+/* --- Feature Boxes Grid --- */
+.feature-box {
+    background: white;
+    border: 1.5px dotted rgba(0,0,139,0.3);
+    padding: 25px;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.feature-box:hover { 
+    transform: translateY(-3px); 
+}
+
+.feature-box i { 
+    font-size: 2rem; 
+    color: rgb(0, 104, 139); 
+    margin-bottom: 15px; 
+}
+
+.feature-box h4 { 
+    color: darkblue; 
+    margin-bottom: 10px; 
+    font-size: 1.1rem; 
+}
+
+.feature-box p { 
+    color: #666; 
+    font-size: 0.9rem; 
+    line-height: 1.5; 
+}
+
+/* --- Core Values Grid --- */
+.values-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+}
+
+.value-card {
+    background: white;
+    border: 1.5px solid rgba(0,0,139,0.1);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.value-card i { 
+    font-size: 1.8rem; 
+    color: rgb(0, 150, 255); 
+    margin-bottom: 10px; 
+}
+
+.value-card h4 { 
+    color: darkblue; 
+    margin-bottom: 8px; 
+    font-size: 1.05rem; 
+}
+
+.value-card p { 
+    color: #666; 
+    font-size: 0.85rem; 
+    line-height: 1.5; 
+}
+
+/* --- Technology Tags --- */
+.tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.tag {
+    background: rgba(0, 150, 255, 0.1);
+    color: darkblue;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border: 1px solid rgba(0, 150, 255, 0.2);
+}
+
+/* --- Quote Box --- */
+.quote-box {
+    margin-top: 50px;
+    padding: 40px 30px;
+    background: linear-gradient(135deg, darkblue, rgb(0, 104, 139));
+    color: white;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,139,0.15);
+}
+
+.quote-box i { 
+    font-size: 2.5rem; 
+    color: rgba(255,255,255,0.2); 
+    margin-bottom: 15px; 
+}
+
+.quote-box h2 { 
+    font-size: 1.5rem; 
+    font-weight: 600; 
+    line-height: 1.5; 
+    margin-bottom: 15px; 
+    font-family: "Pacifico", sans-serif; 
+}
+
+.quote-box p { 
+    font-size: 1rem; 
+    opacity: 0.8; 
+}
+
+/* =========================================
+   MOBILE & TABLET RESPONSIVE MEDIA QUERIES
+   ========================================= */
+
+@media (max-width: 992px) {
+    .hero-title, .hero-subtitle { 
+        font-size: 2.3rem; 
+    }
+    
+    .about-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    /* Transforms sidebar into a smooth horizontal swipeable pill bar on mobile */
+    .about-sidebar {
+        position: relative;
+        top: 0;
+        width: 100%;
+        padding: 10px 5px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .sidebar-nav {
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+        width: max-content;
+        padding: 0 5px;
+    }
+    
+    .sidebar-nav li a {
+        padding: 8px 14px;
+        font-size: 0.85rem;
+        border-left: none;
+        border-bottom: 3px solid transparent;
+        background: rgba(0, 104, 139, 0.04);
+        border-radius: 8px;
+    }
+    
+    .sidebar-nav li a:hover, .sidebar-nav li a.active {
+        border-left: none;
+        border-bottom: 3px solid darkblue;
+        background: rgba(0, 104, 139, 0.1);
+    }
+    
+    .grid-2-col {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-page-container {
+        padding: 25px 15px;
+        margin: 10px auto;
+        width: 100%;
+        border-radius: 10px;
+    }
+    
+    .hero-title, .hero-subtitle { 
+        font-size: 1.7rem; 
+    }
+    
+    .hero-desc { 
+        font-size: 1rem; 
+    }
+    
+    .info-card, .feature-box, .quote-box {
+        padding: 20px 15px;
+    }
+    
+    .quote-box h2 { 
+        font-size: 1.15rem; 
+    }
+}

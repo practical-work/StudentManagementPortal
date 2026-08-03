@@ -1,11 +1,94 @@
 {% extends "base.html" %}
 
-{% block title%}Student Management Portal{% endblock %}
+{% block title %}Student Management Portal | Home{% endblock %}
 
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+{% endblock %}
 
-{% block content%}  
-   <p class="temp">Work is ongoing on Portal  ...</p>
-{% endblock%}
-
+{% block content %}
+<!-- Main Themed Container -->
+<div class="landing-container">
     
-    
+    <!-- Hero Section -->
+    <section class="hero-section">
+        
+        <!-- The "Pill" Badge -->
+        <div class="hero-pill">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> AI-Powered Campus Portal
+        </div>
+
+        <!-- Huge Main Headline -->
+        <h1 class="hero-title">Transform Education</h1>
+        <h1 class="hero-subtitle">With <span class="text-gradient">Smart Solutions</span></h1>
+        
+        <!-- Subheading Paragraph -->
+        <p class="hero-desc">
+            Empower administrators, teachers, and students with real-time analytics, 
+            attendance tracking, and comprehensive management tools in one elegant platform.
+        </p>
+        
+        <!-- Call to Action Buttons -->
+        <div class="hero-buttons">
+            <a href="{{ url_for('auth.registration') }}" class="btn btn-primary">New Registration</a>
+            <a href="{{ url_for('auth.login') }}" class="btn btn-secondary">Student Login</a>
+        </div>
+
+    </section>
+
+    <!-- 3 Floating Feature Cards -->
+    <section class="feature-cards">
+        <div class="card">
+            <div class="card-icon"><i class="fa-solid fa-brain"></i></div>
+            <h3>Smart Assistant</h3>
+            <p>Automated attendance tracking and intelligent academic recommendations.</p>
+        </div>
+        
+        <div class="card">
+            <div class="card-icon"><i class="fa-solid fa-chart-line"></i></div>
+            <h3>Analytics Dashboard</h3>
+            <p>Real-time performance tracking for exams, assignments, and overall grades.</p>
+        </div>
+        
+        <div class="card">
+            <div class="card-icon"><i class="fa-solid fa-users"></i></div>
+            <h3>All-in-One Platform</h3>
+            <p>Seamlessly connects students, faculty, and administrators securely.</p>
+        </div>
+    </section>
+
+    <!-- Latest News & Announcements (Grid) -->
+    <!-- Latest News & Announcements -->
+    <section class="bottom-section">
+        <h2 class="section-heading">Latest Announcements</h2>
+        
+        {% if latest_news %}
+            <!-- Show Grid IF there is news -->
+            <div class="news-grid">
+                {% for news in latest_news[:3] %}
+                    <div class="news-card">
+                        <div class="news-date">{{ news.date.strftime('%b %d, %Y') }}</div>
+                        <h4>{{ news.title }}</h4>
+                        <p>{{ news.excerpt }}</p>
+                        <a href="{{ url_for('pages.notices') }}" class="read-more">Read More &rarr;</a>
+                    </div>
+                {% endfor %}
+            </div>
+            
+            <!-- View All Announcements Button -->
+            <div class="view-all-container">
+                <a href="{{ url_for('pages.notices') }}" class="btn-outline-blue">View All Announcements</a>
+            </div>
+            
+        {% else %}
+            <!-- Clean Empty State IF there is NO news -->
+            <div class="empty-state">
+                <i class="fa-regular fa-folder-open"></i>
+                <h3>No Recent Announcements</h3>
+                <p>There are currently no new updates or notices. Please check back later.</p>
+            </div>
+        {% endif %}
+
+    </section>
+</div>
+{% endblock %}

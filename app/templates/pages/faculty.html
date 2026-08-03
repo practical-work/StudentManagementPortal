@@ -1,0 +1,196 @@
+{% extends "base.html" %}
+
+{% block title %}Faculty & Departments | Student Management Portal{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/faculty.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="faculty-page-container">
+    
+    <!-- SaaS Style Header -->
+    <div class="hero-section">
+        <div class="hero-pill">
+            <i class="fa-solid fa-chalkboard-user"></i> Academic Staff & Departments
+        </div>
+
+        <h1 class="hero-title">Excellence in Teaching</h1>
+        <h1 class="hero-subtitle">Our <span class="text-gradient">Faculty Directory</span></h1>
+        
+        <p class="hero-desc">
+            Our experienced educators, researchers, and industry professionals are committed to delivering quality education, promoting innovation, and supporting students throughout their academic journey.
+        </p>
+    </div>
+
+    <!-- Main Content Layout (Sidebar + Content) -->
+    <div class="faculty-layout">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="faculty-sidebar">
+            <ul class="sidebar-nav">
+                <li><a href="#about" class="active"><i class="fa-solid fa-circle-info"></i> About & Responsibilities</a></li>
+                <li><a href="#departments"><i class="fa-solid fa-building-columns"></i> Academic Departments</a></li>
+                <li><a href="#expertise"><i class="fa-solid fa-atom"></i> Areas of Expertise</a></li>
+                <li><a href="#support"><i class="fa-solid fa-hands-holding-child"></i> Student Support & Hours</a></li>
+                <li><a href="#research"><i class="fa-solid fa-microscope"></i> Research & Publications</a></li>
+                <li><a href="#conduct"><i class="fa-solid fa-file-shield"></i> Code of Conduct & Join</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="faculty-content">
+            
+            <!-- Section 1: About & Responsibilities -->
+            <section id="about" class="faculty-section">
+                <h2 class="section-title">About Our Faculty</h2>
+                <div class="info-card">
+                    <p>Our faculty consists of experienced educators, researchers, and industry professionals dedicated to academic excellence and student success. They guide students through classroom learning, practical training, research activities, and career development.</p>
+                </div>
+
+                <h2 class="section-title" style="margin-top: 40px;">Faculty Responsibilities</h2>
+                <div class="info-card">
+                    <ul class="styled-grid-list">
+                        <li><i class="fa-solid fa-check"></i> Delivering high-quality classroom instruction.</li>
+                        <li><i class="fa-solid fa-check"></i> Preparing and updating course materials.</li>
+                        <li><i class="fa-solid fa-check"></i> Conducting practical and laboratory sessions.</li>
+                        <li><i class="fa-solid fa-check"></i> Mentoring and guiding students.</li>
+                        <li><i class="fa-solid fa-check"></i> Evaluating assignments and examinations.</li>
+                        <li><i class="fa-solid fa-check"></i> Maintaining academic records.</li>
+                        <li><i class="fa-solid fa-check"></i> Supporting research and innovation.</li>
+                        <li><i class="fa-solid fa-check"></i> Encouraging ethical and professional values.</li>
+                        <li><i class="fa-solid fa-check"></i> Assisting students with academic concerns.</li>
+                        <li><i class="fa-solid fa-check"></i> Participating in institutional development.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 2: Departments -->
+            <section id="departments" class="faculty-section">
+                <h2 class="section-title">Academic Departments</h2>
+                <p class="section-subtitle">The institution offers various academic departments, including but not limited to:</p>
+                
+                <div class="dept-grid">
+                    <div class="dept-card"><i class="fa-solid fa-laptop-code"></i> Computer Science & Engineering</div>
+                    <div class="dept-card"><i class="fa-solid fa-brain"></i> Artificial Intelligence & Machine Learning</div>
+                    <div class="dept-card"><i class="fa-solid fa-network-wired"></i> Information Technology</div>
+                    <div class="dept-card"><i class="fa-solid fa-microchip"></i> Electronics & Communication Engineering</div>
+                    <div class="dept-card"><i class="fa-solid fa-gears"></i> Mechanical Engineering</div>
+                    <div class="dept-card"><i class="fa-solid fa-bridge"></i> Civil Engineering</div>
+                    <div class="dept-card"><i class="fa-solid fa-bolt"></i> Electrical Engineering</div>
+                    <div class="dept-card"><i class="fa-solid fa-chart-pie"></i> Management Studies</div>
+                    <div class="dept-card"><i class="fa-solid fa-flask"></i> Applied Sciences</div>
+                </div>
+            </section>
+
+            <!-- Section 3: Areas of Expertise -->
+            <section id="expertise" class="faculty-section">
+                <h2 class="section-title">Areas of Expertise & Specialization</h2>
+                <div class="info-card">
+                    <p>Our faculty members specialize in diverse academic and research areas, ensuring students receive top-tier guidance across modern technological domains:</p>
+                    <div class="tags-container">
+                        <span class="tag">Artificial Intelligence</span>
+                        <span class="tag">Machine Learning</span>
+                        <span class="tag">Data Science</span>
+                        <span class="tag">Cloud Computing</span>
+                        <span class="tag">Cyber Security</span>
+                        <span class="tag">Software Engineering</span>
+                        <span class="tag">Database Management</span>
+                        <span class="tag">Computer Networks</span>
+                        <span class="tag">Internet of Things (IoT)</span>
+                        <span class="tag">Robotics</span>
+                        <span class="tag">Digital Electronics</span>
+                        <span class="tag">Mathematics & Physics</span>
+                        <span class="tag">Management</span>
+                    </div>
+                </div>
+
+                <div class="info-card primary-card" style="margin-top: 20px;">
+                    <h3><i class="fa-solid fa-id-card-clip"></i> Faculty Directory Overview</h3>
+                    <p>The faculty directory provides comprehensive details including Faculty Name, Designation, Department, Qualification, Specialization, Years of Experience, Email Address, Office Location, and specific Areas of Expertise.</p>
+                </div>
+            </section>
+
+            <!-- Section 4: Student Support & Office Hours -->
+            <section id="support" class="faculty-section">
+                <h2 class="section-title">Student Support & Office Hours</h2>
+                
+                <div class="grid-2-col">
+                    <div class="info-card success-card">
+                        <h3><i class="fa-solid fa-hands-bound"></i> Student Support Areas</h3>
+                        <ul class="styled-list">
+                            <li>Academic Counseling & Subject Guidance</li>
+                            <li>Career Planning & Placement Preparation</li>
+                            <li>Project & Internship Supervision</li>
+                            <li>Research Activities & Exam Assistance</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h3><i class="fa-regular fa-clock"></i> Scheduled Office Hours</h3>
+                        <p>Students are encouraged to meet faculty members during their scheduled office hours for academic discussions, project guidance, or general assistance.</p>
+                        <p><em>Please refer to the department notice board or individual faculty profiles for weekly availability.</em></p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section 5: Research & Publications -->
+            <section id="research" class="faculty-section">
+                <h2 class="section-title">Research, Publications & Development</h2>
+                
+                <div class="info-card">
+                    <h3><i class="fa-solid fa-book-open-reader"></i> Scholarly Contributions</h3>
+                    <p>Faculty members actively contribute to Research Projects, Journal Publications, Conference Papers, Technical Workshops, Faculty Development Programs (FDPs), Industry Collaborations, and Innovation Patents.</p>
+                </div>
+
+                <div class="info-card" style="margin-top: 20px;">
+                    <h3><i class="fa-solid fa-award"></i> Professional Achievements</h3>
+                    <p>Our faculty members have received notable recognition in Academic Excellence, Research Publications, Innovation Awards, Industry Collaboration, Student Mentorship, Community Engagement, and Professional Certifications.</p>
+                </div>
+            </section>
+
+            <!-- Section 6: Code of Conduct & Join Us -->
+            <section id="conduct" class="faculty-section">
+                <h2 class="section-title">Code of Conduct & Join Our Faculty</h2>
+                
+                <div class="grid-2-col">
+                    <div class="info-card danger-card">
+                        <h3><i class="fa-solid fa-shield-halved"></i> Code of Conduct</h3>
+                        <ul class="styled-list">
+                            <li>Maintain professionalism, fairness, and integrity.</li>
+                            <li>Treat all students with respect and encourage inclusive learning.</li>
+                            <li>Maintain confidentiality of student information.</li>
+                            <li>Follow institutional policies and regulations.</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-card primary-card">
+                        <h3><i class="fa-solid fa-briefcase"></i> Join Our Faculty</h3>
+                        <p>We welcome qualified educators and professionals passionate about teaching, research, and innovation. Recruitment notifications and career opportunities are published on our official website.</p>
+                    </div>
+                </div>
+
+                <!-- Commitment Footer Box -->
+                <div class="commitment-box">
+                    <h3><i class="fa-solid fa-handshake-angle"></i> Our Commitment</h3>
+                    <p>We are committed to fostering an engaging learning environment where experienced faculty, modern teaching methods, and continuous innovation empower students to achieve academic excellence, professional success, and lifelong learning.</p>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</div>
+
+<!-- Sidebar Scroll & Active State JS -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            sidebarLinks.forEach(l => l.classList.remove('active'));
+            this.classList.add('active');
+        });
+    });
+});
+</script>
+{% endblock %}
